@@ -1,0 +1,23 @@
+.panel.panel-grey {
+    border-radius: 0px;
+    box-shadow: 0px 0px 10px #888;
+    border-color: #888;
+}
+
+.panel.panel-grey .panel-heading {
+    border-radius: 0px;
+    color: #000;
+    background-color: #D0D0D0;
+  }
+
+.panel.panel-grey .panel-body {
+    color: #4D4D4D;
+  }
+  .particles {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+  }
