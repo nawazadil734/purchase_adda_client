@@ -7,8 +7,9 @@ import Header from './Header';
 import profileImg from './doe.jpeg';
 class Profile extends Component {
 
-    componentDidMount() {
-        this.props.fetchCurrentUserId();
+    componentDidMount = async () => {
+        await this.props.fetchCurrentUserId();
+        console.log("inseid", this.props.userid)
     }
 
     renderLabel = ({label,meta, inside}) => {
@@ -40,7 +41,7 @@ class Profile extends Component {
                                 outline: "none",
                                 overflow: "hidden",
                                 width: "100%",
-                                textAlign: "right" }} readOnly>{inside}</textarea>
+                                textAlign: "right" }} value="This is a description." readOnly>{inside}</textarea>
                         </div>
                 </div>
             </div>
@@ -48,7 +49,7 @@ class Profile extends Component {
     }
     
     render() {
-        console.log(this.props.errorMessage)
+        console.log(this.props.userid)
         return (
             <div>
                 <div className="container-fluid" style={{marginBottom: "15pt"}}>
@@ -84,13 +85,13 @@ class Profile extends Component {
                     </div>
                     <div className="shadow p-3 mb-5 bg-white rounded">
                         <h3 style={{paddingLeft:"20px",paddingBottom: "10px"}}>Details</h3>
-                            <Field component={this.renderLabel} label="Username" inside="This is me!"></Field>
-                            <Field component={this.renderLabel} label="First Name" inside="x"></Field>
-                            <Field component={this.renderLabel} label="Last Name" inside="x"></Field>
-                            <Field component={this.renderLabel} label="E-Mail" inside="x"></Field>
-                            <Field component={this.renderLabel} label="Mobile Number" inside="x"></Field>
-                            <Field component={this.renderTextArea} label="Address" rows="3" inside="hey"></Field>
-                            <Field component={this.renderLabel} label="Pincode" inside="x"></Field>
+                            <Field name="username" component={this.renderLabel} label="Username" inside="This is me!"></Field>
+                            <Field name="firstname" component={this.renderLabel} label="First Name" inside="x"></Field>
+                            <Field name="lastname" component={this.renderLabel} label="Last Name" inside="x"></Field>
+                            <Field name="email" component={this.renderLabel} label="E-Mail" inside="x"></Field>
+                            <Field name="phoneNumber" component={this.renderLabel} label="Mobile Number" inside="x"></Field>
+                            <Field name="address" component={this.renderTextArea} label="Address" rows="3" inside="hey"></Field>
+                            <Field name="pincode" component={this.renderLabel} label="Pincode" inside="x"></Field>
                             </div>
             </div>
         </div>
@@ -107,7 +108,7 @@ const wrappedForm = reduxForm({
 function mapStateToProps(state) {
     return { 
         errorMessage: state.auth.errorMessage,
-        userId: state
+        userid: state.auth.userid
     };
 }
 

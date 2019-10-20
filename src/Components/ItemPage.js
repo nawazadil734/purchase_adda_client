@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import { Link } from 'react-router-dom';
-import { Field, reduxForm} from 'redux-form';
-import { connect} from 'react-redux';
-import * as actions from '../actions/index';
+// import { Link } from 'react-router-dom';
+// import { Field, reduxForm} from 'redux-form';
+// import { connect} from 'react-redux';
+// import * as actions from '../actions/index';
 import '../css/item.css'
 
 class ItemPage extends Component {
