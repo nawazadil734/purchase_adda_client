@@ -4,6 +4,7 @@ import Header from './Header'
 import WizardFormFirstPage from './WizardFormFirstPage'
 import WizardFormSecondPage from './WizardFormSecondPage'
 import WizardFormThirdPage from './WizardFormThirdPage'
+import requireAuth from './requireAuth';
 
 class WizardForm extends Component {
   constructor(props) {
@@ -50,4 +51,4 @@ WizardForm.propTypes = {
   onSubmit: PropTypes.func.isRequired
 }
 
-export default WizardForm
+export default requireAuth(WizardForm)

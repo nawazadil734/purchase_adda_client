@@ -1,5 +1,5 @@
 import axios from '../apis/apis';
-import {AUTH_USER, AUTH_ERROR, USER_ID } from './types';
+import {AUTH_USER, AUTH_ERROR, USER_ID, USER_DETAIL } from './types';
 // import history from '../history';
 // save token in localStorage
 export const signUp = (formValues, callback) => {
@@ -39,6 +39,13 @@ export const fetchCurrentUserId = () => {
                       }});
             // console.log("adil userid: " ,response.data);
             dispatch({ type: USER_ID, payload: response.data});
+    }
+}
+
+export const fetchUserDetail = (id) => {
+    return async (dispatch) => {
+        const response = await axios.post('/api/userdata',{id: id});
+        dispatch({ type: USER_DETAIL, payload: response.data})
     }
 }
 

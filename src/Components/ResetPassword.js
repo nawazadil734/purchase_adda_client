@@ -1,91 +1,119 @@
 import React, { Component } from 'react';
-import { Field, reduxForm} from 'redux-form';
-import { connect} from 'react-redux';
-import * as actions from '../actions/index';
-import '../css/SignIn.css';
-class resetPassword extends Component {
+import axios from 'axios';
+import {Link } from 'react-router-dom';
+const loading = {
+    margin: '1em',
+    fontSize: '24px'    
+};
 
-    renderError({error, touched}) {
-        if(touched && error) {
+export default class ResetPassword extends Component {
+    constructor() {
+        super();
+
+        this.state = {
+            userName: '',
+            password: '',
+            confirmPassword: '',
+            update: false,
+            isLoading: true,
+            error: false
+        };
+    }
+
+    async componentDidMount() {
+        console.log(this.props.match.params.token);
+        await axios.get('http://localhost:5000/reset/', {
+                params: {
+                    resetPasswordToken: this.props.match.params.token
+                },
+            })
+            .then(response => {
+                console.log(response);
+                if(response.data.message === 'password reset link a-ok') {
+                    this.setState({
+                        userName: response.data.userName,
+                        update: false,
+                        isLoading: false,
+                        error: false
+                    });
+                } else {
+                    this.setState({
+                        update: false,
+                        isLoading: false,
+                        error: true
+                    });
+                }
+            })
+            .catch(error => {
+                console.log(error.data);
+            });
+    }
+
+    handleChange = name => event => {
+        this.setState({
+            [name]: event.target.value
+        });
+    };
+
+    updatePassword = e => {
+        e.preventDefault();
+        axios
+            .put('http://localhost:5000/updatePasswordViaEmail', {
+                userName: this.state.userName,
+                password: this.state.password
+            })
+            .then(response => {
+                console.log(response.data);
+                if (response.data.message === 'password updated') {
+                    this.setState({
+                        updated: true,
+                        error: false
+                    });
+                } else {
+                    this.setState({
+                        updated: false,
+                        error: true
+                    });
+                }
+            })
+            .catch(error => {
+                console.log(error.data);
+            });
+    };
+
+    render() {
+        const {password, error, isLoading, updated} = this.state;
+
+        if(error) {
             return (
                 <div>
-                    <div className="header">
-                        {error}
+                    <label>Password Reset Screen</label>
+                    <div style={loading}>
+                        <h4>
+                            Problem resetting password. Please send another reset link.
+                        </h4>
+                        <Link to="/">Home</Link>
+                        <Link to="/verification">Forgot Passowrd?</Link>
                     </div>
                 </div>
             );
-        }
-    }
-
-    renderInput = ({input, type, label, meta, style,placeholder}) => {
-        console.log(meta);
-        return (
-            <div>
-                <label>{label}</label>
-                <input {...input}
-                    autoComplete="off"
-                    class={style}
-                    type={type}
-                    placeholder={placeholder}
-                // onChange={formProps.input.onChange} 
-                // value={formProps.input.value}
-            />
-            {this.renderError(meta)}
-            </div>
-        );
-    }
-
-    onSubmit = (formValues) => {
-        this.props.signIn(formValues, () => {
-            this.props.history.push('/dashboard');
-        });
-    }
-    
-    render() {
-        return (
-            <div className="container" style={{justifyContent:"center"}}>
-                <div className="shadow-lg p-3 mb-5 bg-white rounded">
-                <div className="panel panel-grey" style={{ margin:"3% 25% 10%" }}>
-                <div className="panel-heading"><h4>Reset Password</h4></div>
-                <div className="panel-body" style={{ margin:"3% 5%"}}>
-                <form onSubmit={this.props.handleSubmit(this.onSubmit)} className="box-login">
-                        <div className="form-group">
-                            <Field name="password" component={this.renderInput} label="Password" style="form-control" placeholder="Password"/><br/><br/>
-                            <Field name="confirm_password" component={this.renderInput} label="Confirm Password" style="form-control" placeholder="Confirm Password"/><br/><br/>
-                        </div>
-                        <div>
-                            {this.props.errorMessage}
-                        </div>
-                        <div style={{ textAlign : "center"}}>
-                            <button type="submit" class="btn btn-primary">Reset Password</button><br/>
-                        </div>
+        } else if(isLoading) {
+            return (
+                <div>
+                    <label>Password Reset Screen</label>
+                    <div style={loading}>Loading User Data...</div>
+                </div>
+            );
+        } else {
+            return (
+                <div>
+                    <label>Password Reset Screen</label>
+                    <form onSubmit={this.updatePassword}>
+                        <input id="password" label="password" onChange={this.handleChange('password')} value={password} type="password"/>
+                        <button type="submit">Update Password</button>
                     </form>
                 </div>
-            </div>
-            </div>
-            </div>
-        );
+            )
+        }
     }
 }
-
-const validate = (formValues) => {
-    const errors = {}
-    if(!formValues.email) {
-        errors.password = "Please enter your new Password";
-    }
-    if(!formValues.password) {
-        errors.confirm_password = "Please re-enter your new Password";
-    }
-    return errors;
-}
-
-const formWrapped =  reduxForm({
-    form: "resetpassword",
-    validate: validate
-})(resetPassword);
-
-function mapStateToProps(state) {
-    return { errorMessage: state.auth.errorMessage};
-}
-
-export default connect(mapStateToProps, actions)(formWrapped);

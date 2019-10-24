@@ -1,4 +1,4 @@
-import {AUTH_USER, AUTH_ERROR, USER_ID } from '../actions/types';
+import {AUTH_USER, AUTH_ERROR, USER_ID, USER_DETAIL } from '../actions/types';
 const INITIAL_STATE = {
     authenticated: '',
     errorMessage: '',
@@ -13,6 +13,8 @@ export default function(state = INITIAL_STATE, action) {
             return {...state, errorMessage: action.payload };
         case USER_ID:
             return {...state, userid: action.payload.userId};
+        case USER_DETAIL:
+            return {...state, userDetail: action.payload};
         default:
             return state;
     };

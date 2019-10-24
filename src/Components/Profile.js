@@ -4,12 +4,14 @@ import { Field, reduxForm} from 'redux-form';
 import { connect} from 'react-redux';
 import * as actions from '../actions/index';
 import Header from './Header';
-import profileImg from './doe.jpeg';
+// import profileImg from './doe.jpeg';
+import profileImg from './joe.jpg';
+import requireAuth from './requireAuth';
 class Profile extends Component {
 
     componentDidMount = async () => {
         await this.props.fetchCurrentUserId();
-        console.log("inseid", this.props.userid)
+        await this.props.fetchUserDetail(this.props.userid) 
     }
 
     renderLabel = ({label,meta, inside}) => {
@@ -41,7 +43,7 @@ class Profile extends Component {
                                 outline: "none",
                                 overflow: "hidden",
                                 width: "100%",
-                                textAlign: "right" }} value="This is a description." readOnly>{inside}</textarea>
+                                textAlign: "right" }} value={inside} readOnly></textarea>
                         </div>
                 </div>
             </div>
@@ -50,6 +52,7 @@ class Profile extends Component {
     
     render() {
         console.log(this.props.userid)
+        console.log(this.props.userDetail)
         return (
             <div>
                 <div className="container-fluid" style={{marginBottom: "15pt"}}>
@@ -66,11 +69,11 @@ class Profile extends Component {
             </div>  
             <hr/>
             <div>
-                <Link to="/profile"  style={{fontSize:"20px",color:"#191919"}}><b>My Addresses</b></Link>
+                <Link to="/newRequestForm"  style={{fontSize:"20px",color:"#191919"}}><b>New Request</b></Link>
             </div>
             <hr/>
             <div>
-                <Link to="/profile" style={{fontSize:"20px",color:"#191919"}}><b >My Products</b></Link>
+                <Link to="/myitems" style={{fontSize:"20px",color:"#191919"}}><b >My Items</b></Link>
             </div>
             <hr/>
             <div>
@@ -80,18 +83,18 @@ class Profile extends Component {
             </div>
             <div className="col-sm-9">
                     <div className="shadow p-3 mb-5 bg-white rounded">
-                                    <h1 style={{paddingLeft:"20px"}}> John Doe <Link to="/setting" style ={{float:"right", marginRight:"20px"}} className="btn btn-outline-primary waves-effect"  type="button">Edit Profile</Link></h1>
-                            <i className='fas fa-map-marker-alt' style={{paddingLeft:"20px",paddingRight: "8px", paddingBottom: "10px"}}></i>Someplace, Earth<br/>
+                                    <h1 style={{paddingLeft:"20px"}}>{this.props.userDetail ? this.props.userDetail.firstName + " " + this.props.userDetail.lastName : ""} <Link to="/setting" style ={{float:"right", marginRight:"20px"}} className="btn btn-outline-primary waves-effect"  type="button">Edit Profile</Link></h1>
+                            <i className='fas fa-map-marker-alt' style={{paddingLeft:"20px",paddingRight: "8px", paddingBottom: "10px"}}></i>{this.props.userDetail ? this.props.userDetail.address: ' ' }<br/>
                     </div>
                     <div className="shadow p-3 mb-5 bg-white rounded">
                         <h3 style={{paddingLeft:"20px",paddingBottom: "10px"}}>Details</h3>
-                            <Field name="username" component={this.renderLabel} label="Username" inside="This is me!"></Field>
-                            <Field name="firstname" component={this.renderLabel} label="First Name" inside="x"></Field>
-                            <Field name="lastname" component={this.renderLabel} label="Last Name" inside="x"></Field>
-                            <Field name="email" component={this.renderLabel} label="E-Mail" inside="x"></Field>
-                            <Field name="phoneNumber" component={this.renderLabel} label="Mobile Number" inside="x"></Field>
-                            <Field name="address" component={this.renderTextArea} label="Address" rows="3" inside="hey"></Field>
-                            <Field name="pincode" component={this.renderLabel} label="Pincode" inside="x"></Field>
+                            <Field name="username" component={this.renderLabel} label="Username" inside={this.props.userDetail ? this.props.userDetail.userName: ""}></Field>
+                            <Field name="firstname" component={this.renderLabel} label="First Name" inside={this.props.userDetail ? this.props.userDetail.firstName: ""}></Field>
+                            <Field name="lastname" component={this.renderLabel} label="Last Name" inside={this.props.userDetail ? this.props.userDetail.lastName: ""}></Field>
+                            <Field name="email" component={this.renderLabel} label="E-Mail" inside={this.props.userDetail ? this.props.userDetail.email: ""}></Field>
+                            <Field name="phoneNumber" component={this.renderLabel} label="Mobile Number" inside={this.props.userDetail ? this.props.userDetail.phoneNumber: ""}></Field>
+                            <Field name="address" component={this.renderLabel} label="Address" rows="3" inside={this.props.userDetail ? this.props.userDetail.address: ""}></Field>
+                            <Field name="pincode" component={this.renderLabel} label="Pincode" inside="570004"></Field>
                             </div>
             </div>
         </div>
@@ -102,14 +105,15 @@ class Profile extends Component {
 }
 
 const wrappedForm = reduxForm({
-        form: 'editProfile'
+        form: 'profile'
 })(Profile);
 
 function mapStateToProps(state) {
     return { 
         errorMessage: state.auth.errorMessage,
-        userid: state.auth.userid
+        userid: state.auth.userid,
+        userDetail: state.auth.userDetail
     };
 }
 
-export default connect(mapStateToProps, actions)(wrappedForm);
+export default requireAuth(connect(mapStateToProps, actions)(wrappedForm));

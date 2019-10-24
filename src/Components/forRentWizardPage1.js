@@ -1,6 +1,7 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import validate from './validate'
+import requireAuth from './requireAuth';
 // import renderField from './renderField'
 
 // const renderField = ({ input, label, type, meta: { touched, error } }) => (
@@ -139,9 +140,9 @@ const forSaleWizardPage1 = props => {
   )
 }
 
-export default reduxForm({
+export default requireAuth(reduxForm({
   form: 'wizard', // <------ same form name
   destroyOnUnmount: false, // <------ preserve form data
   forceUnregisterOnUnmount: true, // <------ unregister fields on unmount
 //   validate
-})(forSaleWizardPage1)
+})(forSaleWizardPage1))

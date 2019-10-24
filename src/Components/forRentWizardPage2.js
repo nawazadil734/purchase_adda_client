@@ -3,6 +3,7 @@ import { Field, reduxForm } from 'redux-form'
 import validate from './validate'
 import chicago from './chicago.jpg';
 import la from './la.jpg';
+import requireAuth from './requireAuth';
 import ny from './ny.jpg';
 
 const renderError = ({touched, error}) =>
@@ -111,9 +112,9 @@ const forSaleWizardPage2 = props => {
   )
 }
 
-export default reduxForm({
+export default requireAuth(reduxForm({
   form: 'wizard', //Form name is same
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true, // <------ unregister fields on unmount
   // validate
-})(forSaleWizardPage2)        
+})(forSaleWizardPage2))   

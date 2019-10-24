@@ -7,6 +7,7 @@ import Header from './Header';
 // import profileImg from './doe.jpg';
 import '../css/item.css';
 import _ from 'lodash';
+import requireAuth from './requireAuth';
 const categoty = ["bus","car","auto"]
 class Items extends Component {
 
@@ -57,7 +58,7 @@ class Items extends Component {
     renderSelector = ({input, categoryName, classname, divStyle}) => {
         return(
             <div>
-                <select name={categoryName} class={classname} style={divStyle} {...input}>
+                <select name={categoryName} className={classname} style={divStyle} {...input}>
                     <option value="">Category</option>
                     <option value="volvo">Volvoooooooooooooooo</option>
                     <option value="fiat">Fiat</option>
@@ -73,8 +74,11 @@ class Items extends Component {
     
     render() {
         return (
-            <div className="container">
+            <div>
+            <div className="container-fluid">
             <Header/>
+            </div>
+            <div className="container" style={{paddingLeft:"20pt",paddingRight:"20pt"}}>
             <br/>
                 <div className = "row">
                     <div className="left_content col-sm-3">
@@ -120,103 +124,103 @@ class Items extends Component {
                 </div>
                 <div className="right_content col-sm-9" >
                     <div className="shadow p-3 mb-5 bg-white rounded">
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <div class="card">
-                                <img class="card-img-top" src="https://picsum.photos/200/150/?random" ></img>
-                                <div class="card-block">
-                                    <h4 class="card-title">Item_Name</h4>
-                                <div class="card-text">
+                    <div className="row">
+                        <div className="col-sm-4">
+                            <div className="card">
+                                <img className="card-img-top" src="https://picsum.photos/200/150/?random" ></img>
+                                <div className="card-block">
+                                    <h4 className="card-title">Item_Name</h4>
+                                <div className="card-text">
                                     <b>Rating</b>: 4/5<br/>
                                     <b>Price</b>: Rs 360
                                 </div>
                                 </div>
-                                <div class="card-footer">
+                                <div className="card-footer">
                                     <small>Books</small>
-                                <Link class="btn btn-primary float-right btn-sm" to="/itempage">View</Link>
+                                <Link className="btn btn-primary float-right btn-sm" to="/itempage">View</Link>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-4">
-                            <div class="card">
-                                <img class="card-img-top" src="https://picsum.photos/200/150/?random" ></img>
-                                <div class="card-block">
-                                    <h4 class="card-title">Item_Name</h4>
-                                <div class="card-text">
+                        <div className="col-sm-4">
+                            <div className="card">
+                                <img className="card-img-top" src="https://picsum.photos/200/150/?random" ></img>
+                                <div className="card-block">
+                                    <h4 className="card-title">Item_Name</h4>
+                                <div className="card-text">
                                     <b>Rating</b>: 4/5<br/>
                                     <b>Price</b>: Rs 360
                                 </div>
                                 </div>
-                                <div class="card-footer">
+                                <div className="card-footer">
                                     <small>Books</small>
-                                <Link class="btn btn-primary float-right btn-sm" to="/itempage" >View</Link>
+                                <Link className="btn btn-primary float-right btn-sm" to="/itempage" >View</Link>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-4">
-                            <div class="card">
-                                <img class="card-img-top" src="https://picsum.photos/200/150/?random" ></img>
-                                <div class="card-block">
-                                    <h4 class="card-title">Item_Name</h4>
-                                <div class="card-text">
+                        <div className="col-sm-4">
+                            <div className="card">
+                                <img className="card-img-top" src="https://picsum.photos/200/150/?random" ></img>
+                                <div className="card-block">
+                                    <h4 className="card-title">Item_Name</h4>
+                                <div className="card-text">
                                     <b>Rating</b>: 4/5<br/>
                                     <b>Price</b>: Rs 360
                                 </div>
                                 </div>
-                                <div class="card-footer">
+                                <div className="card-footer">
                                     <small>Books</small>
-                                <Link to="" class="btn btn-primary float-right btn-sm">View</Link>
+                                <Link to="" className="btn btn-primary float-right btn-sm">View</Link>
                                 </div>
                             </div>
 
                         </div>
                     </div>
-                    <div class="row" style={{marginTop:"25px"}}>
-                        <div class="col-sm-4">
-                            <div class="card">
-                                <img class="card-img-top" src="https://picsum.photos/200/150/?random" ></img>
-                                <div class="card-block">
-                                    <h4 class="card-title">Item_Name</h4>
-                                <div class="card-text">
+                    <div className="row" style={{marginTop:"25px"}}>
+                        <div className="col-sm-4">
+                            <div className="card">
+                                <img className="card-img-top" src="https://picsum.photos/200/150/?random" ></img>
+                                <div className="card-block">
+                                    <h4 className="card-title">Item_Name</h4>
+                                <div className="card-text">
                                     <b>Rating</b>: 4/5<br/>
                                     <b>Price</b>: Rs 360
                                 </div>
                                 </div>
-                                <div class="card-footer">
+                                <div className="card-footer">
                                     <small>Books</small>
-                                <Link to=""  class="btn btn-primary float-right btn-sm">View</Link>
+                                <Link to=""  className="btn btn-primary float-right btn-sm">View</Link>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-4">
-                            <div class="card">
-                                <img class="card-img-top" src="https://picsum.photos/200/150/?random" ></img>
-                                <div class="card-block">
-                                    <h4 class="card-title">Item_Name</h4>
-                                <div class="card-text">
+                        <div className="col-sm-4">
+                            <div className="card">
+                                <img className="card-img-top" src="https://picsum.photos/200/150/?random" ></img>
+                                <div className="card-block">
+                                    <h4 className="card-title">Item_Name</h4>
+                                <div className="card-text">
                                     <b>Rating</b>: 4/5<br/>
                                     <b>Price</b>: Rs 360
                                 </div>
                                 </div>
-                                <div class="card-footer">
+                                <div className="card-footer">
                                     <small>Books</small>
-                                <Link to=""  class="btn btn-primary float-right btn-sm">View</Link>
+                                <Link to=""  className="btn btn-primary float-right btn-sm">View</Link>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-4">
-                            <div class="card">
-                                <img class="card-img-top" src="https://picsum.photos/200/150/?random" ></img>
-                                <div class="card-block">
-                                    <h4 class="card-title">Item_Name</h4>
-                                <div class="card-text">
+                        <div className="col-sm-4">
+                            <div className="card">
+                                <img className="card-img-top" src="https://picsum.photos/200/150/?random" ></img>
+                                <div className="card-block">
+                                    <h4 className="card-title">Item_Name</h4>
+                                <div className="card-text">
                                     <b>Rating</b>: 4/5<br/>
                                     <b>Price</b>: Rs 360
                                 </div>
                                 </div>
-                                <div class="card-footer">
+                                <div className="card-footer">
                                     <small>Books</small>
-                                <Link to=""  class="btn btn-primary float-right btn-sm">View</Link>
+                                <Link to=""  className="btn btn-primary float-right btn-sm">View</Link>
                                 </div>
                             </div>
 
@@ -226,6 +230,7 @@ class Items extends Component {
                     </div>
                 </div>
             </div>
+        </div>
         </div>
         );
     }
@@ -246,4 +251,4 @@ function mapStateToProps(state) {
     return { errorMessage: state.auth.errorMessage};
 }
 
-export default connect(mapStateToProps, actions)(wrappedForm);
+export default requireAuth(connect(mapStateToProps, actions)(wrappedForm));

@@ -4,6 +4,7 @@ import validate from './validate'
 import chicago from './chicago.jpg';
 import la from './la.jpg';
 import ny from './ny.jpg';
+import requireAuth from './requireAuth';
 
 const renderError = ({touched, error}) =>
   touched && error ? <span>{error}</span> : false
@@ -111,9 +112,9 @@ const WizardFormSecondPage = props => {
   )
 }
 
-export default reduxForm({
+export default requireAuth(reduxForm({
   form: 'wizard', //Form name is same
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true, // <------ unregister fields on unmount
   // validate
-})(WizardFormSecondPage)        
+})(WizardFormSecondPage))    

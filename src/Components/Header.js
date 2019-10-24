@@ -5,7 +5,7 @@ import * as actions from '../actions/index';
 class Header extends Component {
     render() {
         return(
-            <div className="container-fluid">
+            <div className="container">
                 <nav className="navbar navbar-expand-sm navbar-light" style={{ backgroundColor: "whitesmoke"}}>
                     <Link className="navbar-brand" to="/" style={{marginLeft:"15pt", marginRight:"15pt"}}>PurchaseAdda</Link>
                     <ul className="navbar-nav">
@@ -34,6 +34,7 @@ class Header extends Component {
                             <div className="dropdown-menu">
                                 <Link className="dropdown-item" to="/profile">Profile</Link>
                                 <Link className="dropdown-item" to="/setting">Settings</Link>
+                                <Link className="dropdown-item" to="/newRequestForm">New Request</Link>
                                 <button className="dropdown-item" onClick={() => this.props.signout()}>Log Out</button>
                             </div>
                         </li>

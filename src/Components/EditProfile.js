@@ -5,7 +5,13 @@ import { connect} from 'react-redux';
 import Header from './Header';
 import profileImg from './doe.jpg';
 import * as actions from '../actions/index';
+import requireAuth from './requireAuth';
 class EditProfile extends Component {
+
+    componentDidMount = async () => {
+        await this.props.fetchCurrentUserId();
+        await this.props.fetchUserDetail(this.props.userid) 
+    }
 
     renderInput = ({input, classname, type, label, meta, style, placeholder}) => {
         // console.log(meta);
@@ -38,8 +44,8 @@ class EditProfile extends Component {
         );
     }
 
-    renderTextArea = ({input, classname, type, label, meta, style, rows, cols}) => {
-        console.log(meta);
+    renderTextArea = ({input, classname, type, label, meta, style, rows, cols, placeholder}) => {
+        // console.log(meta);
         return (
             <div className="form-group">
                 <label>{label}</label>
@@ -49,6 +55,7 @@ class EditProfile extends Component {
                     style={style}
                     rows={rows} 
                     cols={cols}
+                    placeholder={placeholder}
                 />              
             </div>
         );
@@ -76,7 +83,7 @@ class EditProfile extends Component {
                                         <div className="form-group" style={{textAlign: "center"}}>
                                             <br/>
                                             <label className="btn-sm btn-primary">
-                                                Change Profile Picture <input type="file" style={{display:"none"}}></input>
+                                                Change Picture <input type="file" style={{display:"none"}}></input>
                                             </label>
                                             </div>
                                         <div>
@@ -98,13 +105,13 @@ class EditProfile extends Component {
                                     </div>
                                     <div className="col-sm-6">
                                         <h4> Basic Information</h4>
-                                        <Field name="Username" component={this.renderInput} label="User Name" classname="form-control" type="text" />
-                                        <Field name="Firstname" component={this.renderInput} label="First Name" classname="form-control" type="text" />
-                                        <Field name="Lastname" component={this.renderInput} label="Last Name" classname="form-control" type="text" />
+                                        <Field name="userName" component={this.renderInput} label="User Name" classname="form-control" type="text" placeholder={this.props.userDetail ? this.props.userDetail.userName: ""} />
+                                        <Field name="firstName" component={this.renderInput} label="First Name" classname="form-control" type="text" placeholder={this.props.userDetail ? this.props.userDetail.firstName: ""}/>
+                                        <Field name="lastName" component={this.renderInput} label="Last Name" classname="form-control" type="text" placeholder={this.props.userDetail ? this.props.userDetail.lastName: ""}/>
                                         <h4> Contact Information</h4>
-                                        <Field name="Address" component={this.renderTextArea} classname="form-control" label="Address" rows="2"/>
-                                        <Field name="TelNo" component={this.renderInput} label="Phone Number" classname="form-control" type="text"/>
-                                        <Field name="email" component={this.renderInput} label="E-Mail" classname="form-control" type="email" placeholder="" />
+                                        <Field name="address" component={this.renderTextArea} classname="form-control" label="Address" rows="2" placeholder={this.props.userDetail ? this.props.userDetail.address: ""}/>
+                                        <Field name="phoneNumber" component={this.renderInput} label="Phone Number" classname="form-control" type="text" placeholder={this.props.userDetail ? this.props.userDetail.phoneNumber: ""}/>
+                                        <Field name="email" component={this.renderInput} label="E-Mail" classname="form-control" type="email" placeholder={this.props.userDetail ? this.props.userDetail.email: ""} />
                                         <div style={{textAlign: "center"}}>
                                                 <button className="btn btn-primary" type="submit" style={{marginTop : "15pt"}}>Save Changes</button>
                                         </div>
@@ -124,7 +131,11 @@ const wrappedForm = reduxForm({
 })(EditProfile);
 
 function mapStateToProps(state) {
-    return { errorMessage: state.auth.errorMessage};
+    return { 
+        errorMessage: state.auth.errorMessage,
+        userid: state.auth.userid,
+        userDetail: state.auth.userDetail
+    };
 }
 
-export default connect(mapStateToProps, actions)(wrappedForm);
+export default requireAuth(connect(mapStateToProps, actions)(wrappedForm));

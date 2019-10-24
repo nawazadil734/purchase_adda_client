@@ -1,16 +1,60 @@
 import React, {Component} from 'react';
-// import { Link } from 'react-router-dom';
-// import { Field, reduxForm} from 'redux-form';
-// import { connect} from 'react-redux';
-// import * as actions from '../actions/index';
+import { Link } from 'react-router-dom';
+import { Field, reduxForm} from 'redux-form';
+import { connect} from 'react-redux';
+import * as actions from '../actions/index';
+import Header from './Header';
 import '../css/item.css'
 
 class ItemPage extends Component {
 
+    onSubmit = (formValues) => {
+        console.log(formValues);
+    }
+
+    renderSpinner = ({input, meta, type, classname, step, min, max,divStyle}) => {
+        return(
+            <div>
+            <input {...input}
+                class={classname}
+                type={type}
+                style={divStyle}
+                autoComplete="off"
+                max={max}
+                min={min}
+                step={step}
+            // onChange={formProps.input.onChange} 
+            // value={formProps.input.value}
+            />
+            </div>
+        );
+    }
+
+    renderInput = ({input , classname, typename}) => {
+        return (
+            <div>
+                <input {...input} className={classname} type={typename} />
+            </div>
+        );
+    }
+
+    renderTextArea = ({classname,input ,meta, rows, cols,id}) => {
+        return (
+            <div class="form-group">
+                <textarea {...input} className={classname} id={id} rows={rows} cols={cols} />
+            </div>
+        );
+    }
+
     render() {
         return (
+            <div>
+            <div className="container-fluid">
+                <Header/>
+            </div>
+
             <div className="container">
-                    <div classname="container-flex">
+                    <div classname="container-flex" style={{marginTop:"10px"}}>
                         <div className="shadow p-3 mb-5 bg-white rounded">
                             <h2> Some Title </h2>
                         </div>
@@ -48,14 +92,12 @@ class ItemPage extends Component {
                                 <div className="shadow p-3 mb-5 bg-white rounded">
                                     <div className="card">
                                         <h2 style={{ margin : "10px"}}>Description</h2>
-                                        <textarea rows="4" cols="0" style={{border: "none",
+                                        <textarea rows="4" cols="0" className="form-control shadow-none" style={{border: "none",
                                             backgroundColor: "transparent",
-                                            resize: "none",
                                             outline: "none",
                                             overflow: "hidden",
-                                            width: "100%",
-                                            margin:"10px" }} readOnly>
-                                            Content Description 
+                                            }} readOnly>
+                                            Forerunner 30 is your new everyday watch, thanks to its activity tracking features. That includes steps, calories, distance, sleep¹ and intensity minutes, not to mention 24/7 heart rate monitoring. It also watches out for periods of inactivity and gives you vibration alerts when it’s time to move. We’re making activity tracking even smarter with our Move IQ feature, which automatically detects when you start moving and classifies your activity as a walk, run or bike. In addition, cardio is used to identify all of your other general fitness activities that don’t fall into the other categories.Forerunner 30 is your new everyday watch, thanks to its activity tracking features. That includes steps, calories, distance, sleep¹ and intensity minutes, not to mention 24/7 heart rate monitoring. It also watches out for periods of inactivity and gives you vibration alerts when it’s time to move. We’re making activity tracking even smarter with our Move IQ feature, which automatically detects when you start moving and classifies your activity as a walk, run or bike. In addition, cardio is used to identify all of your other general fitness activities that don’t fall into the other categories.
                                         </textarea>
                                     </div>
                                 </div>
@@ -104,9 +146,91 @@ class ItemPage extends Component {
                         </div>
                     </div>
                 </div>
+                <div classname="container-flex">
+                        <div className="shadow p-3 mb-5 bg-white rounded">
+                            <h2 style={{paddingBottom:"20px"}}> Customer Reviews </h2>
+                            <div className="container">
+                            <form className="form-group" onSubmit={this.props.handleSubmit(this.onSubmit)}>
+                                <div class="form-group" style={{paddingBottom:"20px"}}>
+                                    <h4 for="comment"><b>Create Your Review:</b></h4>
+                                    <div className="form-group">
+                                        <label>Rating</label><br/>
+                                        <Field name="Rating" component={this.renderSpinner} classname="form-control" divStyle={{width:"80px"}} SelId="Rating" type="number" min="1" max="5" step="0.5"/>
+                                    </div>
+                                    <div className="form-group">
+                                        <label>Title</label><br/>
+                                        <Field name="Title" component={this.renderInput} typename="text" classname="form-control"/>
+                                    </div>
+                                    <div className="form-group">
+                                        <label>Description</label><br/>
+                                        <Field name="Description" component={this.renderTextArea} classname="form-control" rows="2" id="desc"/>
+                                    </div>
+                                    <button className="btn btn-primary" style={{marginTop:"10px"}} type="submit">Publish</button>
+                                </div>
+                            </form>
+                            </div>
+                            <div className="container">
+                                <div class="card card-inverse card-info" style={{marginTop:"20px", marginBottom:"20px"}}>
+                                    <div class="card-block">
+                                        <figure class="profile profile-inline">
+                                            <img src="https://picsum.photos/200/150/?random" class="profile-avatar" alt=""></img>
+                                        </figure>
+                                    <h4 class="card-title">Tawshif Ahsan Khan</h4>
+                                    <div class="card-text">
+                                        <label>
+                                            <i class="fa fa-star checked"></i>
+                                            <i class="fa fa-star checked"></i>
+                                            <i class="fa fa-star checked"></i>
+                                            <i class="fa fa-star checked"></i>
+                                            <i class="fa fa-star-half checked"></i>
+                                        </label><br/>
+                                        <label><b>Title</b></label><br/>
+                                        Tawshif is a web designer living in Bangladesh.
+                                    </div>
+                                    </div>
+                                </div>
+                                <div class="card card-inverse card-info" style={{marginTop:"20px", marginBottom:"20px"}}>
+                                    <div class="card-block">
+                                        <figure class="profile profile-inline">
+                                            <img src="https://picsum.photos/200/150/?random" class="profile-avatar" alt=""></img>
+                                        </figure>
+                                    <h4 class="card-title">Tawshif Ahsan Khan</h4>
+                                    <div class="card-text">
+                                        <label>
+                                            <i class="fa fa-star checked"></i>
+                                            <i class="fa fa-star checked"></i>
+                                            <i class="fa fa-star checked"></i>
+                                            <i class="fa fa-star checked"></i>
+                                            <i class="fa fa-star-half checked"></i>
+                                        </label><br/>
+                                        <label><b>Title</b></label><br/>
+                                        Tawshif is a web designer living in Bangladesh.
+                                        <i class="fa fa-star-half-o"></i>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
             </div>
         )
     }
 };
 
-export default ItemPage;
+const validate = (formValues) => {
+    const errors = {}
+    
+    return errors;
+}
+
+const wrappedForm = reduxForm({
+    form: 'itempage',
+    validate: validate
+})(ItemPage);
+
+function mapStateToProps(state) {
+    return { errorMessage: state.auth.errorMessage};
+}
+
+export default connect(mapStateToProps, actions)(wrappedForm);

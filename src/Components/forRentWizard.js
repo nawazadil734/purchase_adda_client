@@ -4,6 +4,7 @@ import Header from './Header'
 import ForRentWizardPage1 from './forRentWizardPage1'
 import ForRentWizardPage2 from './forRentWizardPage2'
 import ForRentWizardPage3 from './forRentWizardPage3'
+import requireAuth from './requireAuth';
 
 class WizardForm extends Component {
   constructor(props) {
@@ -50,4 +51,4 @@ WizardForm.propTypes = {
   onSubmit: PropTypes.func.isRequired
 }
 
-export default WizardForm
+export default requireAuth(WizardForm);

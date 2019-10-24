@@ -105,7 +105,7 @@ class SignUp extends Component {
                                     <Field name="password" component={this.renderInput} label="Password" style="form-control" placeholder = "Password" type="password"/><br/>
                                     <Field name="confirmPassword" component={this.renderInput} label="Confirm Password" style="form-control" placeholder="Confirm Password" type="password"/><br/>
                                     <Field name="firstName" component={this.renderInput} label="First Name" style="form-control" placeholder="First Name" type="text"/><br/>
-                                    <Field name="lastNname" component={this.renderInput} label="Last Name" style="form-control" placeholder= "Last Name" type="text"/><br/>
+                                    <Field name="lastName" component={this.renderInput} label="Last Name" style="form-control" placeholder= "Last Name" type="text"/><br/>
                                     <Field name="phoneNumber" component={this.renderInput} label="Phone Number" style="form-control" placeholder = "Phone Number" type="text"/><br/>
                                     <Field name="address" component={this.renderField} label="Address" style="form-control" placeholder="Address" rows="4" type="text"/><br/>
                                 </div>

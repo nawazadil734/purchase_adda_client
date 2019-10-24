@@ -21,13 +21,13 @@ class SignIn extends Component {
     }
 
     renderInput = ({input, type, label, meta, style}) => {
-        console.log(meta);
+        // console.log(meta);
         return (
             <div>
                 <label>{label}</label>
                 <input {...input}
                     autoComplete="off"
-                    class={style}
+                    className={style}
                     type={type}
                 // onChange={formProps.input.onChange} 
                 // value={formProps.input.value}
