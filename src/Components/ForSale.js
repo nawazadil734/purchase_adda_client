@@ -121,4 +121,4 @@ const formWrapped =  reduxForm({
 })(forSale);
 
 
-export default requireAuht(connect(null, actions )(formWrapped));
+export default requireAuth(connect(null, actions )(formWrapped));

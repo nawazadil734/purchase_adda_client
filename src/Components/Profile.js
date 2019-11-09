@@ -24,7 +24,7 @@ class Profile extends Component {
                     <label className="col-sm" style={{textAlign: "right", color:"black"}}>
                             {inside}
                     </label>
-                  </div>
+                </div>
             </div>
         );
     }
@@ -51,18 +51,26 @@ class Profile extends Component {
     }
     
     render() {
-        console.log(this.props.userid)
+        // console.log(this.props.userid)
         console.log(this.props.userDetail)
+        var userImage = this.props.userDetail ? this.props.userDetail.userImage: ""
+        var ig = userImage.replace("D:\\DBMS Project\\dbms-client\\public\\images\\", "")
+                    .replace("\\","\/")
+       
+        const images = require.context('../../public/images', true);
+        const userPhoto = images(this.props.userDetail ? "./" + `${ig}`: "./default.png");
+
         return (
             <div>
                 <div className="container-fluid" style={{marginBottom: "15pt"}}>
                     <Header/>
                 </div>
+                <br/><br/><br/>
                 <div className="container">
                 <div className = "row">
             <div className="col-sm-3">
             <div className="shadow p-3 mb-5 bg-white rounded">
-                    <img src={profileImg} className="img-fluid" alt="..."></img>
+                    <img src={userPhoto} className="img-fluid" alt="..." style={{width:"320pt",height:"200pt"}}></img>
             </div>
             <div>
                 <Link to="/profile" style={{fontSize:"20px", color:"#191919"}}><b>My Profile</b></Link>
@@ -77,14 +85,14 @@ class Profile extends Component {
             </div>
             <hr/>
             <div>
-                <Link to="/profile"  style={{fontSize:"20px",color:"#191919"}}><b>Logout</b></Link>
+                <div onClick={() => this.props.signout()} style={{fontSize:"20px",color:"#191919"}}><b>Log Out</b></div>
             </div>
             <hr style={{borderTop: "5px solid #0275d8 "}}/>
             </div>
             <div className="col-sm-9">
                     <div className="shadow p-3 mb-5 bg-white rounded">
-                                    <h1 style={{paddingLeft:"20px"}}>{this.props.userDetail ? this.props.userDetail.firstName + " " + this.props.userDetail.lastName : ""} <Link to="/setting" style ={{float:"right", marginRight:"20px"}} className="btn btn-outline-primary waves-effect"  type="button">Edit Profile</Link></h1>
-                            <i className='fas fa-map-marker-alt' style={{paddingLeft:"20px",paddingRight: "8px", paddingBottom: "10px"}}></i>{this.props.userDetail ? this.props.userDetail.address: ' ' }<br/>
+                                    <h1 style={{paddingLeft:"20px"}}>{this.props.userDetail ? this.props.userDetail.firstName + " " + this.props.userDetail.lastName : ""} <Link to="/setting" style ={{float:"right", marginRight:"20px"}} className="btn btn-primary"  type="button">Edit Profile</Link></h1>
+                            <i className='fas fa-map-marker-alt' style={{paddingLeft:"20px",paddingRight: "8px", paddingBottom: "10px"}}></i>{this.props.userDetail ? this.props.userDetail.streetNo + ", " +  this.props.userDetail.city + ", " + this.props.userDetail.state : ' ' }<br/>
                     </div>
                     <div className="shadow p-3 mb-5 bg-white rounded">
                         <h3 style={{paddingLeft:"20px",paddingBottom: "10px"}}>Details</h3>
@@ -93,8 +101,9 @@ class Profile extends Component {
                             <Field name="lastname" component={this.renderLabel} label="Last Name" inside={this.props.userDetail ? this.props.userDetail.lastName: ""}></Field>
                             <Field name="email" component={this.renderLabel} label="E-Mail" inside={this.props.userDetail ? this.props.userDetail.email: ""}></Field>
                             <Field name="phoneNumber" component={this.renderLabel} label="Mobile Number" inside={this.props.userDetail ? this.props.userDetail.phoneNumber: ""}></Field>
-                            <Field name="address" component={this.renderLabel} label="Address" rows="3" inside={this.props.userDetail ? this.props.userDetail.address: ""}></Field>
-                            <Field name="pincode" component={this.renderLabel} label="Pincode" inside="570004"></Field>
+                            <Field name="streetNo" component={this.renderLabel} label="Street No." rows="3" inside={this.props.userDetail ? this.props.userDetail.streetNo: ""}></Field>
+                            <Field name="city" component={this.renderLabel} label="City" rows="3" inside={this.props.userDetail ? this.props.userDetail.city: ""}></Field>
+                            <Field name="state" component={this.renderLabel} label="State" rows="3" inside={this.props.userDetail ? this.props.userDetail.state: ""}></Field>
                             </div>
             </div>
         </div>

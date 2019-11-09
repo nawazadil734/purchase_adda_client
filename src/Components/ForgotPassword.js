@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import '../css/SignUp.css';
 import {Link} from 'react-router-dom';
 const title = {
     pageTitle: 'Forgot Password Screen'
@@ -55,12 +56,25 @@ class ForgotPassword extends Component {
     render() {
         const { email, messageFromServer} = this.state;
         return (
-            <div>
-                <label>Forgot Password Screen</label>
-                <form onSubmit={this.sendEmail}>
-                    <input type="text" id="email" label="email" value={email} onChange={this.handleChange('email')} placeholder="Email Address"/>
-                    <button type="submit">Send Password Reset Email</button>
-                </form>
+            <div className="container" style={{justifyContent:"center"}}>
+                <div class="container" style={{ display:"flex", justifyContent:"center", marginTop:"0%"}}>
+                    <br/><br/><img alt="logo" src="https://i.pinimg.com/originals/33/5f/19/335f1992deafdd78d8fae6fee19e0b12.jpg" style={{ width:"10%", height:"10%"}}></img>
+                </div>
+                <div>
+                    <div className="panel panel-grey rounded" style={{ margin:"1% 25% 10%" }}>
+                        <div className="panel-body" style={{ margin:"3% 5%"}}>
+                            <div style={{textAlign:"center"}}><br/><h2>Forgot Password</h2><br/></div>
+                            <form onSubmit={this.sendEmail} className="box-login">
+                                <div className="form-group" style={{textAlign:"center"}}>
+                                    <label style={{marginBottom:"15pt"}}>Confirm the email and we'll send the password reset instructions.</label>
+                                    <input type="text" id="email" label="email" value={email} onChange={this.handleChange('email')} placeholder="Email Address" className="form-control"/><br/>
+                                    <button type="submit" className="btn btn-primary">Send Password Reset Email</button>
+                                </div>
+                            </form>
+                            <br/>
+                        </div>
+                    </div>
+                </div>
                 {/* {showNullError && (
                     <div>
                         <p>The email address cannot be null.</p>

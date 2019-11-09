@@ -4,8 +4,7 @@ import { Field, reduxForm } from 'redux-form';
 import * as actions from '../actions';
 import { connect } from 'react-redux';
 import '../css/SignUp.css';
-import Particles from 'react-particles-js';
-
+import xxx from './signupbg.jpg';
 var color_text = { color:"black"}
 
 class SignUp extends Component {
@@ -54,42 +53,14 @@ class SignUp extends Component {
         // event.preventDefault();
         // console.log(formValues);
         this.props.signUp(formValues, () => {
-            this.props.history.push('/dashboard');
+            this.props.history.push('/');
         });
     };
 
     render() {
         return (
-            <div>
-                 <Particles
-                params={{
-                    "particles": {
-                        "line_linked": {
-                                    "color":"#FFFFFF"
-                                    },
-                        "number": {
-                            "value": 100
-                        },
-                        "size": {
-                            "value": 5
-                        }
-                    },
-                    "interactivity": {
-                        "events": {
-                            "onhover": {
-                                "enable": true,
-                                "mode": "repulse"
-                            }
-                        }
-                    }
-                }}
-                style={{
-                        width: '100%',
-                        background: "linear-gradient(to right, rgb(15, 128, 240), rgb(245, 39, 10))",
-                        position: 'fixed',
-                        zIndex: -1
-                 }}
-                />
+            <div style={{ backgroundImage: `url(${xxx})`}}>
+              
             <div className="container" style={{justifyContent:"center"}}>
                     <div className="container" style={{ display:"flex", justifyContent:"center", marginTop:"0%"}}>
                         <img alt="logo" src="https://i.pinimg.com/originals/33/5f/19/335f1992deafdd78d8fae6fee19e0b12.jpg" style={{ width:"10%", height:"10%"}}></img>
@@ -107,7 +78,10 @@ class SignUp extends Component {
                                     <Field name="firstName" component={this.renderInput} label="First Name" style="form-control" placeholder="First Name" type="text"/><br/>
                                     <Field name="lastName" component={this.renderInput} label="Last Name" style="form-control" placeholder= "Last Name" type="text"/><br/>
                                     <Field name="phoneNumber" component={this.renderInput} label="Phone Number" style="form-control" placeholder = "Phone Number" type="text"/><br/>
-                                    <Field name="address" component={this.renderField} label="Address" style="form-control" placeholder="Address" rows="4" type="text"/><br/>
+                                    <Field name="streetNo" component={this.renderInput} label="Street No." style="form-control" placeholder="Street No." rows="4" type="text"/><br/>
+                                    <Field name="city" component={this.renderInput} label="City" style="form-control" placeholder="City" rows="4" type="text"/><br/>
+                                    <Field name="state" component={this.renderInput} label="State" style="form-control" placeholder="State" rows="4" type="text"/><br/>
+                                
                                 </div>
                                 <div>
                                     {this.props.errorMessage}

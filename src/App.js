@@ -6,19 +6,38 @@ import SignIn from './Components/SignIn';
 import SignUp from './Components/SignUp';
 import ResetPassword from './Components/ResetPassword'
 import userItems from './Components/userItems';
-import Dashboard from './Components/Dashboard';
-import Verificatiion from './Components/Verification';
+// import Dashboard from './Components/Dashboard';
+// import Verificatiion from './Components/Verification';
 import newRequestForm from './Components/newRequestForm';
 import Setting from './Components/EditProfile';
-// import ForSale from './Components/ForSale';
-import forRentWizard from './Components/forRentWizard';
-import Items from './Components/Items';
-import ItemPage from './Components/ItemPage';
+import ForSaleForm from './Components/ForSaleForm';
+import ForRentForm from './Components/ForRentForm';
+import SaleItems from './Components/SaleItems';
+import RentItems from './Components/RentItems';
+import SaleItemPage from './Components/SaleItemPage';
+import RentItemPage from './Components/RentItemPage';
+import RequestPage from './Components/RequestPage';
+import EditForSaleForm from './Components/EditForSaleForm';
+import EditForRentForm from './Components/EditForRentForm';
+import EditWTBRequestForm from './Components/EditWTBRequestForm';
+import EditWTRRequestForm from './Components/EditWTRRequestForm';
+import requestItem from './Components/requestItem';
+import LandingPage from './Components/LandingPage';
+import Inbox from './Components/Inbox';
+import Outbox from './Components/Outbox';
+import forSaleMessageForm from './Components/forSaleMessageForm';
+import forRentMessageForm from './Components/forRentMessageForm';
+import viewForRentMessage from './Components/viewForRentMessage';
+import viewForSaleMessage from './Components/viewForSaleMessage';
+import ChatBox from './Components/ChatBox';
+// import OtherProfile from './Components/otherUserProfile';
 import history from "./history";
 import ForgotPassword from './Components/ForgotPassword';
+import AboutSales from './Components/AboutSales';
 import * as actions from './actions/index';
-import forSaleWizard from './Components/forSaleWizard';
+// import forSaleWizard from './Components/forSaleWizard';
 import { connect } from 'react-redux';
+import otherUserProfile from './Components/otherUserProfile';
 
 
 class App extends Component {
@@ -27,20 +46,36 @@ class App extends Component {
             <div >
                 <Router history={history}>
                     <div>
-                    <Route path="/" exact component={this.props.authenticated ? Items : SignIn}/>
-                    <Route path="/signup" exact component={SignUp}/>
-                    <Route path="/dashboard" exact component={Items}/>
+                    <Route path="/" exact component={this.props.authenticated ? LandingPage : SignIn}/>
+                    <Route path="/signup" exact component={this.props.authenticated ? LandingPage : SignUp}/>
+                    <Route path="/dashboard" exact component={LandingPage}/>
                     <Route path="/verification" exact component={ForgotPassword}/>
                     <Route path="/reset/:token" exact component={ResetPassword} />
-                    <Route path="/forsell" exact component={forSaleWizard}/>
+                    <Route path="/forsell" exact component={ForSaleForm}/>
                     <Route path="/profile" exact component={Profile}/>
                     <Route path="/setting" exact component={Setting}/>
-                    <Route path="/items" exact component={Items}/>
-                    <Route path="/itempage" exact component={ItemPage} />
-                    <Route path="/forrent" exact component={forRentWizard}/>
-                    <Route path="/itemsRent" exact component={Items}/>
+                    <Route path="/saleItems" exact component={SaleItems}/>
+                    <Route path="/saleitem/:ownerid/:itemid" exact component={SaleItemPage} />
+                    <Route path="/rentitem/:ownerid/:itemid" exact component={RentItemPage} />
+                    <Route path="/forrent" exact component={ForRentForm}/>
+                    <Route path="/rentItems" exact component={RentItems}/>
                     <Route path="/newRequestForm" exact component={newRequestForm}/>
                     <Route path="/myitems" exact component={userItems}/>
+                    <Route path="/otherUser/:id" exact component={otherUserProfile}/>
+                    <Route path="/requestedItems" exact component={RequestPage}/>
+                    <Route path="/editSaleItem/:userid/:itemid" exact component={EditForSaleForm}/>
+                    <Route path="/editRentItem" exact component={EditForRentForm}/>
+                    <Route path="/editReqBuyItem" exact component={EditWTBRequestForm}/>
+                    <Route path="/editReqRentItem" exact component={EditWTRRequestForm}/>
+                    <Route path="/requestItem" exact component={requestItem}/>
+                    <Route path="/knowMore" exact component={AboutSales}/>
+                    <Route path="/inbox" exact component={Inbox}/>
+                    <Route path="/outbox" exact component={Outbox}/>
+                    <Route path="/forSaleMessageForm" exact component={forSaleMessageForm}/>
+                    <Route path="/forRentMessageForm" exact component={forRentMessageForm}/>
+                    <Route path="/viewForRentMessage" exact component={viewForRentMessage}/>
+                    <Route path="/viewForSaleMessage" exact component={viewForSaleMessage}/>
+                    <Route path="/ChatBox/:currUser/:owner" exact component={ChatBox}/>
                     </div>
                 </Router>
             </div>

@@ -6,12 +6,10 @@ import * as actions from '../actions/index';
 import Header from './Header';
 
 class forSale extends Component {
-
-    constructor() {
-        super();
-        this.state = {
-            opt: "buy"
-        }
+    
+    componentDidMount = async () => {
+        await this.props.fetchCurrentUserId();
+        await this.props.fetchUserDetail(this.props.userid)
     }
 
     renderError({error, touched}) {
@@ -42,6 +40,20 @@ class forSale extends Component {
             </div>
         );
     }
+    renderSelector = ({input, categoryName, classname, divStyle, meta}) => {
+        return(
+            <div>
+                <select name={categoryName} className={classname} style={divStyle} {...input}>
+                    <option value="" selected hidden>Category</option>
+                    <option>Books</option>
+                    <option>Stationery</option>
+                    <option>Tools</option>
+                    <option>PC Peripherals</option>
+                </select>
+                {this.renderError(meta)}
+            </div>
+        );
+    };
 
     renderField = ({input, label, rows, cols, meta, style, type, placeholder}) => {
         return (
@@ -92,12 +104,22 @@ class forSale extends Component {
         );
     }
 
+    onSubmitRent = (formValues) => {
+        formValues.id = this.props ? this.props.userid : ""
+        this.props.uploadWtr(formValues);
+    }
+
+    onSubmitBuy = (formValues) => {
+        formValues.id = this.props ? this.props.userid : ""
+        this.props.uploadWtb(formValues);
+    }
+
     render() {
         return(
             <div>
                 <div className="container-fluid">
                 <Header/>
-                </div>
+                </div><br/><br/>
                 <div className="container">
                     <div style={{marginLeft: "20pt", marginRight: "20pt"}}>
                         <br/><h1>Post a new Ad</h1><br/>
@@ -112,21 +134,16 @@ class forSale extends Component {
                             </ul>
                             <div class="tab-content">
                                 <div id="WTB" class="container tab-pane active"><br/>
-                                    <form id="WTBForm">
+                                    <form id="WTBForm" onSubmit={this.props.handleSubmit(this.onSubmitBuy)}>
                                         <div className="form-group">
                                             <Field name="itemName" component={this.renderInput} label="Item to be bought" style="form-control" type="text"/>
                                         </div>
                                         <div className="form-group">
-                                            <label for="categorySelect">Category</label>
-                                            <select className="form-control" id="categorySelect">
-                                            <option>Books</option>
-                                            <option>Stationery</option>
-                                            <option>Tools</option>
-                                            <option>PC Peripherals</option>
-                                            </select>
+                                            <label>Category</label>
+                                            <Field name="itemCategory" categoryName="Category" classname="custom-select" component={this.renderSelector}/>
                                         </div>
                                         <div className="form-group">
-                                            <Field component={this.renderField} label="Description" style="form-control" rows="5" type="text"/>
+                                            <Field name="buyDescription" component={this.renderField} label="Description" style="form-control" rows="5" type="text"/>
                                         </div>
                                         <div className="form-group">
                                             <Field name="itemPrice" component={this.renderInput} label="Price" style="form-control" type="text"/>
@@ -139,21 +156,16 @@ class forSale extends Component {
                                     </form>
                                 </div>
                                 <div id="WTR" class="container tab-pane fade"><br/>
-                                    <form id="WTRForm">
+                                    <form id="WTRForm" onSubmit={this.props.handleSubmit(this.onSubmitRent)}>
                                         <div className="form-group">
                                             <Field name="itemName" component={this.renderInput} label="Item to be rented" style="form-control" type="text"/>
                                         </div>
                                         <div className="form-group">
-                                            <label for="categorySelect">Category</label>
-                                            <select className="form-control" id="categorySelect">
-                                            <option>Books</option>
-                                            <option>Stationery</option>
-                                            <option>Tools</option>
-                                            <option>PC Peripherals</option>
-                                            </select>
+                                            <label>Category</label>
+                                            <Field name="itemCategory" categoryName="Category" classname="custom-select" component={this.renderSelector}/>
                                         </div>
                                         <div className="form-group">
-                                            <Field component={this.renderField} label="Description" style="form-control" rows="5" type="text"/>
+                                            <Field name="itemDescription" component={this.renderField} label="Description" style="form-control" rows="5" type="text"/>
                                         </div>
                                         <div className="form-group">
                                             <Field name="itemRate" component={this.renderInput} label="Rent Fees (per hour)" style="form-control" type="text"/>
@@ -193,5 +205,12 @@ const formWrapped =  reduxForm({
     // validate: validate
 })(forSale);
 
+function mapStateToProps(state) {
+    return { 
+        errorMessage: state.auth.errorMessage,
+        userid: state.auth.userid,
+        userDetail: state.auth.userDetail
+    };
+}
 
-export default connect(null, actions )(formWrapped);
+export default connect(mapStateToProps, actions )(formWrapped);

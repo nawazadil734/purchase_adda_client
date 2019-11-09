@@ -6,11 +6,14 @@ class Header extends Component {
     render() {
         return(
             <div className="container">
-                <nav className="navbar navbar-expand-sm navbar-light" style={{ backgroundColor: "whitesmoke"}}>
+                <nav className="navbar navbar-expand-sm navbar-light fixed-top " style={{ backgroundColor: "whitesmoke"}}>
                     <Link className="navbar-brand" to="/" style={{marginLeft:"15pt", marginRight:"15pt"}}>PurchaseAdda</Link>
                     <ul className="navbar-nav">
                         <li className="nav-item">
-                            <Link className="nav-link" to="/items" style={{marginLeft:"10pt", marginRight:"10pt"}}>Buy</Link>
+                            <Link className="nav-link" to="/saleItems" style={{marginLeft:"10pt", marginRight:"10pt"}}>Buy</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/rentItems" style={{marginLeft:"10pt", marginRight:"10pt"}}>Lend</Link>
                         </li>
                         <li className="nav-item">
                             <Link className="nav-link" to="/forsell" style={{marginLeft:"10pt", marginRight:"10pt"}}>Sell</Link>
@@ -19,7 +22,10 @@ class Header extends Component {
                             <Link className="nav-link" to="/forrent" style={{marginLeft:"10pt", marginRight:"10pt"}}>Rent</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="/itemsRent" style={{marginLeft:"10pt", marginRight:"10pt"}}>Lend</Link>
+                            <Link className="nav-link" to="/requestedItems" style={{marginLeft:"10pt", marginRight:"10pt"}}>Requested Items</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/knowMore" style={{marginLeft:"10pt", marginRight:"10pt"}}>Know More</Link>
                         </li>
                     </ul>
                     <ul className="navbar-nav ml-auto mr-1">
@@ -31,7 +37,7 @@ class Header extends Component {
                             <Link className="nav-link dropdown-toggle" to="/" id="navbardrop" data-toggle="dropdown">
                                 <i className="far fa-user" style={{paddingRight: "3px"}}></i>
                             </Link>
-                            <div className="dropdown-menu">
+                            <div className="dropdown-menu dropdown-menu-right">
                                 <Link className="dropdown-item" to="/profile">Profile</Link>
                                 <Link className="dropdown-item" to="/setting">Settings</Link>
                                 <Link className="dropdown-item" to="/newRequestForm">New Request</Link>

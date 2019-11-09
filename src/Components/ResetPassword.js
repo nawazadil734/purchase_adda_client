@@ -57,8 +57,7 @@ export default class ResetPassword extends Component {
 
     updatePassword = e => {
         e.preventDefault();
-        axios
-            .put('http://localhost:5000/updatePasswordViaEmail', {
+        axios.put('http://localhost:5000/updatePasswordViaEmail', {
                 userName: this.state.userName,
                 password: this.state.password
             })
@@ -82,7 +81,7 @@ export default class ResetPassword extends Component {
     };
 
     render() {
-        const {password, error, isLoading, updated} = this.state;
+        const {password, error, isLoading} = this.state;
 
         if(error) {
             return (
