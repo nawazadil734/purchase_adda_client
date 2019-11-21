@@ -21,7 +21,10 @@ import EditForSaleForm from './Components/EditForSaleForm';
 import EditForRentForm from './Components/EditForRentForm';
 import EditWTBRequestForm from './Components/EditWTBRequestForm';
 import EditWTRRequestForm from './Components/EditWTRRequestForm';
-import requestItem from './Components/requestItem';
+
+import requestItemWtb from './Components/requestItemWtb';
+import requestItemWtr from './Components/requestItemWtr';
+
 import LandingPage from './Components/LandingPage';
 import Inbox from './Components/Inbox';
 import Outbox from './Components/Outbox';
@@ -29,6 +32,12 @@ import forSaleMessageForm from './Components/forSaleMessageForm';
 import forRentMessageForm from './Components/forRentMessageForm';
 import viewForRentMessage from './Components/viewForRentMessage';
 import viewForSaleMessage from './Components/viewForSaleMessage';
+
+import SaleItemDeleteModal from './Components/SaleItemDeleteModal';
+import RentItemDeleteModal from './Components/RentItemDeleteModal';
+import WtbItemDeleteModal from './Components/WtbItemDeleteModal';
+import WtrItemDeleteModal from './Components/WtrItemDeleteModal';
+
 import ChatBox from './Components/ChatBox';
 // import OtherProfile from './Components/otherUserProfile';
 import history from "./history";
@@ -55,19 +64,26 @@ class App extends Component {
                     <Route path="/profile" exact component={Profile}/>
                     <Route path="/setting" exact component={Setting}/>
                     <Route path="/saleItems" exact component={SaleItems}/>
+
+
                     <Route path="/saleitem/:ownerid/:itemid" exact component={SaleItemPage} />
                     <Route path="/rentitem/:ownerid/:itemid" exact component={RentItemPage} />
+                    <Route path="/requestWtb/:ownerid/:itemid" exact component={requestItemWtb}/>
+                    <Route path="/requestWtr/:ownerid/:itemid" exact component={requestItemWtr}/>
+
                     <Route path="/forrent" exact component={ForRentForm}/>
                     <Route path="/rentItems" exact component={RentItems}/>
                     <Route path="/newRequestForm" exact component={newRequestForm}/>
                     <Route path="/myitems" exact component={userItems}/>
                     <Route path="/otherUser/:id" exact component={otherUserProfile}/>
                     <Route path="/requestedItems" exact component={RequestPage}/>
+
                     <Route path="/editSaleItem/:userid/:itemid" exact component={EditForSaleForm}/>
-                    <Route path="/editRentItem" exact component={EditForRentForm}/>
-                    <Route path="/editReqBuyItem" exact component={EditWTBRequestForm}/>
-                    <Route path="/editReqRentItem" exact component={EditWTRRequestForm}/>
-                    <Route path="/requestItem" exact component={requestItem}/>
+                    <Route path="/editRentItem/:userid/:itemid" exact component={EditForRentForm}/>
+                    <Route path="/editReqBuyItem/:userid/:itemid" exact component={EditWTBRequestForm}/>
+                    <Route path="/editReqRentItem/:userid/:itemid" exact component={EditWTRRequestForm}/>
+
+                    
                     <Route path="/knowMore" exact component={AboutSales}/>
                     <Route path="/inbox" exact component={Inbox}/>
                     <Route path="/outbox" exact component={Outbox}/>
@@ -76,6 +92,12 @@ class App extends Component {
                     <Route path="/viewForRentMessage" exact component={viewForRentMessage}/>
                     <Route path="/viewForSaleMessage" exact component={viewForSaleMessage}/>
                     <Route path="/ChatBox/:currUser/:owner" exact component={ChatBox}/>
+
+                    <Route path="/deleteSaleItem/:itemId" exact component={SaleItemDeleteModal}/>
+                    <Route path="/deleteRentItem/:itemId" exact component={RentItemDeleteModal}/>
+                    <Route path="/deleteWtbItem/:itemId" exact component={WtbItemDeleteModal}/>
+                    <Route path="/deleteWtrItem/:itemId" exact component={WtrItemDeleteModal}/>
+
                     </div>
                 </Router>
             </div>

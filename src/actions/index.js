@@ -22,18 +22,178 @@ import {AUTH_USER,
         USER_SALE_ITEMS,
         USER_RENT_ITEMS,
         USER_WTB_ITEMS,
-        USER_WTR_ITEMS
+        USER_WTR_ITEMS,
+
+        DELETE_SALE_ITEM,
+        DELETE_RENT_ITEM,
+        DELETE_WTB_ITEM,
+        DELETE_WTR_ITEM,
+
+        UPDATE_SALE_ITEM_DETAIL,
+        UPDATE_SALE_ITEM_PHOTO,
+
+
+
+        FETCH_SINGLE_REQ_WTB,
+        FETCH_SINGLE_REQ_WTB_OWNER,
+        FETCH_SINGLE_REQ_WTR,
+        FETCH_SINGLE_REQ_WTR_OWNER,
+
+        UPDATE_REQ_BUY_ITEM,
+        UPDATE_REQ_RENT_ITEM,
+
+        RENT_REVIEW,
+        SELLER_REVIEW,
+
+        SELLER_RATING
+
     } from './types';
 import history from '../history';
 import { async } from 'q';
 
 // save token in localStorage
+
+export const sellerRating = (id) => {
+    return async (dispatch) => {
+        const response = await axios.get(`/sellerRating/${id}`);
+        dispatch({ type: SELLER_RATING, payload: response.data});
+    }
+}
+
+export const sellerReview = (formValues) => {
+    return async (dispatch) => {
+        const response = await axios.post('/sellerReview', formValues);
+        dispatch({ type: SELLER_REVIEW, payload: response.data});
+    }
+}
+
+export const rentReview = (formValues) => {
+    return async (dispatch) => {
+        const response = await axios.post('/rentReview', formValues);
+        dispatch({ type: RENT_REVIEW, payload: response.data});
+    }
+}
+
+export const updateReqSaleItem = (formValues) => {
+    return async (dispatch) => {
+        const response = await axios.post('/updateReqSaleItem', formValues);
+        dispatch({ type: UPDATE_REQ_BUY_ITEM, payload: response.data});
+        history.push("/myitems");
+    }
+}
+
+export const updateReqRentItem = (formValues) => {
+    return async (dispatch) => {
+        const response = await axios.post('/updateReqRentItem', formValues);
+        dispatch({ type: UPDATE_REQ_RENT_ITEM, payload: response.data});
+        history.push("/myitems");
+    }
+}
+
+export const fetchSingleReqWtb = (id) => {
+    return async (dispatch) => {
+        const response = await axios.get(`/fetchSingleReqWtb/${id}`);
+        dispatch({ type: FETCH_SINGLE_REQ_WTB, payload: response.data});
+    }
+}
+
+export const fetchSingleReqWtbOwner = (id) => {
+    return async (dispatch) => {
+        const response = await axios.get(`/fetchSingleReqWtbOwner/${id}`);
+        dispatch({ type: FETCH_SINGLE_REQ_WTB_OWNER, payload: response.data});
+    }
+}
+
+export const fetchSingleReqWtr = (id) => {
+    return async (dispatch) => {
+        const response = await axios.get(`/fetchSingleReqWtr/${id}`);
+        dispatch({ type: FETCH_SINGLE_REQ_WTR, payload: response.data});
+    }
+}
+
+export const fetchSingleReqWtrOwner = (id) => {
+    return async (dispatch) => {
+        const response = await axios.get(`/fetchSingleReqWtrOwner/${id}`);
+        dispatch({ type: FETCH_SINGLE_REQ_WTR_OWNER, payload: response.data});
+    }
+}
+
+
+export const uploadSaleItemSinglePhoto = (formValues) => {
+    return async (dispatch) => {
+        console.log("first testing", formValues);
+        const from = formValues.myFile[0];
+        const img = formValues.image;
+        var form = new FormData();
+        form.append("myFile", from)
+        const response = await axios.post(`/uploadSaleSinglePhoto/${formValues.id}/${img}`, form);
+        dispatch({ type: UPDATE_SALE_ITEM_PHOTO, payload: response.data})
+        // history.push('/profile')
+    }
+}
+
+
+
+export const updateSaleItemDetail = (formValues) => {
+    return async (dispatch) => {
+        console.log("i am values", formValues);
+        const response = axios.post('/updateSaleItemDetail', formValues);
+        console.log(response.data);
+        // history.push("/");
+    }
+}
+
+export const updateRentItemDetail = (formValues) => {
+    return async (dispatch) => {
+        console.log("i am values", formValues);
+        const response = axios.post('/updateRentItemDetail', formValues);
+        console.log(response.data);
+        // history.push("/");
+    }
+}
+
+export const deleteSaleItem = (id) => {
+    return async (dispatch) => {
+        const response = axios.delete(`/deleteSaleItem/${id}`);
+        console.log(response.data);
+        dispatch({ type: DELETE_SALE_ITEM, payload: response.data});
+        history.push("/myitems")
+    }
+}
+
+export const deleteRentItem = (id) => {
+    return async (dispatch) => {
+        const response = axios.delete(`/deleteRentItem/${id}`);
+        console.log(response.data);
+        dispatch({ type: DELETE_RENT_ITEM, payload: response.data});
+        history.push("/myitems")
+    }
+}
+
+export const deletewtbItem = (id) => {
+    return async (dispatch) => {
+        const response = axios.delete(`/deletewtbItem/${id}`);
+        console.log(response.data);
+        dispatch({ type: DELETE_WTB_ITEM, payload: response.data});
+        history.push("/myitems")
+    }
+}
+
+export const deletewtrItem = (id) => {
+    return async (dispatch) => {
+        const response = axios.delete(`/deletewtrItem/${id}`);
+        console.log(response.data);
+        dispatch({ type: DELETE_WTR_ITEM, payload: response.data});
+        history.push("/myitems")
+    }
+}
+
 export const fetchUserSaleItem = (id) => {
     return async (dispatch) => {
         const response = await axios.get(`/fetchUserSaleItem/${id}`);
         console.log("totla", response.data);
         dispatch({ type: USER_SALE_ITEMS, payload: response.data});
-        history.push("/myitems");
+        // history.push("/myitems");
     }
 }
 
@@ -42,7 +202,7 @@ export const fetchUserRentItem = (id) => {
         const response = await axios.get(`/fetchUserRentItem/${id}`);
         console.log("totla", response.data);
         dispatch({ type: USER_RENT_ITEMS, payload: response.data});
-        history.push("/myitems");
+        // history.push("/myitems");
     }
 }
 
@@ -51,7 +211,7 @@ export const fetchUserWTBItem = (id) => {
         const response = await axios.get(`/fetchUserwtbItem/${id}`);
         console.log("totla", response.data);
         dispatch({ type: USER_WTB_ITEMS, payload: response.data});
-        history.push("/myitems");
+        // history.push("/myitems");
     }
 }
 
@@ -60,7 +220,7 @@ export const fetchUserWTRItem = (id) => {
         const response = await axios.get(`/fetchUserwtrItem/${id}`);
         console.log("totla", response.data);
         dispatch({ type: USER_WTR_ITEMS, payload: response.data});
-        history.push("/myitems");
+        // history.push("/myitems");
     }
 }
 
@@ -81,6 +241,8 @@ export const messageOwner = (formValues) => {
         // history.push(`/ChatBox/${formValues.currentUser}/${formValues.owner}`);
     }
 }
+
+
 
 export const fetchSingleSaleItem = (id) => {
     return async (dispatch) => {
@@ -116,17 +278,28 @@ export const fetchOwnerProfile = (id) => {
     }
 }
 
-export const fetchSaleItems = () => {
+export const fetchSaleItems = (formValues) => {
     return async (dispatch) => {
-        const response = await axios.get('/fetchSaleItems');
+        var defaultValues = {
+            category : "category",
+            minPrice: -1,
+            maxPrice: -1
+        }
+        const response = await axios.post('/fetchSaleItems', formValues === undefined ? defaultValues : formValues);
         dispatch({ type: FECTH_SALE_ITEMS, payload: response.data});
-        // history.push("/saleItems");
+        history.push("/saleItems");
     }
 }
 
-export const fetchRentItems = () => {
+export const fetchRentItems = (formValues) => {
     return async (dispatch) => {
-        const response = await axios.get('/fetchRentItems');
+        var defaultValues = {
+            category : "category",
+            minPrice: -1,
+            maxPrice: -1,
+            minRating: -1
+        }
+        const response = await axios.post('/fetchRentItems',formValues === undefined ? defaultValues : formValues );
         dispatch({ type: FECTH_RENT_ITEMS, payload: response.data});
         // history.push("/rentItems");
     }

@@ -36,8 +36,6 @@ class forSale extends Component {
                     type={type}
                     autoComplete="off"
                     placeholder = {placeholder}
-                // onChange={formProps.input.onChange} 
-                // value={formProps.input.value}
             />
             {this.renderError(meta)}
             </div>
@@ -73,16 +71,6 @@ class forSale extends Component {
             </div>
         );
     }
-
-    // renderFileInput = ({input, label, style1, style2, type, meta, id}) => {
-    //     return(
-    //         <div>
-    //             <input {...input} type={type} className={style1} id={id}></input>
-    //             <label className={style2} for={id}>{label}</label>
-    //             {this.renderError(meta)}
-    //         </div>
-    //     );
-    // }
 
     renderSpinner = ({input, label, meta, type, style, placeholder, step, min, max}) => {
         return(

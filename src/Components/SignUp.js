@@ -59,7 +59,7 @@ class SignUp extends Component {
 
     render() {
         return (
-            <div style={{ backgroundImage: `url(${xxx})`}}>
+            <div>
               
             <div className="container" style={{justifyContent:"center"}}>
                     <div className="container" style={{ display:"flex", justifyContent:"center", marginTop:"0%"}}>

@@ -80,9 +80,11 @@ class RequestItems extends Component {
             <div>
                 <select name={categoryName} className={classname} style={divStyle} {...input}>
                     <option value="" selected hidden>Category</option>
-                    <option value="volvo">Volvoooooooooooooooo</option>
-                    <option value="fiat">Fiat</option>
-                    <option value="audi">Audi</option>
+                    <option>Books</option>
+                    <option>Stationery</option>
+                    <option>Tools</option>
+                    <option>Computing</option>
+                    <option>Phones and Tablets</option>
                     </select>
             </div>
         );

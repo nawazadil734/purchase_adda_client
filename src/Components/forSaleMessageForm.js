@@ -5,9 +5,6 @@ import {connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import * as actions from '../actions/index';
 import Header from './Header';
-import chicago from './chicago.jpg';
-import la from './la.jpg';
-import ny from './ny.jpg';
 
 class forSale extends Component {
 

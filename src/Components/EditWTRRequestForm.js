@@ -1,22 +1,16 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import {connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import * as actions from '../actions/index';
 import Header from './Header';
-import chicago from './chicago.jpg';
-import la from './la.jpg';
-import ny from './ny.jpg';
 
 const displayNone = {display:"block", clip:"rect(0px 0px 0px 0px)", position:"absolute", left:"0", top:"0"}
 
 class forSale extends Component {
 
-    constructor() {
-        super();
-        this.state = {
-            opt: "buy"
-        }
+
+    componentDidMount() {
+        this.props.fetchSingleReqWtr(this.props.match.params.itemid);
     }
 
     renderError({error, touched}) {
@@ -117,69 +111,71 @@ class forSale extends Component {
         );
     }
 
-    renderSelector = ({input, categoryName, classname, divStyle}) => {
+    renderSelector = ({input, categoryName, classname, divStyle, placeholder}) => {
         return(
             <div>
                 <select name={categoryName} className={classname} style={divStyle} {...input}>
-                    <option value="" selected hidden>Category</option>
+                    <option value="" selected hidden>{placeholder}</option>
                     <option>Books</option>
                     <option>Stationery</option>
                     <option>Tools</option>
-                    <option>PC Peripherals</option>
+                    <option>Computing</option>
+                    <option>Phones and Tablets</option>
                 </select>
             </div>
         );
     };
 
-    onSubmit = (formValues) => (
+    onSubmit = (formValues) => {
+        formValues.itemId  = this.props.match.params.itemid;
         console.log(formValues)
-    )
+        this.props.updateReqRentItem(formValues);
+}
 
     render() {
+
+        console.log("sfsf0", this.props.itemDetail)
         return(
             <div>
                 <div className="container-fluid">
                     <Header/>
-                </div>
+                </div><br/><br/>
                 <div className="container">
                     <div style={{marginLeft: "20pt", marginRight: "20pt"}}>
                         <br/><h1>Editing WTR Ad...</h1><br/>
                         <div style={{marginLeft: "20pt", marginRight: "20pt"}}>
                             <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
                             <div className="form-group">
-                        <Field name="itemName" component={this.renderInput} label="Name" style="form-control" type="text"/>
-                    </div>
-                    <div className="form-group">
-                        <label for="exampleFormControlSelect1">Category</label>
-                        <select className="form-control" id="exampleFormControlSelect1">
-                        <option>Books</option>
-                        <option>Stationery</option>
-                        <option>Tools</option>
-                        <option>PC Peripherals</option>
-                        </select>
-                    </div>
-                    <div className="form-group">
-                        <Field component={this.renderField} label="Description" style="form-control" rows="5" type="text"/>
-                    </div>
-                    <div className="form-group">
-                        <Field name="itemRate" component={this.renderInput} label="Rent Fees (per hour)" style="form-control" type="text"/>
-                    </div>
-                    <label>Maximum Rent Duration</label>
-                    <div className="row" style={{marginTop:"5pt"}}>
-                        <div className="col-sm-6">
-                            <div className="form-group">
-                                <Field name="itemRentDurLimitDays" component={this.renderSpinner} label="Days" style="form-control" type="number" min="0" max="365"/>
-                            </div>
-                        </div>
-                        <div className="col-sm-6">
-                            <div className="form-group">
-                                <Field name="itemRentDurLimitHours" component={this.renderSpinner} label="Hours" style="form-control" type="number" min="0" max="23"/>
-                            </div>
-                        </div>
-                    </div>
-                    <button type="submit" className="btn btn-primary" style={{marginTop: "15pt"}}>
-                        Submit Request
-                    </button>
+                                            <Field name="itemName" component={this.renderInput} label="Item to be rented" style="form-control" type="text" placeholder={this.props.itemDetail ? this.props.itemDetail.item_name : ''}/>
+                                        </div>
+                                        <div className="form-group">
+                                            <label>Category</label>
+                                            <Field name="itemCategory" categoryName="Category" classname="custom-select" component={this.renderSelector} placeholder={this.props.itemDetail ? this.props.itemDetail.item_category : ''}/>
+                                        </div>
+                                        <div className="form-group">
+                                            <Field name="itemDescription" component={this.renderField} label="Description" style="form-control" rows="5" type="text" placeholder={this.props.itemDetail ? this.props.itemDetail.item_desc : ''}/>
+                                        </div>
+                                        <div className="form-group">
+                                            <Field name="itemRate" component={this.renderInput} label="Rent Fees (per hour)" style="form-control" type="text" placeholder={this.props.itemDetail ? this.props.itemDetail.rent_rate : ''}/>
+                                        </div>
+                                        <label>Maximum Rent Duration</label>
+                                        <div className="row" style={{marginTop:"5pt"}}>
+                                            <div className="col-sm-6">
+                                                <div className="form-group">
+                                                    <Field name="itemRentDurLimitDays" component={this.renderSpinner} label="Days" style="form-control" type="number" min="0" max="365" placeholder={this.props.itemDetail ? this.props.itemDetail.rent_duration_days : ''}/>
+                                                </div>
+                                            </div>
+                                            <div className="col-sm-6">
+                                                <div className="form-group">
+                                                    <Field name="itemRentDurLimitHours" component={this.renderSpinner} label="Hours" style="form-control" type="number" min="0" max="23" placeholder={this.props.itemDetail ? this.props.itemDetail.rent_duration_hours : ''}/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <button type="submit" className="btn btn-primary" style={{marginTop: "15pt"}}>
+                                                Submit Request
+                                            </button>
+                                        </div>
                             </form>
                         </div>
                     </div>     
@@ -195,5 +191,10 @@ const formWrapped =  reduxForm({
     // validate: validate
 })(forSale);
 
+function mapStateToProps(state) {
+    return { errorMessage: state.auth.errorMessage,
+        itemDetail : state.auth.fetchUserWTRitem};
+}
 
-export default connect(null, actions )(formWrapped);
+
+export default connect(mapStateToProps, actions )(formWrapped);

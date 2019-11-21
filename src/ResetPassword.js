@@ -3,6 +3,7 @@ import { Field, reduxForm} from 'redux-form';
 import { connect} from 'react-redux';
 import * as actions from '../actions/index';
 import '../css/SignIn.css';
+var color_text = { color:"black"}
 
 class resetPassword extends Component {
 
@@ -18,16 +19,17 @@ class resetPassword extends Component {
         }
     }
 
-    renderInput = ({input, type, label, meta, style,placeholder}) => {
-        console.log(meta);
+    renderInput = ({input, label, meta, type, style, placeholder}) => {
         return (
             <div>
-                <label>{label}</label>
+                <label style={color_text}>{label}</label>
                 <input {...input}
-                    autoComplete="off"
+
                     class={style}
                     type={type}
-                    placeholder={placeholder}
+                    autoComplete="off"
+                    placeholder = {placeholder}
+                    type={type}
                 // onChange={formProps.input.onChange} 
                 // value={formProps.input.value}
             />

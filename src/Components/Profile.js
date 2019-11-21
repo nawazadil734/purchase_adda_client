@@ -4,8 +4,6 @@ import { Field, reduxForm} from 'redux-form';
 import { connect} from 'react-redux';
 import * as actions from '../actions/index';
 import Header from './Header';
-// import profileImg from './doe.jpeg';
-import profileImg from './joe.jpg';
 import requireAuth from './requireAuth';
 class Profile extends Component {
 

@@ -5,31 +5,150 @@ import { connect} from 'react-redux';
 import * as actions from '../actions/index';
 import Header from './Header';
 import requireAuth from './requireAuth';
+import history from '../history';
 class OtherUserProfile extends Component {
+
+    renderSaleItems = () => {
+        return this.props.fetchUserSellingItems.map(item => {
+            const images = require.context('../../public/images', true);
+            const userPhoto = images("./" + `${item.image1}`);
+            return ( 
+                <div className="col-sm-4">
+                <div className="card">
+                        <img className="card-img-top" src={userPhoto} alt="iamge" style={{width:"190pt",height:"120pt"}}></img>
+                        {/* <div  style={{ width:"100%",textAlign:"right", position:"absolute",right:"0"}}>
+                            <Link to={`/deleteSaleItem/${item.item_id}`} className="btn btn-primary rounded-0" type="submit">X</Link>
+                        </div> */}
+                        <div className="card-block">
+                            <h4 className="card-title">{item.item_name}</h4>
+                        <div className="card-text">
+                            <b>Rating</b>: {item.rating === null ? 'Unrated' : item.rating}<br/>
+                            <b>Price: ₹     </b> {item.item_price}
+                        </div>
+                        </div>
+                        <div className="card-footer" style={{textAlign:"center"}}>
+                            {/* <Link className="btn btn-primary float-left btn-sm" to={`/editSaleItem/${item.user_id}/${item.item_id}`}>Modify</Link> */}
+                            <small><b>{item.item_category}</b></small>
+                            <Link className="btn btn-primary float-right btn-sm" to={`/saleitem/${item.user_id}/${item.item_id}`}>View</Link>
+                        </div>
+                        </div>
+                        <br/>
+                </div>
+            );
+        }) 
+    }
+
+    renderRentItems = () => {
+        return this.props.fetchUserRentingItems.map(item => {
+            const images = require.context('../../public/images', true);
+            const userPhoto = images("./" + `${item.image1}`);
+            return ( 
+                <div className="col-sm-4">
+                <div className="card">
+                        <img className="card-img-top" src={userPhoto} alt="iamge" style={{width:"190pt",height:"120pt"}}></img>
+                        {/* <div  style={{ width:"100%",textAlign:"right", position:"absolute",right:"0"}}>
+                        <Link to={`/deleteRentItem/${item.item_id}`} className="btn btn-primary rounded-0" type="submit">X</Link>
+                        </div> */}
+                        <div className="card-block">
+                            <h4 className="card-title">{item.item_name}</h4>
+                        <div className="card-text">
+                            <b>Rating</b>: {item.rating === null ? 'Unrated' : item.rating}<br/>
+                            <b>Rate: ₹     </b> {item.rent_rate}
+                        </div>
+                        </div>
+                        <div className="card-footer" style={{textAlign:"center"}}>
+                        {/* <Link className="btn btn-primary float-left btn-sm" to={`/editRentItem/${item.user_id}/${item.item_id}`}>Modify</Link> */}
+                            <small><b>{item.item_category}</b></small>
+                            <Link className="btn btn-primary float-right btn-sm" to={`/rentitem/${item.user_id}/${item.item_id}`}>View</Link>
+                        </div>
+                        </div>
+                        <br/>
+                </div>
+            );
+        }) 
+    }
+
+
+    renderWTBItems = () => {
+        return this.props.fetchUserWTBuyItems.map(item => {
+            return (
+                        <div className="col-sm-4">
+                            <div className="card">
+                            
+                                {/* <div style={{ width:"100%",textAlign:"right"}}>
+                                    <Link to={`/deleteWtbItem/${item.item_id}`} className="btn btn-primary rounded-0" type="submit">X</Link>
+                                </div> */}
+                                <div className="card-block">
+                                    <h4 className="card-title">{item.item_name}</h4>
+                                <div className="card-text">
+                                    <b>Duration</b>: <br/>
+                                    <b>Pricing</b>: Rs {item.item_price} <br/>
+                                    {/* <b><i className='fas fa-map-marker-alt'></i></b> */}
+                                </div>
+                                </div>
+                                <div className="card-footer" style={{textAlign:"center"}}>
+                                {/* <Link className="btn btn-primary float-left btn-sm" to={`/editReqBuyItem/${item.user_id}/${item.item_id}`}>Modify</Link> */}
+                                    <small><b>{item.item_category}</b></small>
+                                    <Link className="btn btn-primary float-right btn-sm" to={`/requestWtb/${item.user_id}/${item.item_id}`}>View</Link>
+                                </div>
+                            </div><br/>
+                    </div>
+            );
+        })
+    }
+
+    renderWTRItems = () => {
+        return this.props.fetchUserWTRentItems.map(item => {
+            return (
+                        <div className="col-sm-4">
+                            <div className="card">
+                                {/* <div style={{ width:"100%",textAlign:"right"}}>
+                                <Link to={`/deleteWtrItem/${item.item_id}`}className="btn btn-primary rounded-0" type="submit">X</Link>
+                                </div> */}
+                                <div className="card-block">
+                                    <h4 className="card-title">{item.item_name}</h4>
+                                <div className="card-text">
+                                    <b>Duration</b>: <br/>
+                                    <b>Pricing</b>: Rs {item.rent_rate} <br/>
+                                    {/* <b><i className='fas fa-map-marker-alt'></i></b> */}
+                                </div>
+                                </div>
+                                <div className="card-footer" style={{textAlign:"center"}}>
+                                {/* <Link className="btn btn-primary float-left btn-sm" to={`/editReqRentItem/${item.user_id}/${item.item_id}`}>Modify</Link> */}
+                                <small><b>{item.item_category}</b></small>
+                                    <Link className="btn btn-primary float-right btn-sm" to={`/requestWtr/${item.user_id}/${item.item_id}`}>View</Link>
+                                </div>
+                            </div><br/>
+                    </div>
+            );
+        })
+    }
 
     componentDidMount = async () => {
         await this.props.fetchCurrentUserId();
         await this.props.fetchUserDetail(this.props.userid) 
         await this.props.fetchOwnerProfile(this.props.match.params.id)
+        await this.props.sellerRating(this.props.match.params.id);
+        await this.props.fetchCurrentUserId();
+        await this.props.fetchUserSaleItem(this.props.match.params.id);
+        await this.props.fetchUserRentItem(this.props.match.params.id);
+        await this.props.fetchUserWTBItem(this.props.match.params.id);
+        await this.props.fetchUserWTRItem(this.props.match.params.id);
+        
     }
 
-    onSubmit = (formValues) => {
-        console.log(formValues);
-    }
 
-    renderSpinner = ({input, meta, type, classname, step, min, max,divStyle}) => {
+    renderSpinner = ({input, meta, type, className, step, min, max,divStyle}) => {
         return(
             <div>
             <input {...input}
-                class={classname}
+                className={className}
                 type={type}
                 style={divStyle}
                 autoComplete="off"
                 max={max}
                 min={min}
                 step={step}
-            // onChange={formProps.input.onChange} 
-            // value={formProps.input.value}
             />
             </div>
         );
@@ -50,29 +169,31 @@ class OtherUserProfile extends Component {
         );
     }
 
-    renderTextArea = ({label, meta, rows, cols, inside}) => {
+    renderTextArea = ({className,input ,meta, rows, cols,id}) => {
         return (
-            <div className="form-group" style={{paddingLeft:"20px", paddingRight:"20px"}}>
-                <div className="row">
-                        <div className="col-sm">
-                                <label>{label}</label>
-                        </div>
-                        <div className="col-sm" style={{textAlign: "right"}}>
-                            <textarea rows={rows} cols={cols} style={{border: "none",
-                                backgroundColor: "transparent",
-                                resize: "none",
-                                outline: "none",
-                                overflow: "hidden",
-                                width: "100%",
-                                textAlign: "right" }} value={inside} readOnly></textarea>
-                        </div>
-                </div>
+            <div className="form-group">
+                <textarea {...input} className={className} id={id} rows={rows} cols={cols} />
             </div>
         );
     }
+
+    renderInput = ({input , className, typename}) => {
+        return (
+            <div>
+                <input {...input} className={className} type={typename} />
+            </div>
+        );
+    }
+
+    onSubmit = (formValues) => {
+        formValues.sellerId = this.props.fetchOwnerProfileDetail.id;
+        formValues.reviewerId = this.props.userid;
+        this.props.sellerReview(formValues)
+        console.log(formValues);
+    }
     
     render() {
-        console.log("current id" ,this.props.fetchOwnerProfileDetail)
+        console.log("rating" ,)
 
         const images = require.context('../../public/images', true);
         const userPhoto = images(this.props.fetchOwnerProfileDetail ? "./" + `${this.props.fetchOwnerProfileDetail.userImage}`: "./default.png");
@@ -96,7 +217,7 @@ class OtherUserProfile extends Component {
             </div>
             <hr/>
             <div>
-                <Link to="/message"  style={{fontSize:"20px",color:"#191919"}}><b>Message</b></Link>
+            <Link style={{fontSize:"20px",color:"#191919"}} to={`/ChatBox/${this.props ? this.props.userid: ''}/${this.props.match.params.id}`}><b>Message Owner</b></Link>
             </div>
             <hr/>
             </div>
@@ -107,125 +228,97 @@ class OtherUserProfile extends Component {
                     </div>
                     <div className="shadow p-3 mb-5 bg-white rounded">
                         <h3 style={{paddingLeft:"20px",paddingBottom: "10px",paddingRight:"20px"}}> Rating
-                            <span style={{float:"right"}}> <b>4</b>/5</span>
+                            <span style={{float:"right"}}> <b>{this.props.ratingOfSeller ? this.props.ratingOfSeller.rate.toFixed(2): ''}</b>/5</span>
                         </h3><br/>
-                        <form className="form-group" onSubmit={this.props.handleSubmit(this.onSubmit)}>
-                            <label style={{paddingLeft:"20px",paddingBottom: "10px", width:"100%",paddingRight:"20px"}}>Your Rating
-                                <div className="form-group" style={{float:"right"}}>
-                                    <Field name="Rating" component={this.renderSpinner} classname="form-control" divStyle={{width:"80px", float:"right"}} SelId="Rating" type="number" min="0" max="5" step="0.5"/>
+                       
+                         <div className="container">
+                            <form className="form-group" onSubmit={this.props.handleSubmit(this.onSubmit)}>
+                                <div className="form-group" style={{paddingBottom:"20px"}}>
+                                    <h4 for="comment"><b>Create Your Review:</b></h4>
+                                    <div className="form-group">
+                                        <label>Rating</label><br/>
+                                        <Field name="Rating" component={this.renderSpinner} className="form-control" divStyle={{width:"80px"}} SelId="Rating" type="number" min="0" max="5" step="0.5"/>
+                                    </div>
+                                    <div className="form-group">
+                                        <label>Title</label><br/>
+                                        <Field name="Title" component={this.renderInput} typename="text" className="form-control"/>
+                                    </div>
+                                    <div className="form-group">
+                                        <label>Comment</label><br/>
+                                        <Field name="Description" component={this.renderTextArea} className="form-control" rows="2" id="desc"/>
+                                    </div>
+                                    <button className="btn btn-primary" style={{marginTop:"10px"}} type="submit">Publish</button>
                                 </div>
-                            </label>
-                            <div className="form-group" style={{textAlign:"center",paddingLeft:"20px",paddingBottom: "10px", width:"100%",paddingRight:"20px"}}>
-                                <button type="submit" className="btn btn-primary">Submit</button>
+                            </form>
                             </div>
-                        </form>
+                            <div className="container">
+                
+                <h2 className="header" style={{marginTop:"40px", marginBottom:"40px"}}>Seller Products and Ads<hr/></h2>
+                <ul className="nav nav-pills" id="myTab" role="tablist">
+                    <li className="nav-item">
+                        <a className="nav-link active" id="Buy" data-toggle="tab" href="#SaleItems" role="tab" aria-controls="userItemsContent" aria-selected="true">Sell Items</a>
+                    </li>
+                    <li className="nav-item">
+                        <a className="nav-link" id="Rent" data-toggle="tab" href="#RentItems" role="tab" aria-controls="requestedItemsContent" aria-selected="false">Rent Items</a>
+                    </li>
+                    <li className="nav-item">
+                        <a className="nav-link" id="Wtb" data-toggle="tab" href="#WTB" role="tab" aria-controls="userItemsContent" aria-selected="true">Asked for Buy</a>
+                    </li>
+                    <li className="nav-item">
+                        <a className="nav-link" id="Wtr" data-toggle="tab" href="#WTR" role="tab" aria-controls="requestedItemsContent" aria-selected="false">Asked for Rent</a>
+                    </li>
+                </ul><br/>
+
+
+                
+                <div className="tab-content" id="myTabContent">
+
+                    <div className="tab-pane fade show active" id="SaleItems" role="tabpanel" aria-labelledby="userItems-tab">
+                        <div className="shadow p-3 mb-5 bg-white rounded">
+                            <div className="right_content col-sm-12">
+                                    <div className="row">
+                                {this.props.fetchUserSellingItems ? this.renderSaleItems() : ''}
+                                </div>
+                                </div>
+                        </div>
                     </div>
-                    <h3 className="header" style={{paddingLeft:"20pt",paddingRight:"20pt",marginTop:"40px", marginBottom:"40px"}}>userName Recently Listed Items<Link to="/setting" style ={{float:"right"}} className="btn btn-outline-primary waves-effect"  type="button">View All</Link><hr/></h3>
-                    <div className="shadow p-3 mb-5 bg-white rounded">
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <div class="card">
-                                    <img class="card-img-top" src="https://picsum.photos/200/150/?random" ></img>
-                                    <div class="card-block">
-                                        <h4 class="card-title">Item_Name</h4>
-                                    <div class="card-text">
-                                        <b>Rating</b>: 4/5<br/>
-                                        <b>Price</b>: Rs 360
-                                    </div>
-                                    </div>
-                                    <div class="card-footer">
-                                        <small>Books</small>
-                                    <Link class="btn btn-primary float-right btn-sm" to="/itempage">View</Link>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="card">
-                                    <img class="card-img-top" src="https://picsum.photos/200/150/?random" ></img>
-                                    <div class="card-block">
-                                        <h4 class="card-title">Item_Name</h4>
-                                    <div class="card-text">
-                                        <b>Rating</b>: 4/5<br/>
-                                        <b>Price</b>: Rs 360
-                                    </div>
-                                    </div>
-                                    <div class="card-footer">
-                                        <small>Books</small>
-                                    <Link class="btn btn-primary float-right btn-sm" to="/itempage" >View</Link>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="card">
-                                    <img class="card-img-top" src="https://picsum.photos/200/150/?random" ></img>
-                                    <div class="card-block">
-                                        <h4 class="card-title">Item_Name</h4>
-                                    <div class="card-text">
-                                        <b>Rating</b>: 4/5<br/>
-                                        <b>Price</b>: Rs 360
-                                    </div>
-                                    </div>
-                                    <div class="card-footer">
-                                        <small>Books</small>
-                                    <Link class="btn btn-primary float-right btn-sm">View</Link>
-                                    </div>
-                                </div>
 
-                            </div>
-                        </div> 
+                    <div className="tab-pane fade" id="WTB" role="tabpanel" aria-labelledby="userItems-tab">
+                        <div className="shadow p-3 mb-5 bg-white rounded">
+                            <div className="right_content col-sm-12">
+                                <div className="row">
+                            {this.props.fetchUserWTBuyItems ? this.renderWTBItems() : ''}
                         </div>
-                    <h3 className="header" style={{paddingLeft:"20pt",paddingRight:"20pt",marginTop:"40px", marginBottom:"40px"}}>userName Recently Listed Requests<Link to="/setting" style ={{float:"right"}} className="btn btn-outline-primary waves-effect"  type="button">View All</Link><hr/></h3>
-                    <div className="shadow p-3 mb-5 bg-white rounded">
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <div class="card">
-                                    <div class="card-block">
-                                        <h4 class="card-title">Item_Name</h4>
-                                    <div class="card-text">
-                                        <b>Want To Buy</b><br/>
-                                        <b>Price</b>: Rs 360
-                                    </div>
-                                    </div>
-                                    <div class="card-footer">
-                                        <small>Books</small>
-                                    <Link class="btn btn-primary float-right btn-sm" to="/itempage">View</Link>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="card">
-                                    <div class="card-block">
-                                        <h4 class="card-title">Item_Name</h4>
-                                    <div class="card-text">
-                                    <b>Want To Buy</b><br/>
-                                        <b>Price</b>: Rs 360
-                                    </div>
-                                    </div>
-                                    <div class="card-footer">
-                                        <small>Books</small>
-                                    <Link class="btn btn-primary float-right btn-sm" to="/itempage" >View</Link>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="card">
-                                    <div class="card-block">
-                                        <h4 class="card-title">Item_Name</h4>
-                                    <div class="card-text">
-                                        <b>Want To Buy</b><br/>
-                                        <b>Price</b>: Rs 360
-                                    </div>
-                                    </div>
-                                    <div class="card-footer">
-                                        <small>Books</small>
-                                    <Link class="btn btn-primary float-right btn-sm">View</Link>
-                                    </div>
-                                </div>
+                        </div>
+                    </div>
+                    </div>
 
+                    <div className="tab-pane fade" id="RentItems" role="tabpanel" aria-labelledby="requestItems-tab">
+                        <div className="shadow p-3 mb-5 bg-white rounded">
+                        <div className="right_content col-sm-12">
+                                    <div className="row">
+                            {this.props.fetchUserRentingItems ? this.renderRentItems() : ""}
+                            </div>
                             </div>
                         </div>
-                        
+                    </div>
+
+                    <div className="tab-pane fade" id="WTR" role="tabpanel" aria-labelledby="requestItems-tab">
+                        <div className="shadow p-3 mb-5 bg-white rounded">
+                            <div className="right_content col-sm-12">
+                                    <div className="row">
+                            {this.props.fetchUserWTRentItems ? this.renderWTRItems() : ''}
+                                    </div>
+                                </div>
                         </div>
+                    </div>
+
+                </div>
+            </div>
+                    </div>
+                    
+                 
+                   
             </div>
         </div>
         
@@ -244,7 +337,12 @@ function mapStateToProps(state) {
         errorMessage: state.auth.errorMessage,
         userid: state.auth.userid,
         userDetail: state.auth.userDetail,
-        fetchOwnerProfileDetail: state.auth.fetchOwnerProfileDetail
+        fetchOwnerProfileDetail: state.auth.fetchOwnerProfileDetail,
+        fetchUserWTBuyItems: state.auth.fetchUserWTBuyItems,
+        fetchUserWTRentItems: state.auth.fetchUserWTRentItems,
+        fetchUserSellingItems: state.auth.fetchUserSellingItems,
+        fetchUserRentingItems:state.auth.fetchUserRentingItems,
+        ratingOfSeller : state.auth.sellerRate
     };
 }
 

@@ -6,7 +6,7 @@ import { Link} from 'react-router-dom';
 class RenderSaleCard extends Component {
     componentDidMount() {
         this.props.fetchRentItems();
-        setInterval(() => this.props.fetchRentItems(), 1000);
+        // setInterval(() => this.props.fetchRentItems(), 1000);
     }
 
     renderRentCard = () => {
@@ -38,7 +38,7 @@ class RenderSaleCard extends Component {
 
         console.log("adil", this.props.rentItems)
         return (
-            <div className="right_content col-sm-12" style={{ paddingLeft: "300px", margin: "5% 0%"}}>
+            <div className="right_content col-sm-12" style={{ paddingLeft: "300px", margin: "-2% 0%"}}>
                 <div className="shadow p-3 mb-5 bg-white rounded">
                     <div className="row">     
                         {this.props.rentItems ? this.renderRentCard() : ''}

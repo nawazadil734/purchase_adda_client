@@ -59,16 +59,22 @@ class Items extends Component {
             <div>
                 <select name={categoryName} className={classname} style={divStyle} {...input}>
                     <option value="">Category</option>
-                    <option value="volvo">Volvoooooooooooooooo</option>
-                    <option value="fiat">Fiat</option>
-                    <option value="audi">Audi</option>
+                    <option>Books</option>
+                    <option>Stationery</option>
+                    <option>Tools</option>
+                    <option>Computing</option>
+                    <option>Phones and Tablets</option>
                     </select>
             </div>
         );
     };
 
     onSubmit = (formValues) => {
+        if(!formValues.minPrice) formValues.minPrice = ''
+        if(!formValues.maxPrice) formValues.maxPrice = ''
+        if(!formValues.category) formValues.category = ''
         console.log(formValues);
+        this.props.fetchSaleItems(formValues);
     }
     
     render() {
@@ -78,9 +84,18 @@ class Items extends Component {
             <Header/>
             </div>
             <div className="container" style={{paddingLeft:"20pt",paddingRight:"20pt"}}>
-            <br/>
+            <br/><br/><br/>
+                    <div className="row">
+                        <div className="col-sm-12">
+                            <div className="shadow p-3 mb-5 bg-white rounded">
+                                <h1 style={{width:"100%"}}>Items for Sale<Link to="/forsell" className="btn btn-primary" style={{float:"right", marginTop:"5px"}}>Add New Sale Item</Link></h1>
+                            </div>
+                        </div>
+                    </div>
+
+                    
                 <div className = "row">
-                    <div className="left_content col-sm-3" style={{ height: "100%", position: "fixed", zIndex: "1", top:"0", overflowX: "hidden", paddingTop: "80px", width: "300px"}}>
+                    <div className="left_content col-sm-3" style={{ height: "100%", position: "fixed", zIndex: "1", top:"60px", overflowX: "hidden", paddingTop: "80px", width: "300px"}}>
                         <div className="shadow p-3 mb-5 bg-white rounded">
                             <form className="form-group" onSubmit={this.props.handleSubmit(this.onSubmit)}>
                                 <div className="form-group">
@@ -89,15 +104,15 @@ class Items extends Component {
                                     <div className="row">
                                         <div className="col-sm-6">
                                             <label>Min</label>
-                                            <Field name="min" classname="form-control" component={this.renderInput} typename="number" minimum="0"/>
+                                            <Field name="minPrice" classname="form-control" component={this.renderInput} typename="number" minimum="0"/>
                                         </div>
                                         <div className="col-sm-6">
                                             <label>Max</label>
-                                            <Field name="max" classname="form-control" component={this.renderInput} typename="number" minimum="0"/>
+                                            <Field name="maxPrice" classname="form-control" component={this.renderInput} typename="number" minimum="0"/>
                                         </div>
                                     </div>
                                 </div>
-                                
+{/*                                 
                                 <div className="form-group">
                                     <label style={{fontSize:"20px", color:"#191919"}}><b>Rating</b></label>
                                     <hr/>
@@ -107,7 +122,7 @@ class Items extends Component {
                                         <Field name="minrating" classname="form-control" component={this.renderInput} typename="number" minimum="0" step="0.1" maximum="5"/>
                                     </div>
                                     </div>
-                                </div>
+                                </div> */}
                                 <div className="form-group">
                                     <label style={{fontSize:"20px", color:"#191919"}}><b>Category</b></label>
                                     <hr/>
@@ -120,7 +135,7 @@ class Items extends Component {
                                 </div>
                             </form>        
                         </div>
-                </div>         
+                </div>  
                     <SaleItemCard/>
             </div>
         </div>

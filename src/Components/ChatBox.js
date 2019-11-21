@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Field, reduxForm} from 'redux-form';
+import { reset, Field, reduxForm} from 'redux-form';
 import { connect} from 'react-redux';
 import * as actions from '../actions/index';
 // import profileImg from './doe.jpg';
@@ -12,17 +12,27 @@ class ChatBox extends Component {
         this.props.fetchMessage(this.props.match.params.currUser, this.props.match.params.owner);
         this.props.fetchCurrentUserId();
         setInterval(() => this.props.fetchMessage(this.props.match.params.currUser, this.props.match.params.owner), 1000)
+        this.scrollToBottom();
     }
+
+    componentDidUpdate() {
+        this.scrollToBottom();
+      }
+    
+      scrollToBottom = () => {
+        this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+      }
+    
 
 
     renderMessage = () => {
         // console.log("i am render")
         return (
-            this.props.messege.map(mes => {
+            this.props.messege.map((mes, id) => {
                 // console.log("worl" ,mes)
                 return (
                     this.props.workingUser ===  mes.sender_id ?
-                    <div className="row" style={{marginLeft:"5px"}}>
+                    <div className="row" style={{marginLeft:"5px"}} key={id}>
                                     <div className="col-sm-6">
                                         
                                     </div>
@@ -31,7 +41,7 @@ class ChatBox extends Component {
                                     </div>
                     </div> 
                     :
-                    <div className="row" style={{justifyContent:"right", marginRight:"5px"}}>
+                    <div className="row" style={{justifyContent:"right", marginRight:"5px"}} key={id}> 
                         <div className="col-sm-6">
                             <div className="shadow p-3 mb-5 bg-white rounded">{mes.message}</div>
                         </div>
@@ -64,7 +74,6 @@ class ChatBox extends Component {
                     className={style}
                     type={type}
             />
-            {console.log("meayt", meta)}
             {this.renderError(meta)}
             </div>
         );
@@ -73,36 +82,42 @@ class ChatBox extends Component {
     onSubmit = (formValues) => {
         formValues.currentUser =  this.props.match.params.currUser;
         formValues.owner = this.props.match.params.owner;
+        
         this.props.messageOwner(formValues);
     }
     
     render(){
-        console.log("i am user" ,this.props.workingUser);
+        console.log("papapa", this.props)
         return (
             <div className="container">
                 <Header/>
                 <br/><br/>
                 <h2 className="header" style={{marginTop:"40px", marginBottom:"40px"}}>Chat<hr/></h2>
                 <div className="shadow p-3 mb-5 bg-white rounded">
-                        <div className="card card-inverse card-info">
+                        <div className="card card-inverse card-info" >
                             <div className="card-title">
-                                <figure class="profile profile-inline" style={{ marginLeft:"10px", marginTop:"10px"}}>
-                                <img src="https://picsum.photos/200/150/?random" class="profile-avatar" alt=""></img>
-                            </figure>
-                            <h4 className="card-title" style={{ marginTop:"10px"}}>Tawshif Ahsan Khan</h4>
+                                { /*<figure className="profile profile-inline" style={{ marginLeft:"10px", marginTop:"10px"}}>
+                                <img src="https://picsum.photos/200/150/?random" className="profile-avatar" alt=""></img>
+                            </figure> */}
+                            <h4 className="card-title" style={{ marginTop:"10px"}}>Happy Chatting</h4>
                             </div>
 
 
-                            <div className="card-block" style={{overflowY:"auto", maxHeight:"450px", flexDirection: "column-reverse", display: "flex"}}>
-                                {this.props.messege ? this.renderMessage() : ''}
-                            </div>
-                            <div class="card-footer">
-                                <form onSubmit={this.props.handleSubmit(this.onSubmit)} style={{ width:"inherit"}}>
-                                <div className="d-flex">
-                                    <Field name="message" component={this.renderInput} label="message" style="form-control"/><br/><br/>
-                                    {/* <textarea class="form-control mr-1" rows="1" style={{ resize :"none", overflow:"auto"}}></textarea> */}
-                                    <button className="btn btn-primary">Send</button>
+                            <div className="card-block" style={{overflowY: "auto", maxHeight:"450px"}}>
+                                <div className="MessagesList">
+                                    {this.props.messege ? this.renderMessage() : ''}
                                 </div>
+                                <div style={{ float:"left", clear: "both" }}
+                                    ref={(el) => { this.messagesEnd = el; }}>
+                                </div>
+                            </div>
+                            <div className="card-footer">
+                                <form onSubmit={this.props.handleSubmit(this.onSubmit)} style={{ width:"inherit"}}>
+                                    <div className="d-flex">
+                                        <Field name="message" component={this.renderInput} label="message" style="form-control"/><br/><br/>
+                                        {/* <textarea className="form-control mr-1" rows="1" style={{ resize :"none", overflow:"auto"}}></textarea> */}
+                                        <button className="btn btn-primary">Send</button>
+                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -118,9 +133,13 @@ const validate = (formValues) => {
     return errors;
 }
 
+const afterSubmit = (result, dispatch) =>
+  dispatch(reset('chat'));
+
 const wrappedForm = reduxForm({
         form: 'chat',
-        validate: validate
+        validate: validate,
+        onSubmitSuccess: afterSubmit,
 })(ChatBox);
 
 function mapStateToProps(state) {

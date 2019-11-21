@@ -15,12 +15,12 @@ class Header extends Component {
                         <li className="nav-item">
                             <Link className="nav-link" to="/rentItems" style={{marginLeft:"10pt", marginRight:"10pt"}}>Lend</Link>
                         </li>
-                        <li className="nav-item">
+                        {/* <li className="nav-item">
                             <Link className="nav-link" to="/forsell" style={{marginLeft:"10pt", marginRight:"10pt"}}>Sell</Link>
-                        </li>
-                        <li className="nav-item">
+                        </li> */}
+                        {/* <li className="nav-item">
                             <Link className="nav-link" to="/forrent" style={{marginLeft:"10pt", marginRight:"10pt"}}>Rent</Link>
-                        </li>
+                        </li> */}
                         <li className="nav-item">
                             <Link className="nav-link" to="/requestedItems" style={{marginLeft:"10pt", marginRight:"10pt"}}>Requested Items</Link>
                         </li>
@@ -41,6 +41,7 @@ class Header extends Component {
                                 <Link className="dropdown-item" to="/profile">Profile</Link>
                                 <Link className="dropdown-item" to="/setting">Settings</Link>
                                 <Link className="dropdown-item" to="/newRequestForm">New Request</Link>
+                                <Link className="dropdown-item" to="/inbox">Messages</Link>
                                 <button className="dropdown-item" onClick={() => this.props.signout()}>Log Out</button>
                             </div>
                         </li>

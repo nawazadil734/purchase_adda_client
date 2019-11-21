@@ -8,6 +8,12 @@ import '../css/item.css'
 
 class RequestItem extends Component {
 
+    componentDidMount() {
+        this.props.fetchCurrentUserId();
+        this.props.fetchSingleReqWtb(this.props.match.params.itemid);
+        this.props.fetchSingleReqWtbOwner(this.props.match.params.ownerid);
+    }
+
     onSubmit = (formValues) => {
         console.log(formValues);
     }
@@ -47,6 +53,10 @@ class RequestItem extends Component {
     }
 
     render() {
+        // console.log("i am para",this.props.match.params)
+        // console.log("item", this.props.itemDetail);
+        // console.log("owner", this.props.ownerDetail);
+        const images = require.context('../../public/images', true);
         return (
             <div>
             <div className="container-fluid">
@@ -56,7 +66,7 @@ class RequestItem extends Component {
             <div className="container">
                     <div classname="container-flex" style={{marginTop:"20px"}}>
                         <div className="shadow p-3 mb-5 bg-white rounded">
-                            <h2> WTB/WTR : Some Title </h2>
+                            <h2>{this.props.itemDetail ? this.props.itemDetail.item_name : ''} </h2>
                         </div>
                     </div>
                 <div className="row">
@@ -64,18 +74,18 @@ class RequestItem extends Component {
                         <div className="row">
                             <div className="container">
                                 <div className="shadow p-3 mb-5 bg-white rounded">
-                                    <h2>₹ 45000</h2><br/>
-                                    <label>userSelectedCategory</label><br/>
-                                    <label>userDefinedDuration</label><br/>
-                                    <textarea rows="2" cols="0" style={{border: "none",
+                                    <h2>Rs: {this.props.itemDetail ? this.props.itemDetail.item_price : ''}</h2><br/>
+                                    <label>{this.props.itemDetail ? this.props.itemDetail.item_category : ''}</label><br/>
+                                    {/* <textarea rows="2" cols="0" style={{border: "none",
                                             backgroundColor: "transparent",
                                             resize: "none",
                                             outline: "none",
                                             overflow: "hidden",
                                             width: "100%",
-                                            color: "grey" }} readOnly>
-                                            H. No. 42/A, Dramapur, Salcette, Goa, India, World, Universe
-                                    </textarea>
+                                            color: "grey" }} readOnly> */}
+                                            <label>
+                                            {this.props.ownerDetail ? this.props.ownerDetail.streetNo  + " , "  +  this.props.ownerDetail.city + " , " + this.props.ownerDetail.state : ""}
+                                    </label>
                                 </div>
                             </div>
                         </div>
@@ -83,41 +93,55 @@ class RequestItem extends Component {
                             <div className="container">
                                 <div className="shadow p-3 mb-5 bg-white rounded">
                                     <h2 style={{ margin : "10px"}}>Description</h2>
-                                        <textarea rows="15" cols="0" className="form-control shadow-none" style={{border: "none",
+                                    <textarea rows="13" cols="0" className="form-control shadow-none" style={{border: "none",
                                             backgroundColor: "transparent",
                                             resize: "none",
                                             outline: "none",
                                             overflowY: "scroll"
-                                            }} readOnly>
-                                            Forerunner 30 is your new everyday watch, thanks to its activity tracking features. That includes steps, calories, distance, sleep¹ and intensity minutes, not to mention 24/7 heart rate monitoring. It also watches out for periods of inactivity and gives you vibration alerts when it’s time to move. We’re making activity tracking even smarter with our Move IQ feature, which automatically detects when you start moving and classifies your activity as a walk, run or bike. In addition, cardio is used to identify all of your other general fitness activities that don’t fall into the other categories.Forerunner 30 is your new everyday watch, thanks to its activity tracking features. That includes steps, calories, distance, sleep¹ and intensity minutes, not to mention 24/7 heart rate monitoring. It also watches out for periods of inactivity and gives you vibration alerts when it’s time to move. We’re making activity tracking even smarter with our Move IQ feature, which automatically detects when you start moving and classifies your activity as a walk, run or bike. In addition, cardio is used to identify all of your other general fitness activities that don’t fall into the other categories.
-                                        </textarea>
+                                            }} readOnly placeholder={this.props.itemDetail ? this.props.itemDetail.item_desc : ''}>
+                                            </textarea>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div className="col-md-4">
+                   
                         <div className="row">
                             <div className="container">
                                 <div className="shadow p-3 mb-5 bg-white rounded">
                                 <h4>Location</h4>
-                                <iframe id="gmap_canvas" src="https://maps.google.com/maps?q=university%20of%20san%20francisco&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="fi" marginwidth="0" style={{width:"100%", height:"385px"}}></iframe>
+                                <iframe id="gmap_canvas" 
+                                    src={`https://maps.google.com/maps?q=${this.props.ownerDetail ? this.props.ownerDetail.streetNo: ""}%20${this.props.ownerDetail ? this.props.ownerDetail.city: ""}%20${this.props.ownerDetail ? this.props.ownerDetail.state: ""}&t=&z=13&ie=UTF8&iwloc=&output=embed`} 
+                                    frameborder="0" 
+                                    scrolling="no" 
+                                    marginheight="fi" 
+                                    marginwidth="0" 
+                                    style={{width:"100%", height:"340px"}}></iframe>
+                                
                                 </div>
                             </div>
                         </div>
-                        <div className="row" >
+                        
+                    
+                    <div className="row" >
                             <div className="container">
                                 <div className="shadow p-3 mb-5 bg-white rounded">
                                     <h4>Requester Profile</h4><br/>
-                                    <div class="card card-inverse card-info">
-                                        <div class="card-block">
-                                            <figure class="profile profile-inline">
-                                                <img src="https://picsum.photos/200/150/?random" class="profile-avatar" alt=""></img>
+                                    <div className="card card-inverse card-info">
+                                        <div className="card-block">
+                                            <figure className="profile profile-inline">
+                                                <img src={images(this.props.ownerDetail ? "./" + `${this.props.ownerDetail.userImage !== null ? this.props.ownerDetail.userImage : "default.png"}`: "./default.png")} className="profile-avatar" alt=""></img>
                                             </figure>
-                                        <h4 class="card-title">Tawshif Ahsan Khan</h4>
+                                            
+                                        <h4 className="card-title">{this.props.ownerDetail ? this.props.ownerDetail.firstName + " " + this.props.ownerDetail.lastName : ''}</h4>
+                                        
                                         </div>
+                                        <label>
+                                            {this.props.ownerDetail ? this.props.ownerDetail.streetNo  + " , "  +  this.props.ownerDetail.city + " , " + this.props.ownerDetail.state : ""}
+                                        </label>
                                         <div class="card-footer">
-                                            <button class="btn btn-info btn-sm" style={{ float:"left"}}>View Profile</button>
-                                            <button class="btn btn-info btn-sm" style={{ float:"right"}}>Chat with Requester</button>
+                                            <Link class="btn btn-info btn-sm" to={`/otherUser/${this.props.ownerDetail ? this.props.ownerDetail.id : '' }`} style={{ float:"left"}}>View Profile</Link>
+                                            <Link to={`/ChatBox/${this.props ? this.props.userid: ''}/${this.props.ownerDetail? this.props.ownerDetail.id: ''}`} onClick={() => console.log("something")} className="btn btn-info btn-sm" style={{ float:"right"}}>Message Owner</Link>
                                         </div>
                                     </div>
                                 </div>
@@ -143,7 +167,11 @@ const wrappedForm = reduxForm({
 })(RequestItem);
 
 function mapStateToProps(state) {
-    return { errorMessage: state.auth.errorMessage};
+    return { errorMessage: state.auth.errorMessage,
+        userid: state.auth.userid,
+            itemDetail: state.auth.fetchUserWTBitem,
+            ownerDetail: state.auth.fetchSingleWTbOwner
+        };
 }
 
 export default connect(mapStateToProps, actions)(wrappedForm);

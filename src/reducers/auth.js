@@ -15,7 +15,16 @@ import {AUTH_USER,
     USER_SALE_ITEMS,
     USER_RENT_ITEMS,
     USER_WTB_ITEMS,
-    USER_WTR_ITEMS
+    USER_WTR_ITEMS,
+
+
+    FETCH_SINGLE_REQ_WTB,
+    FETCH_SINGLE_REQ_WTB_OWNER,
+    FETCH_SINGLE_REQ_WTR,
+    FETCH_SINGLE_REQ_WTR_OWNER,
+
+    SELLER_RATING
+
 } from '../actions/types';
 const INITIAL_STATE = {
     authenticated: '',
@@ -58,9 +67,19 @@ export default function(state = INITIAL_STATE, action) {
         case USER_WTR_ITEMS:
             return {...state, fetchUserWTRentItems: action.payload};
         case USER_SALE_ITEMS:
-            return{...state, fetchUserSellingItems: action.payload};
+            return {...state, fetchUserSellingItems: action.payload};
         case USER_RENT_ITEMS:
-                return{...state, fetchUserRentingItems: action.payload};
+            return {...state, fetchUserRentingItems: action.payload};
+        case FETCH_SINGLE_REQ_WTB:
+            return {...state, fetchUserWTBitem: action.payload};
+        case FETCH_SINGLE_REQ_WTB_OWNER:
+            return {...state, fetchSingleWTbOwner: action.payload};
+        case FETCH_SINGLE_REQ_WTR:
+            return {...state, fetchUserWTRitem: action.payload}
+        case FETCH_SINGLE_REQ_WTR_OWNER:
+            return {...state, fetchSingleWTrOwner: action.payload};
+        case SELLER_RATING:
+            return {...state, sellerRate: action.payload};
         default:
         return state;
     };
