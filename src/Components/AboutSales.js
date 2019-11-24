@@ -15,7 +15,7 @@ class AboutSales extends Component {
             <div>
                 <div className="container-fluid">
                     <Header/>
-                </div><br/>
+                </div><br/><br/>
                 <div className="container-fluid" style={{backgroundColor:"#f6f6f7", marginTop:"10pt"}}>
                     <div className="container">
                         <div className = "row justify-content-center align-items-center" style={{textAlign:"left"}}>
@@ -23,7 +23,7 @@ class AboutSales extends Component {
                             <h3 style={{fontSize:"35pt", lineHeight:"45pt"}}>
                                 Selling on<br/>PurchaseAdda.
                             </h3>
-                            <text>Something</text>
+                            {/* <text>Something</text> */}
                             </div>
                             <div className="col-sm-6">
                                 <img src={banner}/>

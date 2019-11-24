@@ -2,8 +2,13 @@ import React, { Component } from 'react';
 import { Router, Route } from 'react-router-dom';
 import Profile from './Components/Profile';
 import './App.css';
-import SignIn from './Components/SignIn';
+
+// import SignIn from './Components/SignIn';
+import SignIn2 from './Components/SignIn2';
+
 import SignUp from './Components/SignUp';
+import SignUp2 from './Components/SignUp2';
+
 import ResetPassword from './Components/ResetPassword'
 import userItems from './Components/userItems';
 // import Dashboard from './Components/Dashboard';
@@ -12,11 +17,16 @@ import newRequestForm from './Components/newRequestForm';
 import Setting from './Components/EditProfile';
 import ForSaleForm from './Components/ForSaleForm';
 import ForRentForm from './Components/ForRentForm';
+
 import SaleItems from './Components/SaleItems';
 import RentItems from './Components/RentItems';
+
 import SaleItemPage from './Components/SaleItemPage';
 import RentItemPage from './Components/RentItemPage';
-import RequestPage from './Components/RequestPage';
+
+import RequestWTBPage from './Components/RequestWTBPage';
+import RequestWTRPage from './Components/RequestWTRPage';
+
 import EditForSaleForm from './Components/EditForSaleForm';
 import EditForRentForm from './Components/EditForRentForm';
 import EditWTBRequestForm from './Components/EditWTBRequestForm';
@@ -48,17 +58,21 @@ import * as actions from './actions/index';
 import { connect } from 'react-redux';
 import otherUserProfile from './Components/otherUserProfile';
 
+import SearchResults from './Components/SearchResults';
 
+import Verification2 from './Components/Verification2';
 class App extends Component {
     render() {
         return(
             <div >
                 <Router history={history}>
                     <div>
-                    <Route path="/" exact component={this.props.authenticated ? LandingPage : SignIn}/>
-                    <Route path="/signup" exact component={this.props.authenticated ? LandingPage : SignUp}/>
+                    <Route path="/" exact component={this.props.authenticated ? LandingPage : SignIn2}/>
+                    <Route path="/signup" exact component={this.props.authenticated ? LandingPage : SignUp2}/>
                     <Route path="/dashboard" exact component={LandingPage}/>
-                    <Route path="/verification" exact component={ForgotPassword}/>
+
+                    <Route path="/verification" exact component={Verification2}/>
+
                     <Route path="/reset/:token" exact component={ResetPassword} />
                     <Route path="/forsell" exact component={ForSaleForm}/>
                     <Route path="/profile" exact component={Profile}/>
@@ -76,7 +90,9 @@ class App extends Component {
                     <Route path="/newRequestForm" exact component={newRequestForm}/>
                     <Route path="/myitems" exact component={userItems}/>
                     <Route path="/otherUser/:id" exact component={otherUserProfile}/>
-                    <Route path="/requestedItems" exact component={RequestPage}/>
+
+                    <Route path="/requestedWTBItems" exact component={RequestWTBPage}/>
+                    <Route path="/requestedWTRItems" exact component={RequestWTRPage}/>
 
                     <Route path="/editSaleItem/:userid/:itemid" exact component={EditForSaleForm}/>
                     <Route path="/editRentItem/:userid/:itemid" exact component={EditForRentForm}/>
@@ -97,6 +113,8 @@ class App extends Component {
                     <Route path="/deleteRentItem/:itemId" exact component={RentItemDeleteModal}/>
                     <Route path="/deleteWtbItem/:itemId" exact component={WtbItemDeleteModal}/>
                     <Route path="/deleteWtrItem/:itemId" exact component={WtrItemDeleteModal}/>
+
+                    <Route path="/query" exact component={SearchResults}/>
 
                     </div>
                 </Router>

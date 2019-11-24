@@ -9,7 +9,9 @@ import {AUTH_USER,
         RENT_ITEM_UPLOAD,
         UPLOAD_SALE_PHOTO,
         FECTH_SALE_ITEMS,
-        FECTH_REQ_ITEMS,
+
+        FECTH_REQ_WTB_ITEMS,
+        FECTH_REQ_WTR_ITEMS,
         UPLOAD_RENT_PHOTO,
         FECTH_RENT_ITEMS,
         FETCH_SINGLE_SALE_ITEM,
@@ -45,13 +47,25 @@ import {AUTH_USER,
         RENT_REVIEW,
         SELLER_REVIEW,
 
-        SELLER_RATING
+        SELLER_RATING,
+
+        QUERY_RESULT
 
     } from './types';
 import history from '../history';
 import { async } from 'q';
 
 // save token in localStorage
+
+export const queryResult = (formValues) => {
+    return async (dispatch) => {
+        console.log("i am query", formValues);
+        const response = await axios.post(`/searchQuery`, formValues);
+        console.log("i am search result ", response.data);
+        dispatch({ type: QUERY_RESULT, payload: response.data});
+        history.push("/query");
+    }
+}
 
 export const sellerRating = (id) => {
     return async (dispatch) => {
@@ -305,11 +319,32 @@ export const fetchRentItems = (formValues) => {
     }
 }
 
-export const fetchReqItems = () => {
+export const fetchReqWTBItems = (formValues) => {
     return async (dispatch) => {
-        const response = await axios.get('/fetchReqItems');
-        dispatch({ type: FECTH_REQ_ITEMS, payload: response.data});
-        // history.push("/requestedItems");
+        var defaultValues = {
+            category : "category",
+            minPrice: -1,
+            maxPrice: -1,
+            sort: 'default'
+        }
+        const response = await axios.post('/fetchReqWTBItems',formValues === undefined ? defaultValues : formValues);
+        dispatch({ type: FECTH_REQ_WTB_ITEMS, payload: response.data});
+        history.push("/requestedWTBItems");
+    }
+}
+
+/// ia ma gerw
+export const fetchReqWTRItems = (formValues) => {
+    return async (dispatch) => {
+        var defaultValues = {
+            category : "category",
+            minPrice: -1,
+            maxPrice: -1,
+            sort: 'default'
+        }
+        const response = await axios.post('/fetchReqWTRItems',formValues === undefined ? defaultValues : formValues);
+        dispatch({ type: FECTH_REQ_WTR_ITEMS, payload: response.data});
+        history.push("/requestedWTRItems");
     }
 }
 
@@ -363,7 +398,7 @@ export const uploadWtb = (formValues) => {
      const response = await axios.post("/uploadReqBuy", formValues);
         console.log(response.data);
         dispatch({ type: RENT_ITEM_UPLOAD, payload: response.data});
-        history.push('/requestedItems');
+        history.push('/requestedWTBItems');
     }
 }
 
@@ -372,7 +407,7 @@ export const uploadWtr = (formValues) => {
      const response = await axios.post("/uploadReqRent", formValues);
         console.log(response.data);
         dispatch({ type: RENT_ITEM_UPLOAD, payload: response.data});
-        history.push('/requestedItems');
+        history.push('/requestedWTRItems');
     }
 }
 export const updateProfileInfo = (formValues) => {

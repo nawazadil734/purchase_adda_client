@@ -8,7 +8,7 @@ import Header from './Header';
 import '../css/item.css';
 import _ from 'lodash';
 import requireAuth from './requireAuth';
-import ReqItemcard from './ReqItemCard';
+import ReqItemWTRcard from './ReqItemWTRCard';
 class RequestItems extends Component {
 
     renderLabel = ({label,meta, inside}) => {
@@ -26,20 +26,21 @@ class RequestItems extends Component {
         );
     }
 
-    renderRadioButton = ({}) => {
+    renderRadioButton = () => {
         return(
             <div className="form-group" >
                 <div class="form-check">
-                    <label class="form-check-label" for="radio1">
-                        <input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1" checked/>Ascending
-                    </label>
+                    <div>
+                        <label>
+                            <Field name="sort" component="input" type="radio" value="asc" />{' '}
+                            Ascending
+                        </label>
+                        <br/>
+                        <label>
+                            <Field name="sort" component="input" type="radio" value="desc" />{' '}
+                            Descending
+                        </label>
                     </div>
-                    <div class="form-check">
-                    <label class="form-check-label" for="radio2">
-                        <input type="radio" class="form-check-input" id="radio2" name="optradio" value="option2"/>Descending
-                    </label>
-                    </div>
-                    <div class="form-check">
                 </div>
 
             </div>
@@ -91,7 +92,12 @@ class RequestItems extends Component {
     };
 
     onSubmit = (formValues) => {
+        if(!formValues.minPrice) formValues.minPrice = ''
+        if(!formValues.maxPrice) formValues.maxPrice = ''
+        if(!formValues.category) formValues.category = ''
+        if(!formValues.sort) formValues.sort = '' 
         console.log(formValues);
+        this.props.fetchReqItems(formValues);
     }
     
     render() {
@@ -102,6 +108,13 @@ class RequestItems extends Component {
             </div><br/><br/>
             <div className="container" style={{paddingLeft:"20pt",paddingRight:"20pt"}}>
             <br/>
+            <div className="row">
+                        <div className="col-sm-12">
+                            <div className="shadow p-3 mb-5 bg-white rounded">
+                                <h1 style={{width:"100%"}}>WTR Requested Items<Link to="/newRequestForm" className="btn btn-primary" style={{float:"right", marginTop:"5px"}}>Request Item</Link></h1>
+                            </div>
+                        </div>
+                    </div>
                 <div className = "row">
                     <div className="left_content col-sm-3">
                         <div className="shadow p-3 mb-5 bg-white rounded">
@@ -112,19 +125,19 @@ class RequestItems extends Component {
                                     <div className="row">
                                         <div className="col-sm-6">
                                             <label>Min</label>
-                                            <Field name="min" classname="form-control" component={this.renderInput} typename="number" minimum="0"/>
+                                            <Field name="minPrice" classname="form-control" component={this.renderInput} typename="number" minimum="0"/>
                                         </div>
                                         <div className="col-sm-6">
                                             <label>Max</label>
-                                            <Field name="max" classname="form-control" component={this.renderInput} typename="number" minimum="0"/>
+                                            <Field name="maxPrice" classname="form-control" component={this.renderInput} typename="number" minimum="0"/>
                                         </div>
                                     </div>
                                 </div>
-                                <div className="form-group">
+                                {/* <div className="form-group">
                                     <label style={{fontSize:"20px", color:"#191919"}}><b>Request Type</b></label>
                                     <hr/>
                                     <Field name="reqType" categoryName="reqType" component={this.renderSelector} classname="custom-select" divStyle={{paddingLeftt:"15px", paddingRight:"15px"}}/>
-                                </div>
+                                </div> */}
                                 <div className="form-group">
                                     <label style={{fontSize:"20px", color:"#191919"}}><b>Category</b></label>
                                     <hr/>
@@ -143,7 +156,7 @@ class RequestItems extends Component {
                 </div>
                 <div className="right_content col-sm-9" >
                     <div className="shadow p-3 mb-5 bg-white rounded">
-                        <ReqItemcard/>
+                        <ReqItemWTRcard/>
                     </div>
                 </div>
             </div>

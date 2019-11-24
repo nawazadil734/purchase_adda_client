@@ -4,7 +4,8 @@ import {AUTH_USER,
     USER_DETAIL, 
     UPLOAD_PROFILE_PHOTO,
     FECTH_SALE_ITEMS,
-    FECTH_REQ_ITEMS,
+    FECTH_REQ_WTB_ITEMS,
+    FECTH_REQ_WTR_ITEMS,
     FECTH_RENT_ITEMS, 
     FETCH_SINGLE_SALE_ITEM, 
     FETCH_SINGLE_SALE_OWNER,
@@ -23,7 +24,8 @@ import {AUTH_USER,
     FETCH_SINGLE_REQ_WTR,
     FETCH_SINGLE_REQ_WTR_OWNER,
 
-    SELLER_RATING
+    SELLER_RATING,
+    QUERY_RESULT
 
 } from '../actions/types';
 const INITIAL_STATE = {
@@ -46,7 +48,9 @@ export default function(state = INITIAL_STATE, action) {
             return {...state, profilePhoto: action.payload};
         case FECTH_SALE_ITEMS:
             return {...state, saleItems: action.payload};
-        case FECTH_REQ_ITEMS:
+        case FECTH_REQ_WTB_ITEMS:
+            return {...state, reqItems: action.payload};
+        case FECTH_REQ_WTR_ITEMS:
             return {...state, reqItems: action.payload};
         case FECTH_RENT_ITEMS:
             return {...state, rentItems: action.payload};
@@ -80,6 +84,8 @@ export default function(state = INITIAL_STATE, action) {
             return {...state, fetchSingleWTrOwner: action.payload};
         case SELLER_RATING:
             return {...state, sellerRate: action.payload};
+        case QUERY_RESULT:
+            return {...state, query: action.payload};
         default:
         return state;
     };

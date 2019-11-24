@@ -6,9 +6,9 @@ import { Link} from 'react-router-dom';
 class RenderReqCard extends Component {
 
     componentDidMount() {
-        this.props.fetchReqItems();
+        this.props.fetchReqWTRItems();
         // this.props.fetchOwnerProfile()
-        setInterval(() => this.props.fetchReqItems(), 1000);
+        // setInterval(() => this.props.fetchReqItems(), 1000);
     }
 
 
@@ -21,14 +21,14 @@ class RenderReqCard extends Component {
                                 <div className="card-block">
                                     <h4 className="card-title">{item.item_name}</h4>
                                 <div className="card-text">
-                                    <b>Pricing</b>: Rs {item.item_price} <br/>
+                                    <b>Pricing</b>: Rs {item.rent_rate} <br/>
                                     {/* <b><i className='fas fa-map-marker-alt'></i></b> */}
                                 </div>
                                 </div>
                                 <div className="card-footer" style={{textAlign:"center"}}>
                                     <small className="float-left">{item.item_category}</small>
-                                    <small><b>Want To Buy</b></small>
-                                    <Link className="btn btn-primary float-right btn-sm" to={`/requestWtb/${item.user_id}/${item.item_id}`}>View</Link>
+                                    <small><b>Want To Rent</b></small>
+                                    <Link className="btn btn-primary float-right btn-sm" to={`/requestWtr/${item.user_id}/${item.item_id}`}>View</Link>
                                 </div>
                             </div><br/>
                     </div>

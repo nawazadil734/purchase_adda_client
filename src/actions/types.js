@@ -10,7 +10,10 @@ export const SALE_ITEM_UPLOAD = 'sale_item_upload';
 export const RENT_ITEM_UPLOAD = 'rent_item_upload';
 export const UPLOAD_SALE_PHOTO = 'upload_sale_photo';
 export const FECTH_SALE_ITEMS = 'fetch_sale_items';
-export const FECTH_REQ_ITEMS = 'fetch_req_items';
+
+export const FECTH_REQ_WTB_ITEMS = 'fetch_req_wtb_items';
+export const FECTH_REQ_WTR_ITEMS = 'fetch_req_wtr_items';
+
 export const UPLOAD_RENT_PHOTO = 'upload_rent_photo';
 export const FECTH_RENT_ITEMS = 'fetch_rent_items';
 export const FETCH_SINGLE_SALE_ITEM = 'fetch_single_sale_item';
@@ -45,3 +48,6 @@ export const RENT_REVIEW = 'rent_review';
 export const SELLER_REVIEW = 'seller_review';
 
 export const SELLER_RATING = 'seller_rating';
+
+
+export const QUERY_RESULT = "query_result";
