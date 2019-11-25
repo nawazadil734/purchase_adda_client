@@ -140,10 +140,13 @@ class forSale extends Component {
         this.setState({ files: [...this.state.files, ...e.target.files] })
       }
 
-    renderPhotoInput = ({input}) => {
+    renderPhotoInput = ({input, meta}) => {
         // console.log("i am field", field)
         return (
+            <div>
             <input {...input}  type="file" value={this.props.file} onChange={this.fileSelectedHandler} multiple/>
+            {this.renderError(meta)}
+            </div>
         )
     }
 
@@ -195,7 +198,7 @@ class forSale extends Component {
                                 <br/>
                                 <br/>
                                 <div style={{textAlign:"center", marginBottom:"50pt"}}>
-                                    <button type="submit" className="btn btn-primary">Submit</button>
+                                    <button type="submit" className="btn btn-primary" onClick={() => alert("Rent Item Uploaded")}>Submit</button>
                                 </div>
                             </form>
                         </div>
@@ -229,9 +232,9 @@ const validate = (formValues) => {
     if(!formValues.itemRentDurLimitHours) {
         errors.itemRentDurLimitHours = "You must specify the duration limit";
     }
-    // if(!formValues.itemImages) {
-    //     errors.itemImages = "You must enter a Confirm Password";
-    // }
+    if(!(formValues.myFile && formValues.myFile.length)) {
+        errors.myFile = "You must upload atleast one Item Image";
+    }
 
     return errors;
 }

@@ -59,7 +59,7 @@ class SignUp2 extends Component {
     render() {
         return (
             <div className="myImage">
-                <img src={bgpng} id="bg" alt=""/>
+                <img src={bgpng} id="bg" alt="" style={{ position: "fixed"}}/>
                 <div className="container" style={{alignContent:"center", backgroundColor:"#000000"}}>
                     <div style={{borderRadius:"15px", border:"1px solid #808080", position:"absolute", padding:"20pt", width:"700pt", height:"400pt", top:"50%", transform:"translate(-50%, -50%)", left: "50%", backgroundColor:"white"}}>
                         <div className="row" style={{textAlign:"center"}}>
@@ -105,6 +105,9 @@ class SignUp2 extends Component {
                                 <button type="submit" className="btn btn-primary">Sign Up</button><br/>
                             </div>
                         </form>
+                        <div style={{ textAlign : "center"}}>
+                                <label style={{color:"black", marginTop:"1%", marginRight:"5px"}}>Already have an account?</label><Link to="/">Login</Link>
+                            </div>
                     </div>
                 </div>
             </div>

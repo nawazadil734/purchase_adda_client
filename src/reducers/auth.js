@@ -25,9 +25,14 @@ import {AUTH_USER,
     FETCH_SINGLE_REQ_WTR_OWNER,
 
     SELLER_RATING,
-    QUERY_RESULT
+    QUERY_RESULT,
+
+    FETCH_CHAT,
+
+    FETCH_RENT_REVIEW
 
 } from '../actions/types';
+import { stat } from 'fs';
 const INITIAL_STATE = {
     authenticated: '',
     errorMessage: '',
@@ -86,6 +91,10 @@ export default function(state = INITIAL_STATE, action) {
             return {...state, sellerRate: action.payload};
         case QUERY_RESULT:
             return {...state, query: action.payload};
+        case FETCH_CHAT:
+            return {...state, chatList: action.payload}
+        case FETCH_RENT_REVIEW:
+            return {...state, rent_review: action.payload}
         default:
         return state;
     };

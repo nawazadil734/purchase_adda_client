@@ -79,12 +79,12 @@ class Items extends Component {
     
     render() {
         return (
-            <div>
+            <div style={{overflow:"hidden"}}>
             <div className="container-fluid">
             <Header/>
             </div>
             <div className="container" style={{paddingLeft:"20pt",paddingRight:"20pt"}}>
-            <br/><br/><br/>
+            <br/><br/><br/><br/>
                     <div className="row">
                         <div className="col-sm-12">
                             <div className="shadow p-3 mb-5 bg-white rounded">
@@ -95,7 +95,7 @@ class Items extends Component {
 
                     
                 <div className = "row">
-                    <div className="left_content col-sm-3" style={{ height: "100%", position: "fixed", zIndex: "1", top:"60px", overflowX: "hidden", paddingTop: "80px", width: "300px"}}>
+                    <div className="left_content col-sm-3" style={{ height: "100%", position: "fixed", zIndex: "1", top:"100px", overflowX: "hidden", paddingTop: "80px", width: "300px"}}>
                         <div className="shadow p-3 mb-5 bg-white rounded">
                             <form className="form-group" onSubmit={this.props.handleSubmit(this.onSubmit)}>
                                 <div className="form-group">
@@ -136,6 +136,7 @@ class Items extends Component {
                             </form>        
                         </div>
                 </div>  
+                    
                     <SaleItemCard/>
             </div>
         </div>

@@ -4,7 +4,7 @@ import { Field, reduxForm} from 'redux-form';
 import { connect} from 'react-redux';
 import * as actions from '../actions/index';
 import '../css/SignIn.css';
-import bgpng from './bgpng.png';
+import bgpng from './bc.jpg';
 
 class SignUp2 extends Component {
 
@@ -46,7 +46,7 @@ class SignUp2 extends Component {
     render() {
         return (
             <div className="myImage">
-                <img src={bgpng} id="bg" alt=""/>
+                <img src={bgpng} id="bg" alt="" style={{ position: "fixed"}}/>
                 <div className="container" style={{alignContent:"center", backgroundColor:"#000000"}}>
                     <div style={{borderRadius:"15px", border:"1px solid #808080", position:"absolute", padding:"20pt", width:"500pt", height:"250pt", top:"50%", transform:"translate(-50%, -50%)", left: "50%", backgroundColor:"white"}}>
                         <div class="row" style={{textAlign:"center", position:"relative", height:"100%"}}>
@@ -63,9 +63,10 @@ class SignUp2 extends Component {
                                     <div>
                                         {this.props.errorMessage}
                                     </div>
+                                    <br/>
                                     <div style={{ textAlign : "center"}}>
                                         <button type="submit" className="btn btn-primary">Sign In</button><br/>
-                                    </div>
+                                    </div><br/>
                                     <div style={{ textAlign : "center"}}>
                                         <label style={{color:"black", marginTop:"1%", marginRight:"5px"}}>New to PurchaseAdda?</label><Link to="/signup">Sign Up</Link><br/>
                                         <label style={{color:"black", marginTop:"1%", marginRight:"5px"}}>Forgot Password?</label><Link to="/verification">Click Here</Link><br/>

@@ -49,13 +49,35 @@ import {AUTH_USER,
 
         SELLER_RATING,
 
-        QUERY_RESULT
+        QUERY_RESULT,
+
+        FETCH_CHAT,
+
+
+
+        FETCH_RENT_REVIEW
 
     } from './types';
 import history from '../history';
 import { async } from 'q';
 
 // save token in localStorage
+
+export const fetchRentReview = ({itemId, currentUser}) => {
+    return async (dispatch) => {
+        console.log(itemId, currentUser);
+        const response = await axios.get(`/fetchRentReview/${itemId}/${currentUser}`);
+        dispatch({ type: FETCH_RENT_REVIEW, payload: response.data});
+    }
+}
+
+export const fetchChat = (id) => {
+    return async (dispatch) => {
+        console.log("index id " , id)
+        const response = await axios.get(`/fetchChat/${id}`);
+        dispatch({ type: FETCH_CHAT, payload: response.data});
+    }
+}
 
 export const queryResult = (formValues) => {
     return async (dispatch) => {

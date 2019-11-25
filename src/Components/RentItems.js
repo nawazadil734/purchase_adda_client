@@ -8,6 +8,7 @@ import '../css/item.css';
 import requireAuth from './requireAuth';
 // import RenderSaleCard from './SaleItemCard';
 import RentItemCard from './RentItemCard';
+import bppng from './bc.jpg';
 class Items extends Component {
 
     renderLabel = ({label,meta, inside}) => {
@@ -83,8 +84,10 @@ class Items extends Component {
             <div className="container-fluid">
             <Header/>
             </div>
+            <img src={bppng} id="bg" alt="" style={{ position: "fixed"}}/>
             <div className="container" style={{paddingLeft:"20pt",paddingRight:"20pt"}}>
-            <br/><br/><br/>
+            <br/><br/><br/><br/>
+            {/* <img src={bgpng} id="bg" alt="" style={{ position: "fixed"}}/> */}
                 <div className="row">
                     <div className="col-sm-12">
                         <div className="shadow p-3 mb-5 bg-white rounded">
@@ -93,7 +96,7 @@ class Items extends Component {
                     </div>
                 </div>
                 <div className = "row">
-                <div className="left_content col-sm-3" style={{ height: "100%", position: "fixed", zIndex: "1", top:"60px", overflowX: "hidden", paddingTop: "80px", width: "300px"}}>
+                <div className="left_content col-sm-3" style={{ height: "100%", position: "fixed", zIndex: "1", top:"70px", overflowX: "hidden", paddingTop: "100px", width: "300px"}}>
                         <div className="shadow p-3 mb-5 bg-white rounded">
                             <form className="form-group" onSubmit={this.props.handleSubmit(this.onSubmit)}>
                                 <div className="form-group">

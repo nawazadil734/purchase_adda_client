@@ -65,10 +65,10 @@ class Header extends Component {
                     <ul className="navbar-nav ml-auto mr-1">
                         
                         <form onSubmit={this.props.handleSubmit(this.onSubmit)} >
-                            <div class="ui icon input">
+                            <div className="ui icon input">
                                 <Field name="query" component={this.renderInput} style="form-control"/>
                             {/* <input className="form-control mr-sm-2" type="text" style={{width: "300px"}} placeholder="Search"></input> */}
-                            {/* <div class="input-group-append"> */}
+                            {/* <div className="input-group-append"> */}
                             <button className="btn btn-primary" type="submit" style={{ height: "33px"}}>Search</button>
                             {/* </div> */}
                         </div>

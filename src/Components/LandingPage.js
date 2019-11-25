@@ -16,6 +16,8 @@ import computing_icon from './computing_icon.jpg';
 import tools_icon from './tools_icon.jpg';
 import phone_icon from './phone_icon.jpg';
 import stationery_icon from './stationery_icon.jpg';
+import seeMore_icon from './seeMore.png'
+// import bgpng from './bgpng.png';
 class LandingPage extends Component {
     
     render() {
@@ -25,6 +27,7 @@ class LandingPage extends Component {
                     <Header/>
                 </div>
                 <div className="container-fluid">
+                {/* <img src={bgpng} id="bg" alt="" style={{ position: "fixed"}}/> */}
                     <br/><br/><br/>
                     <div>
                         <div id="carouselExampleControls" className="carousel slide" data-ride="carousel">
@@ -37,7 +40,7 @@ class LandingPage extends Component {
                                             <h1 className="card-title" style={{fontSize:"50pt", paddingLeft:"300pt", fontFamily:"'Cabin', sans-serif"}}>Books</h1>
                                             <h5 style={{paddingLeft:"300pt", fontFamily:"'Open Sans', sans-serif"}}>For the avid reader in you</h5>
                                             <div style={{marginLeft:"300pt", marginTop:"15pt"}}>
-                                                <button class="btn btn-outline-dark" type="link">Check it out</button>
+                                                <button class="btn btn-outline-dark" type="link" onClick={() =>this.props.queryResult({ query: "Books"})}>Check it out</button>
                                             </div>
                                         </div>
                                     </div> 
@@ -50,7 +53,7 @@ class LandingPage extends Component {
                                             <h1 className="card-title" style={{fontSize:"50pt", paddingLeft:"300pt", fontFamily:"'Cabin', sans-serif"}}>Electronics</h1>
                                             <h5 style={{paddingLeft:"300pt", fontFamily:"'Open Sans', sans-serif"}}></h5>
                                             <div style={{marginLeft:"300pt", marginTop:"15pt"}}>
-                                                <button class="btn btn-outline-dark" type="link">Check it out</button>
+                                                <button class="btn btn-outline-dark" type="link" onClick={() =>this.props.queryResult({ query: "Electronics"})}>Check it out</button>
                                             </div>
                                         </div>
                                     </div> 
@@ -63,7 +66,7 @@ class LandingPage extends Component {
                                             <h1 className="card-title" style={{fontSize:"50pt", paddingLeft:"300pt", fontFamily:"'Cabin', sans-serif"}}>Tools</h1>
                                             <h5 style={{paddingLeft:"300pt", fontFamily:"'Open Sans', sans-serif"}}>To get things built on a budget</h5>
                                             <div style={{marginLeft:"300pt", marginTop:"15pt"}}>
-                                                <button class="btn btn-outline-light text-light" type="link">Check it out</button>
+                                                <button class="btn btn-outline-light text-light" type="link" onClick={() =>this.props.queryResult({ query: "Tools"})}>Check it out</button>
                                             </div>
                                         </div>
                                     </div> 
@@ -114,32 +117,32 @@ class LandingPage extends Component {
                             <h4 style={{fontFamily:"'Open Sans', sans-serif"}}>Great stuff. New items coming in every day.</h4>
                         </div>
                         <div style={{marginLeft:"120pt", marginRight:"120pt", marginBottom:"35pt"}} className="row">
-                            <div className="col-sm-2" style={{textAlign:"center"}}>
-                                <img src={books_icon} style={{width:"180px"}} className="rounded-circle"></img>
-                                <p style={{lineHeight:"50pt"}}>Books</p>
+                            <div className="col-sm-2" style={{textAlign:"center"}} onClick={() =>this.props.queryResult({ query: "Books"})}>
+                                <img src={books_icon} style={{width:"180px"}} className="rounded-circle" alt=""></img>
+                                <p style={{lineHeight:"50pt"}} >Books</p>
                             </div>
-                            <div className="col-sm-2" style={{textAlign:"center"}}>
-                                <img src={computing_icon} style={{width:"180px"}} className="rounded-circle"></img>
+                            <div className="col-sm-2" style={{textAlign:"center"}} onClick={() =>this.props.queryResult({ query: "Computing"})}>
+                                <img src={computing_icon} style={{width:"180px"}} className="rounded-circle" alt=""></img>
                                 <p style={{lineHeight:"50pt"}}>Computing</p>
                             </div>
-                            <div className="col-sm-2" style={{textAlign:"center"}}>
+                            <div className="col-sm-2" style={{textAlign:"center"}} onClick={() =>this.props.queryResult({ query: "Tools"})}>
                                 <img src={tools_icon} style={{width:"180px", height:"180px"}} className="rounded-circle"></img>
                                 <p style={{lineHeight:"50pt"}}>Tools</p>
                             </div>
-                            <div className="col-sm-2" style={{textAlign:"center"}}>
+                            <div className="col-sm-2" style={{textAlign:"center"}} onClick={() =>this.props.queryResult({ query: "Phones and Tablets"})}>
                                 <img src={phone_icon} style={{width:"180px"}} className="rounded-circle"></img>
                                 <p style={{lineHeight:"50pt"}}>Phones and Tablets</p>
                             </div>
-                            <div className="col-sm-2" style={{textAlign:"center"}}>
+                            <div className="col-sm-2" style={{textAlign:"center"}} onClick={() =>this.props.queryResult({ query: "Stationery"})}>
                                 <img src={stationery_icon} style={{width:"180px"}} className="rounded-circle"></img>
                                 <p style={{lineHeight:"50pt"}}>Stationery</p>
                             </div>
-                            <div className="col-sm-2" style={{textAlign:"center"}}>
-                                {/* <img src={books_icon} style={{width:"180px"}} className="rounded-circle"></img>
-                                <p style={{lineHeight:"50pt"}}>Books</p> */}
-                                <div style={{width:"180px", height:"180px", backgroundColor:"#ed9f28", textAlign:"center", verticalAlign:"middle", lineHeight:"180px"}} className="rounded-circle text-light">
+                            <div className="col-sm-2" style={{textAlign:"center"}} onClick={() =>this.props.queryResult({ query: "%"})}>
+                                <img src={seeMore_icon} style={{width:"180px"}} className="rounded-circle"></img>
+                                <p style={{lineHeight:"50pt"}}>See More</p>
+                                {/* <div style={{width:"180px", height:"180px", backgroundColor:"#ed9f28", textAlign:"center", verticalAlign:"middle", lineHeight:"180px"}} className="rounded-circle text-light">
                                     <p style={{fontFamily:"'Cabin', sans-serif", fontSize:"20pt"}}>See more...</p>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                         <hr/>
@@ -155,4 +158,4 @@ class LandingPage extends Component {
     }
 }
 
-export default LandingPage;
+export default connect(null, actions)(LandingPage);

@@ -6,49 +6,49 @@ import * as actions from '../actions/index';
 import Header from './Header';
 import profileImg from './doe.jpg';
 import ChatBox from './ChatBox';
+import '../css/chat.css';
+import { async } from 'q';
 // import { thisExpression } from '@babel/types';
 class Profile extends Component {
-    render() {
+    componentDidMount = async () => {
+        await this.props.fetchCurrentUserId();
+        await this.props.fetchChat(this.props.userid);
+    }
+
+
+    renderChatCard = (chats) => {
         return (
-            <div>
+            <div style={{ width: "600px"}}>
+                <img src={profileImg} className="align-self-start mr-3" style={{width:"60px"}}></img>
+                    <div className="media-body">
+                        <label style={{fontFamily:"'Cabin', sans-serif"}}>ADIL NAWAZ</label>
+                        {/* <h6 style={{color:"#a1a1a1"}}>for Item ID: 420696969</h6> */}
+                        {/* <label style={{color:"#a1a1a1", textAlign:"left"}}> Hello ||| </label> */}
+                        {/* <Link className="btn btn-primary float-right">View</button> */}
+                        <Link to={`/ChatBox/${this.props ? this.props.userid: ''}/${this.props.singleRentOwner? this.props.singleRentOwner.id: ''}`} className="btn btn-info btn-sm" style={{ float:"right"}}>View</Link>
+                    </div>
+                </div>
+        )
+    }
+    render() {
+        console.log("list ", this.props.chat)
+        console.log("id", this.props.userid)
+        return (
+            <div style={{overflow:"hidden"}}>
                 <div className="container-fluid" style={{marginBottom: "50pt"}}>
                     <Header/>
                 </div>
-                <div className="container-fluid">
+                <div className="container">
                     <br/>
                     <h1 style={{fontFamily: "'Cabin', sans-serif"}}>Chats</h1>
                     <br/>
-                    <div className = "row">
-                        <div className="col-sm-3">
-                            <div className="tab-content">
-                            <div className="shadow p-3 bg-white">
-                            <div id="Unread" class="container tab-pane active">
-                                    <div class="media ">
-                                        <img src={profileImg} className="align-self-start mr-3" style={{width:"60px"}}></img>
-                                        <div class="media-body">
-                                            <h4 style={{fontFamily:"'Cabin', sans-serif"}}>I want to buy your PC!</h4>
-                                            <h6 style={{color:"#a1a1a1"}}>for Item ID: 420696969</h6>
-                                            <h6 style={{color:"#a1a1a1", textAlign:"left"}}>₹ 45000</h6>
-                                            <button className="btn btn-primary float-right">View</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="Unread" class="container tab-pane active" style={{marginTop:"20px"}}>
-                                    <div class="media ">
-                                        <img src={profileImg} className="align-self-start mr-3" style={{width:"60px"}}></img>
-                                        <div class="media-body">
-                                            <h4 style={{fontFamily:"'Cabin', sans-serif"}}>I want to buy your PC!</h4>
-                                            <h6 style={{color:"#a1a1a1"}}>for Item ID: 420696969</h6>
-                                            <h6 style={{color:"#a1a1a1", textAlign:"left"}}>₹ 45000</h6>
-                                            <button className="btn btn-primary float-right">View</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            </div>
+                    <div style={{borderRadius:"5px", border:"1px solid #808080", position:"absolute", paddingLeft:"15pt", paddingRight:"15pt", width:"55%", height:"65%", top:"50%", transform:"translate(-50%, -50%)", left: "50%", backgroundColor:"white", overflow:"auto"}}>
+            
+                       
+                        <div className="media border-bottom" style={{paddingBottom:"15pt", paddingTop:"15pt"}}>
+                        {this.props.chat ? this.renderChatCard(this.props.chat) : ""}
                         </div>
-                        <div className="col-sm-9">
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -56,12 +56,16 @@ class Profile extends Component {
     }
 }
 
+
+
 const wrappedForm = reduxForm({
         form: 'editProfile'
 })(Profile);
 
 function mapStateToProps(state) {
-    return { errorMessage: state.auth.errorMessage};
+    return { errorMessage: state.auth.errorMessage,
+            chat: state.auth.chatList,
+            userid: state.auth.userid};
 }
 
 export default connect(mapStateToProps, actions)(wrappedForm);

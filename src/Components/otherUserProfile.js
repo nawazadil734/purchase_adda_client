@@ -201,25 +201,26 @@ class OtherUserProfile extends Component {
             <div>
                 <div className="container-fluid" style={{marginBottom: "15pt"}}>
                     <Header/>
-                </div><br/><br/><br/>
+                </div><br/><br/><br/><br/>
                 <div className="container">
                 <div className = "row">
             <div className="col-sm-3">
             <div className="shadow p-3 mb-5 bg-white rounded">
                     <img src={userPhoto} className="img-fluid" alt="..." style={{width:"320pt",height:"200pt"}}></img>
             </div>
-            <div>
+            {/* <div>
                 <Link to="/profile" style={{fontSize:"20px", color:"#191919"}}><b>My Profile</b></Link>
             </div>  
             <hr/>
             <div>
                 <Link to="/myitems" style={{fontSize:"20px",color:"#191919"}}><b >My Items & Requests</b></Link>
+            </div> */}
+            {/* <hr/> */}
+            <div style={{ textAlign: "center"}}>
+            
+            <Link style={{fontSize:"18px"}} className="btn btn-primary" to={`/ChatBox/${this.props ? this.props.userid: ''}/${this.props.match.params.id}`}>Message Owner <i class='far fa-comments'></i></Link>
             </div>
-            <hr/>
-            <div>
-            <Link style={{fontSize:"20px",color:"#191919"}} to={`/ChatBox/${this.props ? this.props.userid: ''}/${this.props.match.params.id}`}><b>Message Owner</b></Link>
-            </div>
-            <hr/>
+            {/* <hr/> */}
             </div>
             <div className="col-sm-9">
                     <div className="shadow p-3 mb-5 bg-white rounded">

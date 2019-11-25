@@ -155,7 +155,7 @@ class EditProfile extends Component {
                                         <Field name="phoneNumber" component={this.renderInput} label="Phone Number" classname="form-control" type="text" placeholder={this.props.userDetail ? this.props.userDetail.phoneNumber: ""}/>
                                         <Field name="email" component={this.renderInput} label="E-Mail" classname="form-control" type="email" placeholder={this.props.userDetail ? this.props.userDetail.email: ""} />
                                         <div style={{textAlign: "center"}}>
-                                                <button className="btn btn-primary" type="submit" style={{marginTop : "15pt"}}>Save Changes</button>
+                                                <button className="btn btn-primary" type="submit" style={{marginTop : "15pt"}}  onClick={() => alert("Profile Updated")}>Save Changes</button>
                                         </div>
                                         <br/>
                                         </form>

@@ -140,7 +140,7 @@ class UserItems extends Component {
         return (
             <div className="container">
                 <Header/><br/><br/>
-                <h2 className="header" style={{marginTop:"40px", marginBottom:"40px"}}>My Products and Ads<hr/></h2>
+                <h2 className="header" style={{marginTop:"40px", marginBottom:"40px"}}>Search Results</h2>
                 <ul className="nav nav-pills" id="myTab" role="tablist">
                     <li className="nav-item">
                         <a className="nav-link active" id="Buy" data-toggle="tab" href="#SaleItems" role="tab" aria-controls="userItemsContent" aria-selected="true">Sell Items</a>
@@ -156,8 +156,6 @@ class UserItems extends Component {
                     </li>
                 </ul><br/>
 
-
-                
                 <div className="tab-content" id="myTabContent">
 
                     <div className="tab-pane fade show active" id="SaleItems" role="tabpanel" aria-labelledby="userItems-tab">

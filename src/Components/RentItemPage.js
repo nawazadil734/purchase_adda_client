@@ -5,6 +5,7 @@ import { connect} from 'react-redux';
 import * as actions from '../actions/index';
 import Header from './Header';
 import '../css/item.css'
+import { stat } from 'fs';
 
 class ItemPage extends Component {
 
@@ -14,9 +15,10 @@ class ItemPage extends Component {
         await this.props.fetchUserDetail(this.props.userid) 
         await this.props.fetchSingleRentItem(this.props.match.params.itemid);
         await this.props.fetchSingleRentOwner(this.props.match.params.ownerid);
+        await this.props.fetchRentReview({ itemId: this.props.match.params.itemid, currentUser: this.props.userid});
     }
 
-    renderSpinner = ({input, meta, type, className, step, min, max,divStyle}) => {
+    renderSpinner = ({input, meta, type, className, step, min, max,divStyle, placeholder}) => {
         return(
             <div>
             <input {...input}
@@ -26,24 +28,25 @@ class ItemPage extends Component {
                 autoComplete="off"
                 max={max}
                 min={min}
+                placeholder={placeholder}
                 step={step}
             />
             </div>
         );
     }
 
-    renderInput = ({input , className, typename}) => {
+    renderInput = ({input , className, typename,placeholder}) => {
         return (
             <div>
-                <input {...input} className={className} type={typename} />
+                <input {...input} className={className} type={typename} placeholder={placeholder}/>
             </div>
         );
     }
 
-    renderTextArea = ({className,input ,meta, rows, cols,id}) => {
+    renderTextArea = ({className,input ,meta, rows, cols,id,placeholder}) => {
         return (
             <div className="form-group">
-                <textarea {...input} className={className} id={id} rows={rows} cols={cols} />
+                <textarea {...input} className={className} id={id} rows={rows} cols={cols} placeholder={placeholder} />
             </div>
         );
     }
@@ -52,6 +55,7 @@ class ItemPage extends Component {
         formValues.itemId = this.props.match.params.itemid;
         formValues.reviewerId = this.props.userid
         this.props.rentReview(formValues);
+        window.history.go()
         // console.log(formValues);
     }
 
@@ -59,6 +63,7 @@ class ItemPage extends Component {
     render() {
         console.log(this.props.userid)
         console.log(this.props.match.params.itemid)
+        console.log("current review ", this.props.review);
         const images = require.context('../../public/images', true);
         const userPhoto = images(this.props.singleRentItem ? "./" + `${this.props.singleRentItem.image1}`: "./default.png");
         return (
@@ -179,30 +184,35 @@ class ItemPage extends Component {
                 </div>
                 <div className="container-flex">
                         <div className="shadow p-3 mb-5 bg-white rounded">
-                            <h2 style={{paddingBottom:"20px"}}> Customer Reviews </h2>
+                            {/* <h2 style={{paddingBottom:"20px"}}> Customer Reviews </h2> */}
                             <div className="container">
                             <form className="form-group" onSubmit={this.props.handleSubmit(this.onSubmit)}>
                                 <div className="form-group" style={{paddingBottom:"20px"}}>
                                     <h4 for="comment"><b>Create Your Review:</b></h4>
                                     <div className="form-group">
                                         <label>Rating</label><br/>
-                                        <Field name="Rating" component={this.renderSpinner} className="form-control" divStyle={{width:"80px"}} SelId="Rating" type="number" min="0" max="5" step="0.5"/>
+                                        <Field name="Rating" component={this.renderSpinner} className="form-control" divStyle={{width:"80px"}} SelId="Rating" 
+                                            type="number" min="0" max="5" step="0.5"
+                                                placeholder={this.props.review ? this.props.review.rating: ''}
+                                            />
                                     </div>
                                     <div className="form-group">
                                         <label>Title</label><br/>
-                                        <Field name="Title" component={this.renderInput} typename="text" className="form-control"/>
+                                        <Field name="Title" component={this.renderInput} typename="text" className="form-control" 
+                                            placeholder={this.props.review ? this.props.review.title : ''}/>
                                     </div>
                                     <div className="form-group">
-                                        <label>Description</label><br/>
-                                        <Field name="Description" component={this.renderTextArea} className="form-control" rows="2" id="desc"/>
+                                        <label>Comment</label><br/>
+                                        <Field name="Description" component={this.renderTextArea} className="form-control" rows="2" id="desc"
+                                             placeholder={this.props.review ? this.props.review.comment : ''}/>
                                     </div>
-                                    <button className="btn btn-primary" style={{marginTop:"10px"}} type="submit">Publish</button>
+                                    <button className="btn btn-primary" style={{marginTop:"10px"}} type="submit" onClick={() => alert("Review Submitted")}>Publish</button>
                                 </div>
                             </form>
                             </div>
 
 
-                            <div className="container">
+                            {/* <div className="container">
                                 <div className="card card-inverse card-info" style={{marginTop:"20px", marginBottom:"20px"}}>
                                     <div className="card-block">
                                         <figure className="profile profile-inline">
@@ -223,7 +233,7 @@ class ItemPage extends Component {
                                     </div>
                                 </div>
                                 
-                            </div>
+                            </div> */}
                         </div>
                     </div>
             </div>
@@ -234,6 +244,15 @@ class ItemPage extends Component {
 
 const validate = (formValues) => {
     const errors = {}
+    if(!formValues.Rating) {
+        errors.Rating = "Please enter your Rating ";
+    }
+    if(!formValues.Title) {
+        errors.Title = "Please enter your Title";
+    }
+    if(!formValues.Description) {
+        errors.Description = "Please enter your Description";
+    }
     
     return errors;
 }
@@ -249,7 +268,8 @@ function mapStateToProps(state) {
         userid: state.auth.userid,
         userDetail: state.auth.userDetail,
         singleRentItem: state.auth.singleRentItem,
-        singleRentOwner: state.auth.singleRentOwner
+        singleRentOwner: state.auth.singleRentOwner,
+        review: state.auth.rent_review
     };
 }
 

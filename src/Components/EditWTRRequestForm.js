@@ -130,6 +130,7 @@ class forSale extends Component {
         formValues.itemId  = this.props.match.params.itemid;
         console.log(formValues)
         this.props.updateReqRentItem(formValues);
+        window.history.back();
 }
 
     render() {

@@ -280,6 +280,7 @@ class forSale extends Component {
         if(!formValues.item_price) formValues.item_price = ""
         console.log("asds", formValues);
         this.props.updateSaleItemDetail(formValues);
+        window.history.back();
     }
 
     render() {

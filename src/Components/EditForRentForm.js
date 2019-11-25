@@ -268,6 +268,7 @@ class forSale extends Component {
     onSubmit = (formValues) => {
         formValues.id = this.props.itemDetails.item_id
         this.props.updateRentItemDetail(formValues);
+        window.history.back();
         // console.log(formValues)
     }
 

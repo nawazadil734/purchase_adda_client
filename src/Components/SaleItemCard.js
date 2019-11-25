@@ -37,7 +37,7 @@ class RenderSaleCard extends Component {
     render() {
             // console.log("details",this.props.saleItems)
         return (
-            <div className="right_content col-sm-12" style={{ paddingLeft: "300px", margin: "0% 0%"}}>
+            <div className="right_content col-sm-12" style={{paddingLeft: "300px", margin: "-1% 0%"}}>
                 <div className="shadow p-3 mb-5 bg-white rounded">
                     <div className="row"> 
 
