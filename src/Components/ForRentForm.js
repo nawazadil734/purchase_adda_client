@@ -198,7 +198,7 @@ class forSale extends Component {
                                 <br/>
                                 <br/>
                                 <div style={{textAlign:"center", marginBottom:"50pt"}}>
-                                    <button type="submit" className="btn btn-primary" onClick={() => alert("Rent Item Uploaded")}>Submit</button>
+                                    <button type="submit" className="btn btn-primary" >Submit</button>
                                 </div>
                             </form>
                         </div>

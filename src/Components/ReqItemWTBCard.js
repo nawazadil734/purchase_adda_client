@@ -38,7 +38,14 @@ class RenderReqCard extends Component {
     render() {
         return (
            
-            <div className="right_content col-sm-12" >
+            <div className="right_content col-sm-12">
+            <div className="row">
+                        <div className="col-sm-12">
+                            <div className="shadow p-3 mb-5 bg-white rounded">
+                                <h1 style={{width:"100%"}}>WTB Requested Items<Link to="/newRequestForm" className="btn btn-primary" style={{float:"right", marginTop:"5px"}}>Request Item</Link></h1>
+                            </div>
+                        </div>
+            </div>
                     <div className="row">
                     {this.props.reqItems ? this.renderReqCard() : ''}
 

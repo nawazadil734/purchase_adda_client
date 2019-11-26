@@ -97,7 +97,7 @@ class RequestItems extends Component {
         if(!formValues.category) formValues.category = ''
         if(!formValues.sort) formValues.sort = '' 
         console.log(formValues);
-        this.props.fetchReqItems(formValues);
+        this.props.fetchReqWTRItems(formValues);
     }
     
     render() {
@@ -107,16 +107,16 @@ class RequestItems extends Component {
             <Header/>
             </div><br/><br/><br/><br/>
             <div className="container" style={{paddingLeft:"20pt",paddingRight:"20pt"}}>
-            <div className="row">
+            {/* <div className="row">
                         <div className="col-sm-12">
                             <div className="shadow p-3 mb-5 bg-white rounded">
                                 <h1 style={{width:"100%"}}>WTR Requested Items<Link to="/newRequestForm" className="btn btn-primary" style={{float:"right"}}>Request Item</Link></h1>
                             </div>
                         </div>
-            </div>
+            </div> */}
                 <div className="row">
-                    <div className="left_content col-sm-3">
-                        <div className="shadow p-3 mb-5 bg-white rounded">
+                    <div className="left_content col-sm-3" style={{height: "100%", position: "fixed", zIndex: "1", top:"70px", overflowX: "hidden", paddingTop: "20px", width: "300px"}}>
+                        <div className="shadow p-3 mb-5 bg-white rounded" style={{ zIndex: "-1"}}>
                             <form className="form-group" onSubmit={this.props.handleSubmit(this.onSubmit)}>
                                 <div className="form-group">
                                     <label style={{fontSize:"20px", color:"#191919"}}><b>Price</b></label>
@@ -153,7 +153,7 @@ class RequestItems extends Component {
                             </form>        
                         </div>
                 </div>
-                <div className="right_content col-sm-9" >
+                <div className="right_content col-sm-9" style={{ right: "-290px", margin: "1% 0%"}} >
                     <div className="shadow p-3 mb-5 bg-white rounded">
                         <ReqItemWTRcard/>
                     </div>

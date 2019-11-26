@@ -378,6 +378,7 @@ export const uploadSaleItem = (formValues) => {
         // console.log(res2.data)
         dispatch({ type: SALE_ITEM_UPLOAD, payload: res1.data});
         dispatch({ type: UPLOAD_SALE_PHOTO, payload: res2.data})
+        alert("Sale Item Uploaded")
         history.push('/saleItems');
     }
 }
@@ -400,6 +401,7 @@ export const uploadRentItem = (formValues) => {
         const res2 = await axios.post(`/uploadRentItemImage/${res1.data.itemId}`, formValues.form);
         dispatch({ type: RENT_ITEM_UPLOAD, payload: res1.data});
         dispatch({ type: UPLOAD_RENT_PHOTO, payload: res2.data})
+        alert("Rent Item Uploaded")
         history.push('/rentItems');
     }
 }
@@ -409,6 +411,7 @@ export const uploadWtb = (formValues) => {
      const response = await axios.post("/uploadReqBuy", formValues);
         console.log(response.data);
         dispatch({ type: RENT_ITEM_UPLOAD, payload: response.data});
+        alert("Request Item Uploaded")
         history.push('/requestedWTBItems');
     }
 }
@@ -418,6 +421,7 @@ export const uploadWtr = (formValues) => {
      const response = await axios.post("/uploadReqRent", formValues);
         console.log(response.data);
         dispatch({ type: RENT_ITEM_UPLOAD, payload: response.data});
+        alert("Request Item Uploaded")
         history.push('/requestedWTRItems');
     }
 }

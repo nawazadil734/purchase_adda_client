@@ -149,7 +149,7 @@ class forSale extends Component {
                                             <Field name="itemPrice" component={this.renderInput} label="Price" style="form-control" type="text"/>
                                         </div>
                                         <div>
-                                            <button type="submit" className="btn btn-primary" style={{marginTop: "15pt"}}  onClick={() => alert("Request Item Uploaded")}>
+                                            <button type="submit" className="btn btn-primary" style={{marginTop: "15pt"}} >
                                                 Submit Request
                                             </button>
                                         </div>
@@ -184,7 +184,7 @@ class forSale extends Component {
                                             </div>
                                         </div>
                                         <div>
-                                            <button type="submit" className="btn btn-primary" style={{marginTop: "15pt"}} onClick={() => alert("Request Item Uploaded")}>
+                                            <button type="submit" className="btn btn-primary" style={{marginTop: "15pt"}} >
                                                 Submit Request
                                             </button>
                                         </div>
