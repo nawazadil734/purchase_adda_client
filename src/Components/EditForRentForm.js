@@ -6,6 +6,7 @@ import * as actions from '../actions/index';
 import Header from './Header';
 import la from './la.jpg';
 import $ from 'jquery';
+import noImage from './noImage.png';
 
 const displayNone = {display:"block", clip:"rect(0px 0px 0px 0px)", position:"absolute", left:"0", top:"0"}
 
@@ -110,40 +111,42 @@ class forSale extends Component {
 
     onSubmitPhoto1 = (formValues) => {
         console.log(formValues.myFile[0])
-        formValues.id = this.props ? this.props.userid : ""
-        // this.props.uploadProfilePhoto(formValues)
+        formValues.id = this.props.itemDetails.item_id
+        this.props.uploadRentItemSinglePhoto1(formValues)
     }
 
     onSubmitPhoto2 = (formValues) => {
         console.log(formValues.myFile[0])
-        formValues.id = this.props ? this.props.userid : ""
-        // this.props.uploadProfilePhoto(formValues)
+        formValues.id = this.props.itemDetails.item_id
+        this.props.uploadRentItemSinglePhoto2(formValues)
     }
 
     onSubmitPhoto3 = (formValues) => {
         console.log(formValues.myFile[0])
-        formValues.id = this.props ? this.props.userid : ""
-        // this.props.uploadProfilePhoto(formValues)
+        formValues.id = this.props.itemDetails.item_id
+        this.props.uploadRentItemSinglePhoto3(formValues)
     }
 
     onSubmitPhoto4 = (formValues) => {
         console.log(formValues.myFile[0])
-        formValues.id = this.props ? this.props.userid : ""
-        // this.props.uploadProfilePhoto(formValues)
+        formValues.id = this.props.itemDetails.item_id
+        this.props.uploadRentItemSinglePhoto4(formValues)
     }
 
     onSubmitPhoto5 = (formValues) => {
         console.log(formValues.myFile[0])
-        formValues.id = this.props ? this.props.userid : ""
-        // this.props.uploadProfilePhoto(formValues)
+        formValues.id = this.props.itemDetails.item_id
+        this.props.uploadRentItemSinglePhoto5(formValues)
     }
 
     onSubmitPhoto6 = (formValues) => {
         console.log(formValues.myFile[0])
-        formValues.id = this.props ? this.props.userid : ""
-        // this.props.uploadProfilePhoto(formValues)
+        formValues.id = this.props.itemDetails.item_id
+        this.props.uploadRentItemSinglePhoto6(formValues)
     }
 
+
+    
     componentDidMount () {
         this.props.fetchSingleRentItem(this.props.match.params.itemid)
         this.props.fetchCurrentUserId();
@@ -337,7 +340,7 @@ class forSale extends Component {
                                         <div className = "row" style={{marginBottom:"5pt"}}>
                                             <div className="col-sm-6">
                                                 <div className="card" style={{width:"100%", height:"auto"}}>
-                                                    <img className="card-img-top" src={la} alt="Card image" style={{width:"100%"}}/>
+                                                    <img className="card-img-top" src={ noImage} alt="Card image" style={{width:"100%"}}/>
                                                 </div>
                                                 <form onSubmit={this.props.handleSubmit(this.onSubmitPhoto1)}>
                                                     <Field name="myFile" component={this.renderPhotoInput1}/><br/>
@@ -345,9 +348,9 @@ class forSale extends Component {
                                                 </form>
                                             </div>
                                             <div className="col-sm-6">
-                                                <div className="card" style={{width:"100%", height:"auto"}}>
+                                                {/* <div className="card" style={{width:"100%", height:"auto"}}>
                                                     <img className="card-img-top" src={la} alt="Card image" style={{width:"100%"}}/>
-                                                </div>
+                                                </div> */}
                                                 <form onSubmit={this.props.handleSubmit(this.onSubmitPhoto2)}>
                                                     <Field name="myFile" component={this.renderPhotoInput2}/><br/>
                                                     <input type="submit" value="Upload a file" className="btn btn-primary"/>
@@ -356,18 +359,18 @@ class forSale extends Component {
                                         </div>
                                         <div className = "row" style={{marginBottom:"15pt"}}>
                                             <div className="col-sm-6">
-                                                <div className="card" style={{width:"100%", height:"auto"}}>
+                                                {/* <div className="card" style={{width:"100%", height:"auto"}}>
                                                     <img className="card-img-top" src={la} alt="Card image" style={{width:"100%"}}/>
-                                                </div>
+                                                </div> */}
                                                 <form onSubmit={this.props.handleSubmit(this.onSubmitPhoto3)}>
                                                     <Field name="myFile" component={this.renderPhotoInput3}/><br/>
                                                     <input type="submit" value="Upload a file" className="btn btn-primary"/>
                                                 </form>
                                             </div>
                                             <div className="col-sm-6">
-                                                <div className="card" style={{width:"100%", height:"auto"}}>
+                                                {/* <div className="card" style={{width:"100%", height:"auto"}}>
                                                     <img className="card-img-top" src={la} alt="Card image" style={{width:"100%"}}/>
-                                                </div>
+                                                </div> */}
                                                 <form onSubmit={this.props.handleSubmit(this.onSubmitPhoto4)}>
                                                     <Field name="myFile" component={this.renderPhotoInput4}/><br/>
                                                     <input type="submit" value="Upload a file" className="btn btn-primary"/>
@@ -376,18 +379,18 @@ class forSale extends Component {
                                         </div>
                                         <div className = "row">
                                             <div className="col-sm-6">
-                                                <div className="card" style={{width:"100%", height:"auto"}}>
+                                                {/* <div className="card" style={{width:"100%", height:"auto"}}>
                                                     <img className="card-img-top" src={la} alt="Card image" style={{width:"100%"}}/>
-                                                </div>
+                                                </div> */}
                                                 <form onSubmit={this.props.handleSubmit(this.onSubmitPhoto5)}>
                                                     <Field name="myFile" component={this.renderPhotoInput5}/><br/>
                                                     <input type="submit" value="Upload a file" className="btn btn-primary"/>
                                                 </form>
                                             </div>
                                             <div className="col-sm-6">
-                                                <div className="card" style={{width:"100%", height:"auto"}}>
+                                                {/* <div className="card" style={{width:"100%", height:"auto"}}>
                                                     <img className="card-img-top" src={la} alt="Card image" style={{width:"100%"}}/>
-                                                </div>
+                                                </div> */}
                                                 <form onSubmit={this.props.handleSubmit(this.onSubmitPhoto6)}>
                                                     <Field name="myFile" component={this.renderPhotoInput6}/><br/>
                                                     <input type="submit" value="Upload a file" className="btn btn-primary"/>

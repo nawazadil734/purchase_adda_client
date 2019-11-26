@@ -79,24 +79,24 @@ class Items extends Component {
     
     render() {
         return (
-            <div style={{overflow:"hidden"}}>
+            <div>
             <div className="container-fluid">
             <Header/>
             </div>
-            <div className="container" style={{paddingLeft:"20pt",paddingRight:"20pt"}}>
+            <div className="container" style={{paddingLeft:"20pt",paddingRight:"20pt", overflow:"hidden"}}>
             <br/><br/><br/><br/>
-                    <div className="row">
+                    {/* <div className="row" style={{ width: "830px", marginLeft: "270px"}}>
                         <div className="col-sm-12">
                             <div className="shadow p-3 mb-5 bg-white rounded">
                                 <h1 style={{width:"100%"}}>Items for Sale<Link to="/forsell" className="btn btn-primary" style={{float:"right", marginTop:"5px"}}>Add New Sale Item</Link></h1>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
 
                     
-                <div className = "row">
-                    <div className="left_content col-sm-3" style={{ height: "100%", position: "fixed", zIndex: "1", top:"100px", overflowX: "hidden", paddingTop: "80px", width: "300px"}}>
-                        <div className="shadow p-3 mb-5 bg-white rounded">
+                <div className = "row" >
+                    <div className="left_content col-sm-3" style={{height: "100%", position: "fixed", zIndex: "1", top:"70px", overflowX: "hidden", paddingTop: "20px", width: "300px"}}>
+                        <div className="shadow p-3 mb-5 bg-white rounded" style={{ zIndex: "-1"}}>
                             <form className="form-group" onSubmit={this.props.handleSubmit(this.onSubmit)}>
                                 <div className="form-group">
                                     <label style={{fontSize:"20px", color:"#191919"}}><b>Price</b></label>
@@ -136,6 +136,7 @@ class Items extends Component {
                             </form>        
                         </div>
                 </div>  
+                
                     
                     <SaleItemCard/>
             </div>

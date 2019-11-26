@@ -6,7 +6,7 @@ import * as actions from '../actions/index';
 import Header from './Header';
 import la from './la.jpg';
 import $ from 'jquery';
-
+import noImage from './noImage.png';
 const displayNone = {display:"block", clip:"rect(0px 0px 0px 0px)", position:"absolute", left:"0", top:"0"}
 
 class forSale extends Component {
@@ -111,43 +111,37 @@ class forSale extends Component {
     onSubmitPhoto1 = (formValues) => {
         console.log(formValues.myFile[0])
         formValues.id = this.props.itemDetails.item_id
-        formValues.image = 1;
-        this.props.uploadSaleItemSinglePhoto(formValues)
+        this.props.uploadSaleItemSinglePhoto1(formValues)
     }
 
     onSubmitPhoto2 = (formValues) => {
         console.log(formValues.myFile[0])
-        formValues.id = this.props ? this.props.userid : "";
-        formValues.image = 2;
-        this.props.uploadSaleItemSinglePhoto(formValues)
+        formValues.id = this.props.itemDetails.item_id
+        this.props.uploadSaleItemSinglePhoto2(formValues)
     }
 
     onSubmitPhoto3 = (formValues) => {
         console.log(formValues.myFile[0])
-        formValues.id = this.props ? this.props.userid : ""
-        formValues.replaceImage = 3
-        this.props.uploadSaleItemSinglePhoto(formValues)
+        formValues.id = this.props.itemDetails.item_id
+        this.props.uploadSaleItemSinglePhoto3(formValues)
     }
 
     onSubmitPhoto4 = (formValues) => {
         console.log(formValues.myFile[0])
-        formValues.id = this.props ? this.props.userid : ""
-        formValues.replaceImage = 4
-        this.props.uploadSaleItemSinglePhoto(formValues)
+        formValues.id = this.props.itemDetails.item_id
+        this.props.uploadSaleItemSinglePhoto4(formValues)
     }
 
     onSubmitPhoto5 = (formValues) => {
         console.log(formValues.myFile[0])
-        formValues.id = this.props ? this.props.userid : ""
-        formValues.replaceImage = 5
-        this.props.uploadSaleItemSinglePhoto(formValues)
+        formValues.id = this.props.itemDetails.item_id
+        this.props.uploadSaleItemSinglePhoto5(formValues)
     }
 
     onSubmitPhoto6 = (formValues) => {
         console.log(formValues.myFile[0])
-        formValues.id = this.props ? this.props.userid : ""
-        formValues.replaceImage = 6
-        this.props.uploadSaleItemSinglePhoto(formValues)
+        formValues.id = this.props.itemDetails.item_id
+        this.props.uploadSaleItemSinglePhoto6(formValues)
     }
 
     componentDidMount () {
@@ -337,7 +331,7 @@ class forSale extends Component {
                                         <div className = "row" style={{marginBottom:"5pt"}}>
                                             <div className="col-sm-6">
                                                 <div className="card" style={{width:"100%", height:"auto"}}>
-                                                {/* <img className="card-img-top" src={images(this.props.itemDetails ? (this.props.itemDetails.images1 !== null ? "./" + `${this.props.itemDetails.image1}` :  "./noImage.png" ): "./noImage.png")} alt="Card image" style={{width:"100%"}}/> */}
+                                                {/* <img className="card-img-top" src={images(this.props.itemDetails ? (this.props.itemDetails.image1 !== null ? "./" + `${this.props.itemDetails.image1}`  : noImage) :  noImage)} alt="Card image" style={{width:"100%"}}/> */}
                                                 </div>
                                                 <form onSubmit={this.props.handleSubmit(this.onSubmitPhoto1)}>
                                                     <Field name="myFile" component={this.renderPhotoInput1}/><br/>

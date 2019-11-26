@@ -37,7 +37,14 @@ class RenderSaleCard extends Component {
     render() {
             // console.log("details",this.props.saleItems)
         return (
-            <div className="right_content col-sm-12" style={{paddingLeft: "300px", margin: "-1% 0%"}}>
+            <div className="right_content col-sm-12" style={{paddingLeft: "300px", margin: "1% 0%"}}>
+             <div className="row" style={{ width: "830px", marginLeft: "-15px"}}>
+                        <div className="col-sm-12">
+                            <div className="shadow p-3 mb-5 bg-white rounded">
+                                <h1 style={{width:"100%"}}>Items for Sale<Link to="/forsell" className="btn btn-primary" style={{float:"right", marginTop:"5px"}}>Add New Sale Item</Link></h1>
+                            </div>
+                        </div>
+                    </div>
                 <div className="shadow p-3 mb-5 bg-white rounded">
                     <div className="row"> 
 

@@ -155,18 +155,7 @@ export const fetchSingleReqWtrOwner = (id) => {
 }
 
 
-export const uploadSaleItemSinglePhoto = (formValues) => {
-    return async (dispatch) => {
-        console.log("first testing", formValues);
-        const from = formValues.myFile[0];
-        const img = formValues.image;
-        var form = new FormData();
-        form.append("myFile", from)
-        const response = await axios.post(`/uploadSaleSinglePhoto/${formValues.id}/${img}`, form);
-        dispatch({ type: UPDATE_SALE_ITEM_PHOTO, payload: response.data})
-        // history.push('/profile')
-    }
-}
+
 
 
 
@@ -508,3 +497,182 @@ export const signout = () => {
         payload: ''
     };
 };
+
+
+
+
+
+
+
+
+
+
+////////////////////////////////////////////////////////////
+
+
+export const uploadSaleItemSinglePhoto1 = (formValues) => {
+    return async (dispatch) => {
+        console.log("first testing", formValues);
+        const from = formValues.myFile[0];
+        var form = new FormData();
+        form.append("myFile", from)
+        const response = await axios.post(`/uploadSaleSinglePhoto1/${formValues.id}`, form);
+        dispatch({ type: UPDATE_SALE_ITEM_PHOTO, payload: response.data})
+        // history.push('/profile')
+        window.history.go()
+    }
+}
+
+
+export const uploadSaleItemSinglePhoto2 = (formValues) => {
+    return async (dispatch) => {
+        console.log("first testing", formValues);
+        const from = formValues.myFile[0];
+        var form = new FormData();
+        form.append("myFile", from)
+        const response = await axios.post(`/uploadSaleSinglePhoto2/${formValues.id}`, form);
+        dispatch({ type: UPDATE_SALE_ITEM_PHOTO, payload: response.data})
+        // history.push('/profile')
+        window.history.go()
+    }
+}
+
+export const uploadSaleItemSinglePhoto3 = (formValues) => {
+    return async (dispatch) => {
+        console.log("first testing", formValues);
+        const from = formValues.myFile[0];
+        var form = new FormData();
+        form.append("myFile", from)
+        const response = await axios.post(`/uploadSaleSinglePhoto3/${formValues.id}`, form);
+        dispatch({ type: UPDATE_SALE_ITEM_PHOTO, payload: response.data})
+        // history.push('/profile')
+        window.history.go()
+    }
+}
+
+
+export const uploadSaleItemSinglePhoto4 = (formValues) => {
+    return async (dispatch) => {
+        console.log("first testing", formValues);
+        const from = formValues.myFile[0];
+        var form = new FormData();
+        form.append("myFile", from)
+        const response = await axios.post(`/uploadSaleSinglePhoto4/${formValues.id}`, form);
+        dispatch({ type: UPDATE_SALE_ITEM_PHOTO, payload: response.data})
+        // history.push('/profile')
+        window.history.go()
+    }
+}
+
+export const uploadSaleItemSinglePhoto5 = (formValues) => {
+    return async (dispatch) => {
+        console.log("first testing", formValues);
+        const from = formValues.myFile[0];
+        var form = new FormData();
+        form.append("myFile", from)
+        const response = await axios.post(`/uploadSaleSinglePhoto5/${formValues.id}`, form);
+        dispatch({ type: UPDATE_SALE_ITEM_PHOTO, payload: response.data})
+        // history.push('/profile')
+        window.history.go()
+    }
+}
+
+
+
+export const uploadSaleItemSinglePhoto6 = (formValues) => {
+    return async (dispatch) => {
+        console.log("first testing", formValues);
+        const from = formValues.myFile[0];
+        var form = new FormData();
+        form.append("myFile", from)
+        const response = await axios.post(`/uploadSaleSinglePhoto6/${formValues.id}`, form);
+        dispatch({ type: UPDATE_SALE_ITEM_PHOTO, payload: response.data})
+        // history.push('/profile')
+        window.history.go()
+    }
+}
+
+////////////////////////////////////////////////////////////
+
+
+export const uploadRentItemSinglePhoto1 = (formValues) => {
+    return async (dispatch) => {
+        console.log("first testing", formValues);
+        const from = formValues.myFile[0];
+        var form = new FormData();
+        form.append("myFile", from)
+        const response = await axios.post(`/uploadRentSinglePhoto1/${formValues.id}`, form);
+        dispatch({ type: UPDATE_SALE_ITEM_PHOTO, payload: response.data})
+        // history.push('/profile')
+        window.history.go()
+    }
+}
+
+
+export const uploadRentItemSinglePhoto2 = (formValues) => {
+    return async (dispatch) => {
+        console.log("first testing", formValues);
+        const from = formValues.myFile[0];
+        var form = new FormData();
+        form.append("myFile", from)
+        const response = await axios.post(`/uploadRentSinglePhoto2/${formValues.id}`, form);
+        dispatch({ type: UPDATE_SALE_ITEM_PHOTO, payload: response.data})
+        // history.push('/profile')
+        window.history.go()
+    }
+}
+
+export const uploadRentItemSinglePhoto3 = (formValues) => {
+    return async (dispatch) => {
+        console.log("first testing", formValues);
+        const from = formValues.myFile[0];
+        var form = new FormData();
+        form.append("myFile", from)
+        const response = await axios.post(`/uploadRentSinglePhoto3/${formValues.id}`, form);
+        dispatch({ type: UPDATE_SALE_ITEM_PHOTO, payload: response.data})
+        // history.push('/profile')
+        window.history.go()
+    }
+}
+
+
+export const uploadRentItemSinglePhoto4 = (formValues) => {
+    return async (dispatch) => {
+        console.log("first testing", formValues);
+        const from = formValues.myFile[0];
+        var form = new FormData();
+        form.append("myFile", from)
+        const response = await axios.post(`/uploadRentSinglePhoto4/${formValues.id}`, form);
+        dispatch({ type: UPDATE_SALE_ITEM_PHOTO, payload: response.data})
+        // history.push('/profile')
+        window.history.go()
+    }
+}
+
+export const uploadRentItemSinglePhoto5 = (formValues) => {
+    return async (dispatch) => {
+        console.log("first testing", formValues);
+        const from = formValues.myFile[0];
+        var form = new FormData();
+        form.append("myFile", from)
+        const response = await axios.post(`/uploadRentSinglePhoto5/${formValues.id}`, form);
+        dispatch({ type: UPDATE_SALE_ITEM_PHOTO, payload: response.data})
+        // history.push('/profile')
+        window.history.go()
+    }
+}
+
+
+
+export const uploadRentItemSinglePhoto6 = (formValues) => {
+    return async (dispatch) => {
+        console.log("first testing", formValues);
+        const from = formValues.myFile[0];
+        var form = new FormData();
+        form.append("myFile", from)
+        const response = await axios.post(`/uploadRentSinglePhoto6/${formValues.id}`, form);
+        dispatch({ type: UPDATE_SALE_ITEM_PHOTO, payload: response.data})
+        // history.push('/profile')
+        window.history.go()
+    }
+}
