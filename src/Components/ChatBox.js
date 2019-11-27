@@ -13,6 +13,7 @@ class ChatBox extends Component {
         this.props.fetchCurrentUserId();
         setInterval(() => this.props.fetchMessage(this.props.match.params.currUser, this.props.match.params.owner), 1000)
         this.scrollToBottom();
+        this.props.fetchUserDetail(this.props.match.params.owner)
     }
 
     componentDidUpdate() {
@@ -87,19 +88,24 @@ class ChatBox extends Component {
     }
     
     render(){
-        console.log("papapa", this.props)
+        console.log("papapa", this.props.userDetail)
+        const images = require.context('../../public/images', true);
         return (
             <div className="container">
                 <Header/>
                 <br/><br/>
-                <h2 className="header" style={{marginTop:"40px", marginBottom:"40px"}}>Chat<hr/></h2>
+                <h2 className="header" style={{marginTop:"40px", marginBottom:"40px"}}>Chat</h2>
                 <div className="shadow p-3 mb-5 bg-white rounded">
                         <div className="card card-inverse card-info" >
                             <div className="card-title">
-                                { /*<figure className="profile profile-inline" style={{ marginLeft:"10px", marginTop:"10px"}}>
-                                <img src="https://picsum.photos/200/150/?random" className="profile-avatar" alt=""></img>
-                            </figure> */}
-                            <h4 className="card-title" style={{ marginTop:"10px"}}>Happy Chatting</h4>
+                            {/* <div className="col-sm-2">
+                                
+                            </div> */}
+                                <figure className="profile profile-inline" style={{ marginLeft:"10px", marginTop:"10px"}}>
+                                <img src={images(this.props.userDetail ? "./" + `${this.props.userDetail.userImage}`: "./default.png")} className="profile-avatar" alt="" style={{width:"60px", marginBottom:"10pt"}}></img> 
+                                {/* <img src="https://picsum.photos/200/150/?random" ></img> */}
+                            </figure>
+                            <h4 className="card-title" style={{ marginTop:"10px"}}>{this.props.userDetail ? this.props.userDetail.firstName + " " + this.props.userDetail.lastName : ''}</h4>
                             </div>
 
 
@@ -113,7 +119,7 @@ class ChatBox extends Component {
                             </div>
                             <div className="card-footer">
                                 <form onSubmit={this.props.handleSubmit(this.onSubmit)} style={{ width:"inherit"}}>
-                                    <div className="d-flex">
+                                    <div className="flex">
                                         <Field name="message" component={this.renderInput} label="message" style="form-control"/><br/><br/>
                                         {/* <textarea className="form-control mr-1" rows="1" style={{ resize :"none", overflow:"auto"}}></textarea> */}
                                         <button className="btn btn-primary">Send</button>
@@ -145,7 +151,8 @@ const wrappedForm = reduxForm({
 function mapStateToProps(state) {
     return { errorMessage: state.auth.errorMessage,
             messege: state.auth.messege,
-            workingUser: state.auth.userid
+            workingUser: state.auth.userid,
+            userDetail: state.auth.userDetail
         };
 }
 

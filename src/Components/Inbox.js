@@ -17,17 +17,17 @@ class Profile extends Component {
     }
 
 
-    renderChatCard = () => {
+    renderChatCard = (images) => {
         return this.props.chat.map(item => {
         return (
             <div className="row" style={{borderBottom:"1px solid #C0C0C0", margin:"10pt"}}>
             {/* {this.props.fetchUserDetail(item.reciever_id)} */}
                             <div className="col-sm-2">
-                                <img src={profileImg} className="align-self-start mr-3" style={{width:"60px", marginBottom:"10pt"}}></img> 
+                                <img src={images("./" + `${item.userImage}`)} className="align-self-start mr-3" style={{width:"60px", marginBottom:"10pt"}}></img> 
                             </div>
                             <div className="col-sm-10">
-                                <h3>Ainsley Harriot</h3>
-                                <Link to={`/ChatBox/${item.reciever_id}/${item.sender_id}`}  className="btn btn-info btn-sm" style={{ float:"right"}}>Message Owner</Link>
+                                <h3>{item.firstName + " " + item.lastName}</h3>
+                                <Link to={`/ChatBox/${item.sender_id}/${item.reciever_id}`}  className="btn btn-info btn-sm" style={{ float:"right"}}>Message Owner</Link>
                             </div>
                         </div>
         )
@@ -37,6 +37,7 @@ class Profile extends Component {
         console.log("list ", this.props.chat)
         console.log("id", this.props.userid)
         console.log("detail", this.props.userDetail)
+        const images = require.context('../../public/images', true);
         return (
             <div style={{overflow:"hidden"}}>
                 <div className="container-fluid" style={{marginBottom: "50pt"}}>
@@ -101,7 +102,7 @@ class Profile extends Component {
                                 <button className="btn btn-primary" style={{fontSize:"10pt"}}>View</button>
                             </div>
                         </div> */}
-                        {this.props.chat ? this.renderChatCard() : ''}
+                        {this.props.chat ? this.renderChatCard(images) : ''}
                     </div>
                 </div>
             </div>
