@@ -63,7 +63,7 @@ class ItemPage extends Component {
             <div className="container-fluid">
                 <Header/>
             </div>
-            <br/><br/><br/>
+            <br/><br/><br/><br/>
             <div className="container">
                     <div classname="container-flex" style={{marginTop:"10px"}}>
                         <div className="shadow p-3 mb-5 bg-white rounded">

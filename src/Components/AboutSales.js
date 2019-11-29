@@ -57,8 +57,8 @@ class AboutSales extends Component {
                         
                             <ul style={{paddingLeft:"50px", paddingTop:"10px", listStyleImage: `url(${Background})`}}>
                                 <li style={{fontSize:"16pt"}}>Sell it.List in minutes.</li>
-                                <li style={{fontSize:"16pt"}}>Ship it.No meetups.</li>
                                 <li style={{fontSize:"16pt"}}>Get paid.List for free.</li>
+                                <li style={{fontSize:"16pt"}}>Need something? Post a request.</li>
                             </ul>
                         </div>
                     </div>
@@ -66,10 +66,9 @@ class AboutSales extends Component {
                 <div className="container" style={{marginTop:"20pt"}}>
                     <div className="row align-items-center" style={{justifyContent:"end", textAlign:"left"}}>
                         <div className="col-sm-4" >
-                            <h1>Sell (almost) <br/> 
+                            <h1>Buy and Rent (almost) <br/> 
                                 anything.
                             </h1>
-                            <text> used Items</text>
                         </div>
                         <div className="col-sm-4" style={{padding:"20px"}}>
                             <div className="card">
@@ -129,7 +128,7 @@ class AboutSales extends Component {
                         <div className = "row" style={{textAlign:"left"}}>
                             <div className="col-sm-6">
                                 <h3 style={{paddingTop:"40px",fontSize:"35pt", lineHeight:"45pt"}}>
-                                    Selling has never<br/>been easy.
+                                    Selling and Lending<br/>simplified.
                                 </h3>
                                 <text>So fast, much WOW!</text>
                             </div>

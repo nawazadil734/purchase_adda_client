@@ -150,10 +150,10 @@ class UserItems extends Component {
                         <a className="nav-link" id="Rent" data-toggle="tab" href="#RentItems" role="tab" aria-controls="requestedItemsContent" aria-selected="false">Rent Items</a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" id="Wtb" data-toggle="tab" href="#WTB" role="tab" aria-controls="userItemsContent" aria-selected="true">Asked for Buy</a>
+                        <a className="nav-link" id="Wtb" data-toggle="tab" href="#WTB" role="tab" aria-controls="userItemsContent" aria-selected="true">Want To Buy</a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" id="Wtr" data-toggle="tab" href="#WTR" role="tab" aria-controls="requestedItemsContent" aria-selected="false">Asked for Rent</a>
+                        <a className="nav-link" id="Wtr" data-toggle="tab" href="#WTR" role="tab" aria-controls="requestedItemsContent" aria-selected="false">Want To Rent</a>
                     </li>
                 </ul><br/>
 

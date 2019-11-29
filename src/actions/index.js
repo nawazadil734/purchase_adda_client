@@ -55,13 +55,33 @@ import {AUTH_USER,
 
 
 
-        FETCH_RENT_REVIEW
+        FETCH_RENT_REVIEW,
+
+        FETCH_SELLER_REVIEW,
+
+        CLEAR_NOTIFICATION
 
     } from './types';
 import history from '../history';
 import { async } from 'q';
 
 // save token in localStorage
+
+export const clearNotification = (id) => {
+    return async (dispatch) => {
+        const response = await axios.get(`/clearNotification/${id}`);
+        dispatch({ type: CLEAR_NOTIFICATION, payload: response.data});
+        window.history.go()
+    }
+}
+
+export const fetchSellerReview = ({ownerId, currentUser}) => {
+    return async (dispatch) => {
+        console.log(ownerId, currentUser);
+        const response = await axios.get(`/fetchSellerReview/${ownerId}/${currentUser}`);
+        dispatch({ type: FETCH_SELLER_REVIEW, payload: response.data});
+    }
+}
 
 export const fetchRentReview = ({itemId, currentUser}) => {
     return async (dispatch) => {

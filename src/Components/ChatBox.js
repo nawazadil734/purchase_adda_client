@@ -39,7 +39,7 @@ class ChatBox extends Component {
                                         
                                     </div>
                                     <div className="col-sm-6">
-                                        <div className="shadow p-3 mb-5 rounded" style={{ textAlign:"right", width:"intrinsic", backgroundColor:"#0275d8", color: "white"}}>{mes.message}</div>
+                                        <div className="shadow p-3 mb-5 rounded" style={{ textAlign:"right", backgroundColor:"#0275d8", color: "white"}}>{mes.message}</div>
                                     </div>
                     </div> 
                     :
@@ -121,7 +121,7 @@ class ChatBox extends Component {
                             <div className="card-footer">
                                 <form onSubmit={this.props.handleSubmit(this.onSubmit)} style={{ width:"inherit"}}>
                                     <div className="flex">
-                                        <Field name="message" component={this.renderInput} label="message" style="form-control"/><br/><br/>
+                                        <Field name="message" component={this.renderInput} label="Enter Message" style="form-control"/><br/><br/>
                                         {/* <textarea className="form-control mr-1" rows="1" style={{ resize :"none", overflow:"auto"}}></textarea> */}
                                         <button className="btn btn-primary">Send</button>
                                     </div>

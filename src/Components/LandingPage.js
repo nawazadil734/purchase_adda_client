@@ -51,10 +51,10 @@ class LandingPage extends Component {
                                         <img src={test} alt="Second slide"></img>
                                         <div className="card-img-overlay">
                                             <br/><br/><br/><br/>
-                                            <h1 className="card-title" style={{fontSize:"50pt", paddingLeft:"300pt", fontFamily:"'Cabin', sans-serif"}}>Electronics</h1>
+                                            <h1 className="card-title" style={{fontSize:"50pt", paddingLeft:"300pt", fontFamily:"'Cabin', sans-serif"}}>Computing</h1>
                                             <h5 style={{paddingLeft:"300pt", fontFamily:"'Open Sans', sans-serif"}}></h5>
                                             <div style={{marginLeft:"300pt", marginTop:"15pt"}}>
-                                                <button class="btn btn-outline-dark" type="link" onClick={() =>this.props.queryResult({ query: "Electronics"})}>Check it out</button>
+                                                <button class="btn btn-outline-dark" type="link" onClick={() =>this.props.queryResult({ query: "Computing"})}>Check it out</button>
                                             </div>
                                         </div>
                                     </div> 

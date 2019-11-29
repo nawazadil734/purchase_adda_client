@@ -135,11 +135,11 @@ class OtherUserProfile extends Component {
         await this.props.fetchUserRentItem(this.props.match.params.id);
         await this.props.fetchUserWTBItem(this.props.match.params.id);
         await this.props.fetchUserWTRItem(this.props.match.params.id);
-        
+        await this.props.fetchSellerReview({ ownerId: this.props.match.params.id, currentUser: this.props.userid});
     }
 
 
-    renderSpinner = ({input, meta, type, className, step, min, max,divStyle}) => {
+    renderSpinner = ({input, meta, type, className, step, min, max,divStyle, placeholder}) => {
         return(
             <div>
             <input {...input}
@@ -149,6 +149,7 @@ class OtherUserProfile extends Component {
                 autoComplete="off"
                 max={max}
                 min={min}
+                placeholder={placeholder}
                 step={step}
             />
             </div>
@@ -170,18 +171,18 @@ class OtherUserProfile extends Component {
         );
     }
 
-    renderTextArea = ({className,input ,meta, rows, cols,id}) => {
+    renderTextArea = ({className,input ,meta, rows, cols,id,placeholder}) => {
         return (
             <div className="form-group">
-                <textarea {...input} className={className} id={id} rows={rows} cols={cols} />
+                <textarea {...input} className={className} id={id} rows={rows} cols={cols} placeholder={placeholder} />
             </div>
         );
     }
 
-    renderInput = ({input , className, typename}) => {
+    renderInput = ({input , className, typename,placeholder}) => {
         return (
             <div>
-                <input {...input} className={className} type={typename} />
+                <input {...input} className={className} type={typename} placeholder={placeholder}/>
             </div>
         );
     }
@@ -190,11 +191,12 @@ class OtherUserProfile extends Component {
         formValues.sellerId = this.props.fetchOwnerProfileDetail.id;
         formValues.reviewerId = this.props.userid;
         this.props.sellerReview(formValues)
+        window.history.go()
         console.log(formValues);
     }
     
     render() {
-        console.log("rating" ,)
+        console.log("rating" , this.props.match.params.id)
 
         const images = require.context('../../public/images', true);
         const userPhoto = images(this.props.fetchOwnerProfileDetail ? "./" + `${this.props.fetchOwnerProfileDetail.userImage}`: "./default.png");
@@ -233,7 +235,7 @@ class OtherUserProfile extends Component {
                             <span style={{float:"right"}}> <b>{this.props.ratingOfSeller ? this.props.ratingOfSeller.rate.toFixed(2): ''}</b>/5</span>
                         </h3><br/>
                        
-                         <div className="container">
+                         {/* <div className="container">
                             <form className="form-group" onSubmit={this.props.handleSubmit(this.onSubmit)}>
                                 <div className="form-group" style={{paddingBottom:"20px"}}>
                                     <h4 for="comment"><b>Create Your Review:</b></h4>
@@ -252,7 +254,35 @@ class OtherUserProfile extends Component {
                                     <button className="btn btn-primary" style={{marginTop:"10px"}} type="submit">Publish</button>
                                 </div>
                             </form>
+                            </div> */}
+
+                            <div className="container">
+                            <form className="form-group" onSubmit={this.props.handleSubmit(this.onSubmit)}>
+                                <div className="form-group" style={{paddingBottom:"20px"}}>
+                                    <h4 for="comment"><b>Create Your Review:</b></h4>
+                                    <div className="form-group">
+                                        <label>Rating</label><br/>
+                                        <Field name="Rating" component={this.renderSpinner} className="form-control" divStyle={{width:"80px"}} SelId="Rating" 
+                                            type="number" min="0" max="5" step="0.5"
+                                                placeholder={this.props.review ? this.props.review.rating: ''}
+                                            />
+                                    </div>
+                                    <div className="form-group">
+                                        <label>Title</label><br/>
+                                        <Field name="Title" component={this.renderInput} typename="text" className="form-control" 
+                                            placeholder={this.props.review ? this.props.review.title : ''}/>
+                                    </div>
+                                    <div className="form-group">
+                                        <label>Comment</label><br/>
+                                        <Field name="Description" component={this.renderTextArea} className="form-control" rows="2" id="desc"
+                                             placeholder={this.props.review ? this.props.review.comment : ''}/>
+                                    </div>
+                                    <button className="btn btn-primary" style={{marginTop:"10px"}} type="submit" onClick={() => alert("Review Submitted")}>Publish</button>
+                                </div>
+                            </form>
                             </div>
+
+
                             <div className="container">
                 
                 <h2 className="header" style={{marginTop:"40px", marginBottom:"40px"}}>Seller Products and Ads<hr/></h2>
@@ -330,8 +360,26 @@ class OtherUserProfile extends Component {
     }
 }
 
+
+const validate = (formValues) => {
+    const errors = {}
+    if(!formValues.Rating) {
+        errors.Rating = "Please enter your Rating ";
+    }
+    if(!formValues.Title) {
+        errors.Title = "Please enter your Title";
+    }
+    if(!formValues.Description) {
+        errors.Description = "Please enter your Description";
+    }
+    
+    return errors;
+}
+
+
 const wrappedForm = reduxForm({
-        form: 'otheruserprofile'
+        form: 'otheruserprofile',
+        validate: validate
 })(OtherUserProfile);
 
 function mapStateToProps(state) {
@@ -344,7 +392,8 @@ function mapStateToProps(state) {
         fetchUserWTRentItems: state.auth.fetchUserWTRentItems,
         fetchUserSellingItems: state.auth.fetchUserSellingItems,
         fetchUserRentingItems:state.auth.fetchUserRentingItems,
-        ratingOfSeller : state.auth.sellerRate
+        ratingOfSeller : state.auth.sellerRate,
+        review: state.auth.seller_review
     };
 }
 

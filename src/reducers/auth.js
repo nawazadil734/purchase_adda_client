@@ -29,7 +29,9 @@ import {AUTH_USER,
 
     FETCH_CHAT,
 
-    FETCH_RENT_REVIEW
+    FETCH_RENT_REVIEW,
+
+    FETCH_SELLER_REVIEW
 
 } from '../actions/types';
 import { stat } from 'fs';
@@ -95,6 +97,8 @@ export default function(state = INITIAL_STATE, action) {
             return {...state, chatList: action.payload}
         case FETCH_RENT_REVIEW:
             return {...state, rent_review: action.payload}
+        case FETCH_SELLER_REVIEW:
+            return {...state, seller_review: action.payload}
         default:
         return state;
     };

@@ -63,7 +63,7 @@ class Profile extends Component {
                 <div className="container-fluid" style={{marginBottom: "15pt"}}>
                     <Header/>
                 </div>
-                <br/><br/><br/>
+                <br/><br/><br/><br/>
                 <div className="container">
                 <div className = "row">
             <div className="col-sm-3">
@@ -81,7 +81,7 @@ class Profile extends Component {
             <div>
                 <Link to="/myitems" style={{fontSize:"20px",color:"#191919"}}><b >My Items</b></Link>
             </div>
-            <hr/>
+            <hr style={{color:"whitesmoke"}}></hr>
             <div>
                 <div onClick={() => this.props.signout()} style={{fontSize:"20px",color:"#191919"}}><b>Log Out</b></div>
             </div>

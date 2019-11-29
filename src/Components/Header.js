@@ -4,10 +4,18 @@ import {connect } from 'react-redux';
 import { reset, Field, reduxForm} from 'redux-form';
 import requireAuth from './requireAuth';
 import * as actions from '../actions/index';
+import { async } from 'q';
 class Header extends Component {
+    componentDidMount = async () => {
+        await this.props.fetchCurrentUserId();
+        // await this.props.fetchUserDetail(this.props.userid)
+        setInterval(() => this.props.fetchUserDetail(this.props.userid), 1000)
+        
+    }
 
     onSubmit = (formValues) => {
         this.props.queryResult(formValues);
+        
     }
 
     renderError({error, touched}) {
@@ -42,6 +50,8 @@ class Header extends Component {
 
 
     render() {
+        console.log(this.props.userid)
+        console.log(this.props.userDetail)
         return(
             <div className="container">
                 <nav className="navbar navbar-expand-sm navbar-light fixed-top " style={{ backgroundColor: "whitesmoke"}}>
@@ -70,16 +80,28 @@ class Header extends Component {
                                 <Field name="query" component={this.renderInput} style="form-control"/>
                             {/* <input className="form-control mr-sm-2" type="text" style={{width: "300px"}} placeholder="Search"></input> */}
                             {/* <div className="input-group-append"> */}
-                            <button className="btn btn-primary" type="submit" style={{ height: "33px"}}>Search</button>
+                            <button className="btn btn-success" type="submit" style={{ height: "33px"}}><i className="fas fa-search" style={{fontSize:"15pt", color:"white"}}></i></button>
                             {/* </div> */}
                         </div>
                         </form>
+                        
                         <li className="nav-item dropdown">
                             <Link className="nav-link dropdown-toggle" to="/" id="navbardrop" data-toggle="dropdown">
-                                <i className="far fa-user" style={{paddingRight: "3px"}}></i>
+                                {this.props.userDetail ? (this.props.userDetail.notiCount ===0 ? <i className="far fa-bell" style={{paddingRight: "3px", fontSize:"13pt"}}></i> : <i className="fas fa-bell" style={{paddingRight: "3px", fontSize:"13pt"}}></i>) : ''}
+                                
+                            </Link>
+                            <div className="dropdown-menu dropdown-menu-right" style={{textAlign:"center"}}>
+                                <label style={{paddingLeft:"5pt", fontWeight:"bold"}}>{this.props.userDetail? this.props.userDetail.notiCount : ''} new messages.</label>
+                                <button className="btn btn-danger" onClick={() => this.props.clearNotification(this.props.userid)}>Clear</button>
+                            </div>
+                        </li>
+                        <li className="nav-item dropdown">
+                            <Link className="nav-link dropdown-toggle" to="/" id="navbardrop" data-toggle="dropdown">
+                                {/* <i className="far fa-user" style={{paddingRight: "3px"}}></i> */}
+                                Welcome, {this.props.userDetail ? this.props.userDetail.userName : ''}
                             </Link>
                             <div className="dropdown-menu dropdown-menu-right">
-                                <Link className="dropdown-item" to="/profile">Profile</Link>
+                                <Link className="dropdown-item" to="/profile">My Profile</Link>
                                 <Link className="dropdown-item" to="/setting">Settings</Link>
                                 {/* <Link className="dropdown-item" to="/newRequestForm">New Request</Link> */}
                                 <Link className="dropdown-item" to="/inbox">Messages</Link>
@@ -107,7 +129,10 @@ const formWrapped =  reduxForm({
 })(Header);
 
 function mapStateToProps(state) {
-    return { errorMessage: state.auth.errorMessage};
+    return { errorMessage: state.auth.errorMessage,
+        userid: state.auth.userid,
+        userDetail: state.auth.userDetail
+    };
 }
 
 export default requireAuth(connect(mapStateToProps, actions)(formWrapped));

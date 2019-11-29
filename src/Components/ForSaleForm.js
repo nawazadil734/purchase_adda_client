@@ -97,11 +97,12 @@ class forSale extends Component {
         return(
             <div>
                 <select name={categoryName} className={classname} style={divStyle} {...input}>
-                    <option value="" selected hidden>Category</option>
+                    <option value="">Category</option>
                     <option>Books</option>
                     <option>Stationery</option>
                     <option>Tools</option>
-                    <option>PC Peripherals</option>
+                    <option>Computing</option>
+                    <option>Phones and Tablets</option>
                 </select>
                 {this.renderError(meta)}
             </div>
@@ -144,7 +145,7 @@ class forSale extends Component {
             <div>
                 <div className="container-fluid">
                     <Header/>
-                </div><br/><br/>
+                </div><br/><br/><br/>
                 <div className="container">
                     <div style={{marginLeft: "20pt", marginRight: "20pt"}}>
                         <br/><h1>Post an Item for sale</h1><br/>

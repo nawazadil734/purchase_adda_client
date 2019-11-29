@@ -105,7 +105,7 @@ class EditProfile extends Component {
                 <div className="container-fluid">
                 <Header/>
             </div>
-            <br/><br/>
+            <br/><br/><br/>
             <div className="container" >
             <div style={{marginLeft: "20px", marginRight: "20px"}}>
                 <br/><h1>Edit Profile</h1><br/>

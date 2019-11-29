@@ -260,7 +260,8 @@ class forSale extends Component {
                     <option>Books</option>
                     <option>Stationery</option>
                     <option>Tools</option>
-                    <option>PC Peripherals</option>
+                    <option>Computing</option>
+                    <option>Phones and Tablets</option>
                 </select>
             </div>
         );
@@ -336,16 +337,16 @@ class forSale extends Component {
                                                 </div>
                                                 <form onSubmit={this.props.handleSubmit(this.onSubmitPhoto1)}>
                                                     <Field name="myFile" component={this.renderPhotoInput1}/><br/>
-                                                    <input type="submit" value="Upload a file" className="btn btn-primary"/>
+                                                    <input type="submit" value="Replace Image 1" className="btn btn-primary"/>
                                                 </form>
                                             </div>
                                             <div className="col-sm-6">
                                                 <div className="card" style={{width:"100%", height:"auto"}}>
-                                                    {/* <img className="card-img-top" src={images(this.props.itemDetails ? (this.props.itemDetails.images2 !== null ? "./" + `${this.props.itemDetails.image2}` :  "./noImage.png" ): "./noImage.png")} alt="Card image" style={{width:"100%"}}/> */}
+                                                    {/* <img className="card-img-top" src={images(this.props.itemDetails ? (this.props.itemDetails.image2 !== null ? "./" + `${this.props.itemDetails.image2}`  : noImage) :  noImage)} alt="Card image" style={{width:"100%"}}/> */}
                                                 </div>
                                                 <form onSubmit={this.props.handleSubmit(this.onSubmitPhoto2)}>
                                                     <Field name="myFile" component={this.renderPhotoInput2}/><br/>
-                                                    <input type="submit" value="Upload a file" className="btn btn-primary"/>
+                                                    <input type="submit" value="Replace Image 2" className="btn btn-primary"/>
                                                 </form>
                                             </div>
                                         </div>
@@ -356,7 +357,7 @@ class forSale extends Component {
                                                 </div>
                                                 <form onSubmit={this.props.handleSubmit(this.onSubmitPhoto3)}>
                                                     <Field name="myFile" component={this.renderPhotoInput3}/><br/>
-                                                    <input type="submit" value="Upload a file" className="btn btn-primary"/>
+                                                    <input type="submit" value="Replace Image 3" className="btn btn-primary"/>
                                                 </form>
                                             </div>
                                             <div className="col-sm-6">
@@ -365,7 +366,7 @@ class forSale extends Component {
                                                 </div>
                                                 <form onSubmit={this.props.handleSubmit(this.onSubmitPhoto4)}>
                                                     <Field name="myFile" component={this.renderPhotoInput4}/><br/>
-                                                    <input type="submit" value="Upload a file" className="btn btn-primary"/>
+                                                    <input type="submit" value="Replace Image 4" className="btn btn-primary"/>
                                                 </form>
                                             </div>
                                         </div>
@@ -376,7 +377,7 @@ class forSale extends Component {
                                                 </div>
                                                 <form onSubmit={this.props.handleSubmit(this.onSubmitPhoto5)}>
                                                     <Field name="myFile" component={this.renderPhotoInput5}/><br/>
-                                                    <input type="submit" value="Upload a file" className="btn btn-primary"/>
+                                                    <input type="submit" value="Replace Image 5" className="btn btn-primary"/>
                                                 </form>
                                             </div>
                                             <div className="col-sm-6">
@@ -385,7 +386,7 @@ class forSale extends Component {
                                                  </div>
                                                 <form onSubmit={this.props.handleSubmit(this.onSubmitPhoto6)}>
                                                     <Field name="myFile" component={this.renderPhotoInput6}/><br/>
-                                                    <input type="submit" value="Upload a file" className="btn btn-primary"/>
+                                                    <input type="submit" value="Replace Image 6" className="btn btn-primary"/>
                                                 </form>
                                             </div>
                                         </div>

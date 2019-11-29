@@ -55,3 +55,7 @@ export const QUERY_RESULT = "query_result";
 export const FETCH_CHAT = 'fetch_chat';
 
 export const FETCH_RENT_REVIEW = 'fetch_rent_review';
+
+export const FETCH_SELLER_REVIEW = 'fetch_seller_review';
+
+export const CLEAR_NOTIFICATION = 'clear_noti';
