@@ -6,10 +6,10 @@ import './App.css';
 // import SignIn from './Components/SignIn';
 import SignIn2 from './Components/SignIn2';
 
-import SignUp from './Components/SignUp';
+// import SignUp from './Components/SignUp';
 import SignUp2 from './Components/SignUp2';
 
-import ResetPassword from './Components/ResetPassword'
+
 import userItems from './Components/userItems';
 // import Dashboard from './Components/Dashboard';
 // import Verificatiion from './Components/Verification';
@@ -51,7 +51,7 @@ import WtrItemDeleteModal from './Components/WtrItemDeleteModal';
 import ChatBox from './Components/ChatBox';
 // import OtherProfile from './Components/otherUserProfile';
 import history from "./history";
-import ForgotPassword from './Components/ForgotPassword';
+
 import AboutSales from './Components/AboutSales';
 import * as actions from './actions/index';
 // import forSaleWizard from './Components/forSaleWizard';
@@ -60,7 +60,13 @@ import otherUserProfile from './Components/otherUserProfile';
 
 import SearchResults from './Components/SearchResults';
 
+
+
+
+
+import ForgotPassword from './Components/ForgotPassword';
 import Verification2 from './Components/Verification2';
+import ResetPassword from './Components/ResetPassword'
 class App extends Component {
     render() {
         return(

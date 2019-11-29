@@ -7,6 +7,7 @@ import * as actions from '../actions/index';
 import Header from './Header';
 import chicago from './chicago.jpg';
 import la from './la.jpg';
+import requireAuth from './requireAuth';
 import ny from './ny.jpg';
 
 class forSale extends Component {
@@ -198,4 +199,4 @@ const formWrapped =  reduxForm({
 })(forSale);
 
 
-export default connect(null, actions )(formWrapped);
+export default requireAuth(connect(null, actions )(formWrapped));

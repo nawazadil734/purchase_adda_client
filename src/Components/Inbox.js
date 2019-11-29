@@ -7,6 +7,7 @@ import Header from './Header';
 import profileImg from './doe.jpg';
 import ChatBox from './ChatBox';
 import '../css/chat.css';
+import requireAuth from './requireAuth';
 import { async } from 'q';
 // import { thisExpression } from '@babel/types';
 class Profile extends Component {
@@ -22,12 +23,14 @@ class Profile extends Component {
         return (
             <div className="row" style={{borderBottom:"1px solid #C0C0C0", margin:"10pt"}}>
             {/* {this.props.fetchUserDetail(item.reciever_id)} */}
-                            <div className="col-sm-2">
-                                <img src={images("./" + `${item.userImage}`)} className="align-self-start mr-3" style={{width:"60px", marginBottom:"10pt"}}></img> 
-                            </div>
+                            <figure className="profile profile-inline" style={{ marginLeft:"10px", marginTop:"10px"}}>
+                                <img src={images("./" + `${item.userImage}`)} className="profile-avatar" alt="" style={{width:"60px", marginBottom:"10pt"}}></img> 
+                              
+                            </figure>
+                            
                             <div className="col-sm-10">
-                                <h3>{item.firstName + " " + item.lastName}</h3>
-                                <Link to={`/ChatBox/${item.sender_id}/${item.reciever_id}`}  className="btn btn-info btn-sm" style={{ float:"right"}}>Message Owner</Link>
+                                <h3><b>{item.firstName + " " + item.lastName}</b></h3>
+                                <Link to={`/ChatBox/${item.sender_id}/${item.reciever_id}`}  className="btn btn-info btn-sm" style={{ float:"right"}}>View Message</Link>
                             </div>
                         </div>
         )
@@ -123,4 +126,4 @@ function mapStateToProps(state) {
             userDetail: state.auth.userDetail};
 }
 
-export default connect(mapStateToProps, actions)(wrappedForm);
+export default requireAuth(connect(mapStateToProps, actions)(wrappedForm));

@@ -84,7 +84,7 @@ class Items extends Component {
             <div className="container-fluid">
             <Header/>
             </div>
-            <img src={bppng} id="bg" alt="" style={{ position: "fixed"}}/>
+            {/* <img src={bppng} id="bg" alt="" style={{ position: "fixed"}}/> */}
             <div className="container" style={{paddingLeft:"20pt",paddingRight:"20pt", overflow:"hidden"}}>
             <br/><br/><br/><br/>
             {/* <img src={bgpng} id="bg" alt="" style={{ position: "fixed"}}/> */}

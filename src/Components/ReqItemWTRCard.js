@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import * as action from '../actions/index';
 import { Link} from 'react-router-dom';
 
+import requireAuth from './requireAuth';
+
 class RenderReqCard extends Component {
 
     componentDidMount() {
@@ -58,4 +60,5 @@ const mapStateToProps = (state) => {
     return { reqItems: state.auth.reqItems}
 }
 
-export default connect(mapStateToProps, action)(RenderReqCard);
+export default requireAuth(connect(mapStateToProps, action)(RenderReqCard));
+ 

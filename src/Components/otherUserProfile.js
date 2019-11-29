@@ -6,6 +6,7 @@ import * as actions from '../actions/index';
 import Header from './Header';
 import requireAuth from './requireAuth';
 import history from '../history';
+
 class OtherUserProfile extends Component {
 
     renderSaleItems = () => {
@@ -347,4 +348,4 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps, actions)(wrappedForm)
+export default requireAuth(connect(mapStateToProps, actions)(wrappedForm))

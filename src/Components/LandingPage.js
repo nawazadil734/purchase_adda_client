@@ -17,6 +17,7 @@ import tools_icon from './tools_icon.jpg';
 import phone_icon from './phone_icon.jpg';
 import stationery_icon from './stationery_icon.jpg';
 import seeMore_icon from './seeMore.png'
+import requireAuth from './requireAuth';
 // import bgpng from './bgpng.png';
 class LandingPage extends Component {
     
@@ -158,4 +159,4 @@ class LandingPage extends Component {
     }
 }
 
-export default connect(null, actions)(LandingPage);
+export default requireAuth(connect(null, actions)(LandingPage));

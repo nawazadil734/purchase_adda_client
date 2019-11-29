@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import {connect } from 'react-redux';
 import { reset, Field, reduxForm} from 'redux-form';
+import requireAuth from './requireAuth';
 import * as actions from '../actions/index';
 class Header extends Component {
 
@@ -109,6 +110,6 @@ function mapStateToProps(state) {
     return { errorMessage: state.auth.errorMessage};
 }
 
-export default connect(mapStateToProps, actions)(formWrapped);
+export default requireAuth(connect(mapStateToProps, actions)(formWrapped));
 
 // export default connect(null, actions)();

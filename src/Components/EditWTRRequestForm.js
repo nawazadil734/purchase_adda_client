@@ -3,6 +3,7 @@ import {connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import * as actions from '../actions/index';
 import Header from './Header';
+import requireAuth from './requireAuth';
 
 const displayNone = {display:"block", clip:"rect(0px 0px 0px 0px)", position:"absolute", left:"0", top:"0"}
 
@@ -140,7 +141,7 @@ class forSale extends Component {
             <div>
                 <div className="container-fluid">
                     <Header/>
-                </div><br/><br/>
+                </div><br/><br/><br/>
                 <div className="container">
                     <div style={{marginLeft: "20pt", marginRight: "20pt"}}>
                         <br/><h1>Editing WTR Ad...</h1><br/>
@@ -198,4 +199,4 @@ function mapStateToProps(state) {
 }
 
 
-export default connect(mapStateToProps, actions )(formWrapped);
+export default requireAuth(connect(mapStateToProps, actions )(formWrapped));

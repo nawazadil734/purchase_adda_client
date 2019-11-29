@@ -4,7 +4,7 @@ import { Field, reduxForm} from 'redux-form';
 import { connect} from 'react-redux';
 import * as actions from '../actions/index';
 import '../css/SignIn.css';
-import bgpng from './bgpng.png';
+import bgpng from './final.jpg';
 var color_text = { color:"black"}
 
 class SignUp2 extends Component {
@@ -59,7 +59,7 @@ class SignUp2 extends Component {
     render() {
         return (
             <div className="myImage">
-                <img src={bgpng} id="bg" alt="" style={{ position: "fixed"}}/>
+                <img src={bgpng} id="bg" alt="" style={{ position: "fixed",width:"1850px"}}/>
                 <div className="container" style={{alignContent:"center", backgroundColor:"#000000"}}>
                     <div style={{borderRadius:"15px", border:"1px solid #808080", position:"absolute", padding:"20pt", width:"700pt", height:"400pt", top:"50%", transform:"translate(-50%, -50%)", left: "50%", backgroundColor:"white"}}>
                         <div className="row" style={{textAlign:"center"}}>

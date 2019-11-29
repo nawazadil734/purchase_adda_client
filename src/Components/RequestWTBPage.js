@@ -183,4 +183,4 @@ function mapStateToProps(state) {
     return { errorMessage: state.auth.errorMessage};
 }
 
-export default connect(mapStateToProps, actions)(wrappedForm);
+export default requireAuth(connect(mapStateToProps, actions)(wrappedForm));

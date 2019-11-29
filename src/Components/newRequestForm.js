@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import {connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import * as actions from '../actions/index';
+import requireAuth from './requireAuth';
 import Header from './Header';
 
 class forSale extends Component {
@@ -213,4 +214,4 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps, actions )(formWrapped);
+export default requireAuth(connect(mapStateToProps, actions )(formWrapped));

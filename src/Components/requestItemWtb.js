@@ -4,6 +4,7 @@ import { Field, reduxForm} from 'redux-form';
 import { connect} from 'react-redux';
 import * as actions from '../actions/index';
 import Header from './Header';
+import requireAuth from './requireAuth';
 import '../css/item.css'
 
 class RequestItem extends Component {
@@ -174,5 +175,5 @@ function mapStateToProps(state) {
         };
 }
 
-export default connect(mapStateToProps, actions)(wrappedForm);
+export default requireAuth(connect(mapStateToProps, actions)(wrappedForm));
 

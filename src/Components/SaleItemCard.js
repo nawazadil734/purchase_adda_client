@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import * as action from '../actions/index';
 import { Link} from 'react-router-dom';
+import requireAuth from './requireAuth';
 
 class RenderSaleCard extends Component {
     componentDidMount() {
@@ -62,4 +63,4 @@ const mapStateToProps = (state) => {
     return { saleItems: state.auth.saleItems}
 }
 
-export default connect(mapStateToProps, action)(RenderSaleCard);
+export default requireAuth(connect(mapStateToProps, action)(RenderSaleCard));

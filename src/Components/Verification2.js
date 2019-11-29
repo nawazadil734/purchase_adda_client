@@ -5,7 +5,8 @@ import axios from 'axios';
 import { connect} from 'react-redux';
 import * as actions from '../actions/index';
 import '../css/SignIn.css';
-import bgpng from './bgpng.png';
+import bgpng from './final.jpg';
+import history from '../history';
 
 class Verification2 extends Component {
 
@@ -42,11 +43,14 @@ class Verification2 extends Component {
                         showError: true,
                         messageFromServer: ''
                     });
+                    alert("Email not in database. Do try again.")
                 } else if (response.data === 'recovery email sent') {
                     this.setState({
                         showError: false,
                         messageFromServer: 'recovery email sent'
                     });
+                    alert("Recovery Email sent. Check email to change password")
+                    history.push("/")
                 }
             })
             .catch(error => {
@@ -93,9 +97,9 @@ class Verification2 extends Component {
         const { email, messageFromServer} = this.state;
         return (
             <div className="myImage">
-                <img src={bgpng} id="bg" alt=""/>
+                <img src={bgpng} id="bg" alt="" style={{ width: "1850px", height:"889px"}}/>
                 <div className="container" style={{alignContent:"center", backgroundColor:"#000000"}}>
-                    <div style={{borderRadius:"15px", border:"1px solid #808080", position:"absolute", padding:"20pt", width:"500pt", height:"250pt", top:"50%", transform:"translate(-50%, -50%)", left: "50%", backgroundColor:"white"}}>
+                    <div style={{borderRadius:"15px", border:"1px solid #808080", position:"absolute", padding:"20pt", width:"500pt", height:"300pt", top:"50%", transform:"translate(-50%, -50%)", left: "50%", backgroundColor:"white"}}>
                         <div className="row" style={{textAlign:"center"}}>
                             <div className="col-sm-12">
                                 <label style={{fontSize:"33pt", fontFamily:"'Cabin', sans-serif"}}>Purchase</label><label style={{fontSize:"33pt", color:"#0275d8", fontFamily:"'Cabin', sans-serif"}}>Adda</label>
@@ -117,7 +121,13 @@ class Verification2 extends Component {
                                     </div>
                                     <div style={{ textAlign : "center"}}>
                                         <button type="submit" className="btn btn-primary">Send Password Reset Email</button><br/>
+                                    </div><br/>
+                                    <div style={{ textAlign : "center"}}>
+                                        Go back to Login...
+                                            <Link to="/">Login</Link>
+                                        {/* <Link to="/signup" className="btn btn-primary">Signup</Link> */}
                                     </div>
+                                    {this.messageFromServer === "recovery email sent" ? alert("verification email sent") : ""}
                                 </form>
                             </div>
                         </div>

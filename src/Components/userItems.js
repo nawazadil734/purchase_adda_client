@@ -8,6 +8,7 @@ import '../css/item.css';
 import Header from '../Components/Header'
 import { async } from 'q';
 import { stat } from 'fs';
+import requireAuth from './requireAuth';
 class UserItems extends Component {
 
 
@@ -226,4 +227,4 @@ function mapStateToProps(state) {
         fetchUserRentingItems:state.auth.fetchUserRentingItems};
 }
 
-export default connect(mapStateToProps, actions)(wrappedForm);
+export default requireAuth(connect(mapStateToProps, actions)(wrappedForm));

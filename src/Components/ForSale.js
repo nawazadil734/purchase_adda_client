@@ -6,6 +6,7 @@ import * as actions from '../actions/index';
 import Header from './Header';
 import requireAuth from './requireAuth';
 
+
 class forSale extends Component {
 
     renderError({error, touched}) {

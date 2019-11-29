@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import requireAuth from './requireAuth';
 import Header from './Header';
 import { Link } from 'react-router-dom';
+
 class Dashboard extends Component {
     render() {
         var well={

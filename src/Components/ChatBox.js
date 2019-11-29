@@ -6,6 +6,7 @@ import * as actions from '../actions/index';
 // import profileImg from './doe.jpg';
 import '../css/item.css';
 import Header from './Header'
+import requireAuth from './requireAuth';
 class ChatBox extends Component {
 
     componentDidMount() {
@@ -38,7 +39,7 @@ class ChatBox extends Component {
                                         
                                     </div>
                                     <div className="col-sm-6">
-                                        <div className="shadow p-3 mb-5 bg-white rounded" style={{ textAlign:"right", width:"intrinsic"}}>{mes.message}</div>
+                                        <div className="shadow p-3 mb-5 rounded" style={{ textAlign:"right", width:"intrinsic", backgroundColor:"#0275d8", color: "white"}}>{mes.message}</div>
                                     </div>
                     </div> 
                     :
@@ -94,9 +95,9 @@ class ChatBox extends Component {
             <div className="container">
                 <Header/>
                 <br/><br/>
-                <h2 className="header" style={{marginTop:"40px", marginBottom:"40px"}}>Chat</h2>
-                <div className="shadow p-3 mb-5 bg-white rounded">
-                        <div className="card card-inverse card-info" >
+                <h2 className="header" style={{ marginBottom:"40px"}}>Chat</h2>
+                <div className="shadow p-3 mb-5 bg-white rounded" style={{ height: "700px"}}>
+                        <div className="card card-inverse card-info"  style={{ height: "670px"}}>
                             <div className="card-title">
                             {/* <div className="col-sm-2">
                                 
@@ -109,7 +110,7 @@ class ChatBox extends Component {
                             </div>
 
 
-                            <div className="card-block" style={{overflowY: "auto", maxHeight:"450px"}}>
+                            <div className="card-block" style={{overflowY: "auto", backgroundColor:"whitesmoke"}}>
                                 <div className="MessagesList">
                                     {this.props.messege ? this.renderMessage() : ''}
                                 </div>
@@ -156,4 +157,4 @@ function mapStateToProps(state) {
         };
 }
 
-export default connect(mapStateToProps, actions)(wrappedForm);
+export default requireAuth(connect(mapStateToProps, actions)(wrappedForm));

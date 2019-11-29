@@ -7,6 +7,7 @@ import Header from './Header';
 import '../css/item.css';
 import requireAuth from './requireAuth';
 import RenderSaleCard from './SaleItemCard';
+
 import SaleItemCard from './SaleItemCard';
 class Items extends Component {
 
@@ -80,6 +81,7 @@ class Items extends Component {
     render() {
         return (
             <div>
+            
             <div className="container-fluid">
             <Header/>
             </div>

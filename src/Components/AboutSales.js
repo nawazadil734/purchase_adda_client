@@ -7,6 +7,7 @@ import Header from './Header';
 import '../css/item.css'
 import Background from "../Components/bullet-list-icon-2.jpg"
 import banner from "../Components/banner_image.jpg"
+import requireAuth from './requireAuth';
 
 class AboutSales extends Component {
 
@@ -168,4 +169,4 @@ class AboutSales extends Component {
     }
 };
 
-export default AboutSales;
+export default requireAuth(AboutSales);

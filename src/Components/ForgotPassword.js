@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import '../css/SignUp.css';
 import {Link} from 'react-router-dom';
+import requireAuth from './requireAuth';
 const title = {
     pageTitle: 'Forgot Password Screen'
 };
@@ -100,4 +101,4 @@ class ForgotPassword extends Component {
     }
 }
 
-export default ForgotPassword;
+export default requireAuth(ForgotPassword);

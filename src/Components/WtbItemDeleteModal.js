@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import * as actions from '../actions/index';
 import { connect } from 'react-redux'; 
+import requireAuth from './requireAuth';
 import history from '../history';
 
 class DeletePostModal extends Component {
@@ -33,4 +34,4 @@ class DeletePostModal extends Component {
     }
 }
 
-export default connect(null, actions)(DeletePostModal);
+export default requireAuth(connect(null, actions)(DeletePostModal));
